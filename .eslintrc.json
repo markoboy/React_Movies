@@ -26,5 +26,8 @@
         "**/*.js",
         "!src/**/*.js",
         "**/*.test.js"
-    ]
+    ],
+    "settings": {
+        "import/resolver": "webpack"
+    }
 }

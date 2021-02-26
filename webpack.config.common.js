@@ -21,6 +21,12 @@ exports.getCommonConfig = ({ buildPath }) => ({
   resolve: {
     extensions: ['.js', '.jsx'],
     symlinks: false,
+    alias: {
+      '@components': resolve(__dirname, 'src', 'components'),
+      '@containers': resolve(__dirname, 'src', 'containers'),
+      '@services': resolve(__dirname, 'src', 'services'),
+      '@utils': resolve(__dirname, 'src', 'utils'),
+    },
   },
 
   module: {
