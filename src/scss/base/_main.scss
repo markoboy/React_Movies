@@ -1,0 +1,20 @@
+html, body {
+  height: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: $font-family;
+  font-weight: $font-weight-regular;
+  margin: 0;
+  background-color: $color-secondary;
+  color: $color-white;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 1.1em;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}

@@ -1,0 +1,21 @@
+/**
+ * Application global styles to be used through out the whole app.
+ * This file should only include the themes/modules/mixin that should be used.
+ * No direct style should be used within this file as it is only the entry point.
+ */
+
+// Theme imports
+@import 'theme/app-theme';
+
+// Mixin imports
+@import 'mixin/media-queries';
+
+// Base imports
+@import 'base/main',
+  'base/typography';
+
+// Layout imports
+@import 'layout/grid';
+
+// Module imports
+@import 'module/button';
