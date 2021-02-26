@@ -24,6 +24,7 @@
     },
     "ignorePatterns": [
         "**/*.js",
-        "!src/**/*.js"
+        "!src/**/*.js",
+        "**/*.test.js"
     ]
 }
