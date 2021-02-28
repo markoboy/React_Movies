@@ -1,0 +1,40 @@
+$media-screen-x-small: 360px !default;
+$media-screen-small: 640px !default;
+$media-screen-medium: 880px !default;
+$media-screen-large: 1024px !default;
+
+@mixin media($screenWidth) {
+  @if $screenWidth == minXS {
+    @media screen and (min-width: $media-screen-x-small) {
+      @content;
+    }
+  } @else if $screenWidth == minS {
+    @media screen and (min-width: $media-screen-small) {
+      @content;
+    }
+  } @else if $screenWidth == minM {
+    @media screen and (min-width: $media-screen-medium) {
+      @content;
+    }
+  } @else if $screenWidth == minL {
+    @media screen and (min-width: $media-screen-large) {
+      @content;
+    }
+  } @else if $screenWidth == maxXS {
+    @media screen and (max-width: $media-screen-x-small) {
+      @content;
+    }
+  } @else if $screenWidth == maxS {
+    @media screen and (max-width: $media-screen-small) {
+      @content;
+    }
+  } @else if $screenWidth == maxM {
+    @media screen and (max-width: $media-screen-medium) {
+      @content;
+    }
+  } @else if $screenWidth == maxL {
+    @media screen and (max-width: $media-screen-large) {
+      @content;
+    }
+  }
+}
