@@ -1,0 +1,30 @@
+@import 'essential';
+
+.result-filter__item {
+  text-transform: uppercase;
+  position: relative;
+  margin-top: $result-filter-spacing;
+  padding-bottom: $result-filter-spacing;
+  cursor: pointer;
+
+  + .result-filter__item {
+    margin-left: $result-filter-item-spacing;
+  }
+
+  &.result-filter__item--active {
+    &::after {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      height: $result-filter-border-width;
+      background-color: $color-primary;
+    }
+  }
+
+  &.result-filter__item--last {
+    margin-left: auto;
+  }
+}

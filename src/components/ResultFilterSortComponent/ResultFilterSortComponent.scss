@@ -1,0 +1,40 @@
+@import 'essential';
+
+.result-filter {
+  &__sort-label {
+    color: lighten($color-secondary, 20%);
+    margin-right: $result-filter-item-spacing;
+    cursor: pointer;
+  }
+
+  &__select {
+    cursor: pointer;
+    font-size: $form-input-font-size;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+
+    &-wrapper {
+      position: relative;
+    }
+
+    &-value {
+      padding-right: 1.5em;
+      position: relative;
+
+      &::after {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 50%;
+        right: 0;
+        transform: translateY(-70%) rotate(45deg);
+        border: 0.25em solid;
+        border-color: transparent $color-primary $color-primary transparent;
+        border-radius: 1px;
+      }
+    }
+  }
+}
