@@ -1,0 +1,8 @@
+$wrapper-max-width: 1140px !default;
+
+.wrapper {
+  margin: 0 auto;
+  padding: 0 15px;
+  width: 100%;
+  max-width: $wrapper-max-width;
+}
