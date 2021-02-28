@@ -1,3 +1,10 @@
+import Avengers from '../../resources/avengers.JPG';
+import Bohemian from '../../resources/bohemian-rhapsody.JPG';
+import Inception from '../../resources/inception.JPG';
+import KillBill from '../../resources/kill-bill.JPG';
+import PulpFiction from '../../resources/pulp-fiction.JPG';
+import Reservoir from '../../resources/reservoir-dogs.JPG';
+
 const MovieService = {
   getAvailableFilters() {
     return [
@@ -45,45 +52,45 @@ const MovieService = {
     return [
       {
         id: 'm1',
-        image: '',
+        image: PulpFiction,
         title: 'Pulp Fiction',
-        year: 2004,
-        category: ['Action & Adventure'],
+        releaseDate: 2004,
+        genre: ['Action & Adventure'],
       },
       {
         id: 'm2',
-        image: '',
+        image: Bohemian,
         title: 'Bohemian Rhapsody',
-        year: 2003,
-        category: ['Drama', 'Biography', 'Music'],
+        releaseDate: 2003,
+        genre: ['Drama', 'Biography', 'Music'],
       },
       {
         id: 'm3',
-        image: '',
+        image: KillBill,
         title: 'Kill Bill: Vol 2',
-        year: 1994,
-        category: ['Oscar winning Movie'],
+        releaseDate: 1994,
+        genre: ['Oscar winning Movie'],
       },
       {
         id: 'm4',
-        image: '',
+        image: Avengers,
         title: 'Avengers: War of Infinity',
-        year: 2004,
-        category: ['Action & Adventure'],
+        releaseDate: 2004,
+        genre: ['Action & Adventure'],
       },
       {
         id: 'm5',
-        image: '',
+        image: Inception,
         title: 'Inception',
-        year: 2003,
-        category: ['Action & Adventure'],
+        releaseDate: 2003,
+        genre: ['Action & Adventure'],
       },
       {
         id: 'm6',
-        image: '',
+        image: Reservoir,
         title: 'Reservoir dogs',
-        year: 1994,
-        category: ['Oscar winning Movie'],
+        releaseDate: 1994,
+        genre: ['Oscar winning Movie'],
       },
     ];
   },
