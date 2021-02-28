@@ -1,3 +1,4 @@
+import ResultNoFoundComponent from '@components/ResultNoFoundComponent/ResultNoFoundComponent';
 import LoggerService from '@services/LoggerService';
 import React from 'react';
 
@@ -18,7 +19,7 @@ export default class ErrorBoundary extends React.Component {
 
   render() {
     if (this.state.hasError) {
-      return <h3>No Movie Found</h3>;
+      return <ResultNoFoundComponent />;
     }
 
     return this.props.children;

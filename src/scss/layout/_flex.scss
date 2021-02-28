@@ -1,0 +1,19 @@
+.flex {
+  display: flex;
+
+  &.flex--column {
+    flex-flow: column nowrap;
+  }
+
+  &--grow {
+    flex-grow: 1;
+  }
+
+  .justify-content--center {
+    justify-content: center;
+  }
+
+  .align-items--center {
+    align-items: center;
+  }
+}
