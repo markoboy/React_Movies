@@ -1,0 +1,23 @@
+@import 'essential';
+
+.form__input {
+  border: 1px solid transparent;
+  outline: none;
+  border-radius: $border-radius;
+  padding: $form-input-padding;
+  font-size: $form-input-font-size;
+  width: 100%;
+  background-color: rgba($color-secondary, 0.4);
+  color: $color-white;
+
+  &:focus,
+  &:hover {
+    border-color: $color-primary;
+    box-shadow: $box-shadow-primary;
+  }
+
+  &::placeholder {
+    color: $color-secondary;
+    opacity: 1;
+  }
+}

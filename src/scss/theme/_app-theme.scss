@@ -19,7 +19,15 @@ $color-grey: #424242 !default;
 
 // Borders and shadows
 $border-radius: 4px !default;
-$box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.25);
+$box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.25) !default;
+$box-shadow-primary: 2px 4px 8px rgba($color-primary, 0.25) !default;
 
 // Sections / Wrappers
 $wrapper-max-width: 1240px !default;
+
+// Form defaults
+$form-input-padding: 0.7em 0.8em !default;
+$form-input-font-size: 1.1em !default;
+
+// Row / Columns
+$column-margin: 5px !default;

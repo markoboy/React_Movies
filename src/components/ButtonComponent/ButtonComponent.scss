@@ -4,9 +4,9 @@
   display: block;
   outline: none;
   border: none;
-  padding: 0.6em 0.7em;
+  padding: $form-input-padding;
   border-radius: $border-radius;
-  font-size: 1.1em;
+  font-size: $form-input-font-size;
   text-transform: uppercase;
   cursor: pointer;
   transition: background-color 0.3s linear, color 0.3s linear;
@@ -28,7 +28,7 @@
   }
 
   &--secondary {
-    background-color: rgba($color-secondary, 0.5);
+    background-color: rgba($color-secondary, 0.4);
     color: $color-primary;
 
     &:focus,

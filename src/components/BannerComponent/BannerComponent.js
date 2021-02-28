@@ -13,7 +13,11 @@ export default function BannerComponent({
         ))}
         <img src={imgSrc} alt={imgAlt} />
       </picture>
-      <div className="banner__content">{children}</div>
+      <div className="banner__content">
+        <div className="wrapper">
+          {children}
+        </div>
+      </div>
     </section>
   );
 }

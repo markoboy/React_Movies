@@ -4,7 +4,9 @@
   position: relative;
   width: 100%;
   margin: 0 auto;
-  margin-top: -80px;
+  margin-top: -5em;
+  overflow: hidden;
+  max-height: 420px;
 
   img {
     filter: blur(5px);
@@ -14,7 +16,20 @@
     position: absolute;
     top: 0;
     left: 0;
-    padding: 6em 6em 1em;
+    padding: 4.5em 15px 1em;
     width: 100%;
+
+    @include media(minM) {
+      padding: 6em 6em 1em;
+    }
+  }
+
+  &__title {
+    font-weight: $font-weight-regular;
+    font-size: 2em;
+    text-transform: uppercase;
+    word-spacing: 0.2em;
+    margin: 0;
+    margin-bottom: 1em;
   }
 }
