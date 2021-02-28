@@ -1,0 +1,9 @@
+.font {
+  &--regular {
+    font-weight: $font-weight-regular;
+  }
+
+  &--bold {
+    font-weight: $font-weight-bold;
+  }
+}
