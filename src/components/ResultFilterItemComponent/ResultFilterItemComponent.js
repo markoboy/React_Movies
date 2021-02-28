@@ -3,8 +3,14 @@ import PropTypes from 'prop-types';
 import './ResultFilterItemComponent.scss';
 
 export default function ResultFilterItemComponent({ children, isActive, classes }) {
+  let computedClasses = `result-filter__item ${classes}`;
+
+  if (isActive) {
+    computedClasses += ' result-filter__item--active';
+  }
+
   return (
-    <li className={`result-filter__item ${isActive && 'result-filter__item--active'} ${classes}`}>
+    <li className={computedClasses}>
       {children}
     </li>
   );
