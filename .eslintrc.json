@@ -19,8 +19,12 @@
     ],
     "rules": {
         "linebreak-style": "off",
+        "comma-dangle": "off",
         "react/jsx-filename-extension": "off",
-        "comma-dangle": "off"
+        "react/destructuring-assignment": "off",
+        "react/prop-types": "off",
+        "react/jsx-props-no-spreading": "off",
+        "react/button-has-type": "off"
     },
     "ignorePatterns": [
         "**/*.js",

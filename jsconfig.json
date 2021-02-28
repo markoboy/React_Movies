@@ -3,6 +3,7 @@
       "target": "esnext",
       "allowSyntheticDefaultImports": false,
       "baseUrl": "./",
+      "jsx": "react",
       "checkJs": false,
       "paths": {
         "@components/*": [

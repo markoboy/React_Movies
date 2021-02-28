@@ -44,7 +44,14 @@ exports.getCommonConfig = ({ buildPath }) => ({
       {
         test: /\.s[ac]ss$/i,
         exclude: /node_modules/,
-        use: ['css-loader', 'postcss-loader', 'sass-loader'],
+        use: ['css-loader', 'postcss-loader', {
+          loader: 'sass-loader',
+          options: {
+            sassOptions: {
+              includePaths: [resolve(__dirname, 'src', 'scss')]
+            }
+          }
+        }],
       },
 
       // Asset loader for images
