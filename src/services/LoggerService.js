@@ -21,10 +21,8 @@ export default class LoggerService {
               window.console,
               `[${name}] `
             );
-          } catch (error) {
-            console.log(method);
-            console.error(error);
-          }
+          // eslint-disable-next-line no-empty
+          } catch (err) { }
         } else {
           this[method] = () => { };
         }
