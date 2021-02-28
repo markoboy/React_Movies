@@ -1,8 +1,6 @@
 import withWrapper from '@components/HigherOrder/WithWrapper';
 import React from 'react';
 
-function SiteContainer() {
-  return <main>Site Container</main>;
+export default function SiteContainer() {
+  return <main className="site-container__main">Site Container</main>;
 }
-
-export default withWrapper(SiteContainer);

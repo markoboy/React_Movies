@@ -1,8 +1,6 @@
 import withWrapper from '@components/HigherOrder/WithWrapper';
 import React from 'react';
 
-function FooterContainer() {
+export default function FooterContainer() {
   return <footer>Footer Container</footer>;
 }
-
-export default withWrapper(FooterContainer);
