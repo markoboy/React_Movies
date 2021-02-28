@@ -5,11 +5,11 @@ import './BrandLogoComponent.scss';
 
 export default function BrandLogoComponent({ name, subName }) {
   return (
-    <a href="/">
-      <h1 className="brand-logo">
+    <h1 className="brand-logo">
+      <a href="/">
         {name}<span className="font--regular">{subName}</span>
-      </h1>
-    </a>
+      </a>
+    </h1>
   );
 }
 

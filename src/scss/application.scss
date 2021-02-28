@@ -8,7 +8,14 @@
 @import 'essential';
 
 // Base imports
-@import 'base/main', 'base/typography';
+@import
+  'base/main',
+  'base/typography',
+  'base/backgrounds';
 
 // Layout imports
-@import 'layout/grid', 'layout/site-container', 'layout/wrapper';
+@import
+  'layout/grid',
+  'layout/section',
+  'layout/site-container',
+  'layout/wrapper';
