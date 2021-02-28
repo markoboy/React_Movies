@@ -1,6 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable react/jsx-one-expression-per-line */
-import withWrapper from '@components/HigherOrder/WithWrapper';
 import React from 'react';
 import './HeaderNavComponent.scss';
 import PropTypes from 'prop-types';
@@ -12,12 +11,14 @@ import PropTypes from 'prop-types';
  */
 function HeaderNavComponent({ headerLogo, actionButton }) {
   return (
-    <header className="header-nav">
-      <div className="header-nav__logo-container">
-        {headerLogo}
-      </div>
-      <div className="header-nav__btn-container">
-        {actionButton}
+    <header className="header-nav-container">
+      <div className="header-nav">
+        <div className="header-nav__logo-container">
+          {headerLogo}
+        </div>
+        <div className="header-nav__btn-container">
+          {actionButton}
+        </div>
       </div>
     </header>
   );
@@ -28,4 +29,4 @@ HeaderNavComponent.propTypes = {
   actionButton: PropTypes.element.isRequired,
 };
 
-export default withWrapper(HeaderNavComponent);
+export default HeaderNavComponent;
