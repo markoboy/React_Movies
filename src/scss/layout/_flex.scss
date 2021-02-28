@@ -5,6 +5,10 @@
     flex-flow: column nowrap;
   }
 
+  &.flex--wrap {
+    flex-flow: row wrap;
+  }
+
   &--grow {
     flex-grow: 1;
   }

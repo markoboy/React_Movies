@@ -1,0 +1,64 @@
+@import 'essential';
+
+.result-item {
+  // Pop out container
+  &__pop-out {
+    display: none;
+    position: absolute;
+    top: 1em;
+    right: 1em;
+
+    .pop-out {
+      // Pop out action button
+      &__btn {
+        font-size: 0.65em;
+        padding: 1em;
+        height: 4em;
+        width: 4em;
+        border-radius: 50%;
+        background-color: $color-black;
+        color: $color-white;
+        cursor: pointer;
+
+        &:hover {
+          ~ .pop-out__content {
+            display: block;
+          }
+        }
+      }
+
+      // Pop out content
+      &__content {
+        position: absolute;
+        top: 0;
+        right: 0;
+        display: none;
+        z-index: 10;
+        min-width: 180px;
+        background-color: $color-black;
+        padding: 0.5em 0;
+        font-size: 0.9em;
+
+        &:hover {
+          display: block;
+        }
+
+        // Pop out content item
+        .pop-out-content__item {
+          padding: 0.5em 1em;
+          background-color: inherit;
+          text-transform: initial;
+          text-align: left;
+          color: $color-white;
+          border-radius: 0;
+
+          &:hover {
+            background-color: $color-primary;
+            color: inherit;
+            box-shadow: none;
+          }
+        }
+      }
+    }
+  }
+}
