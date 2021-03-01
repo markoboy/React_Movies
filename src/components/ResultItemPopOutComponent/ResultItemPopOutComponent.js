@@ -1,4 +1,4 @@
-import ButtonComponent from '@components/ButtonComponent/ButtonComponent';
+import ButtonComponent from '@components/Forms/ButtonComponent/ButtonComponent';
 import { faEllipsisV } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types';

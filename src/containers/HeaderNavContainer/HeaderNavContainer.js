@@ -1,12 +1,13 @@
 import BrandLogoComponent from '@components/BrandLogoComponent/BrandLogoComponent';
-import ButtonComponent from '@components/ButtonComponent/ButtonComponent';
+import ButtonComponent from '@components/Forms/ButtonComponent/ButtonComponent';
 import HeaderNavComponent from '@components/HeaderNavComponent/HeaderNavComponent';
 import SpinnerComponent from '@components/SpinnerComponent/SpinnerComponent';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import getModalFormInputs from '@utils/getModalFormInputs';
 import React, { Component, lazy, Suspense } from 'react';
 
-const LazyModalComponent = lazy(() => import('@components/ModalComponent/ModalComponent'));
+const LazyModalFormContainer = lazy(() => import('@containers/ModalFormContainer/ModalFormContainer'));
 
 export default class HeaderNavContainer extends Component {
   constructor(props) {
@@ -14,11 +15,26 @@ export default class HeaderNavContainer extends Component {
 
     this.state = {
       isModalOpened: false,
-      addMovieFormData: null,
+      modalTitle: 'Add movie',
+      modalActions: [
+        {
+          name: 'Reset',
+          classes: 'btn--outline btn--full-width',
+          type: 'reset',
+        },
+        {
+          name: 'Submit',
+          classes: 'btn--primary btn--full-width',
+          type: 'submit',
+        },
+      ],
+      formInputs: getModalFormInputs(),
     };
 
     this.handleAddButton = this.handleAddButton.bind(this);
     this.handleModalClose = this.handleModalClose.bind(this);
+    this.handleFormSubmit = this.handleFormSubmit.bind(this);
+    this.handleOnChange = this.handleOnChange.bind(this);
   }
 
   handleModalClose() {
@@ -29,30 +45,64 @@ export default class HeaderNavContainer extends Component {
     this.setState({ isModalOpened: true });
   }
 
+  handleFormSubmit() {
+    const data = this.state.formInputs.reduce((computedData, input) => {
+      // eslint-disable-next-line no-param-reassign
+      computedData[input.name] = input.value;
+      return computedData;
+    }, {});
+
+    console.log(data);
+  }
+
+  handleFormReset() {
+    this.setState({ formInputs: getModalFormInputs() });
+  }
+
+  handleOnChange(input, value) {
+    this.setState((state) => ({
+      formInputs: state.formInputs.map((fInput) => {
+        if (fInput === input) {
+          return {
+            ...fInput,
+            value,
+          };
+        }
+
+        return fInput;
+      }),
+    }));
+  }
+
+  getHeaderActionButton() {
+    return (
+      <ButtonComponent
+        classes="btn--secondary btn--with-icon"
+        onButtonClick={this.handleAddButton}
+      >
+        <FontAwesomeIcon size="xs" icon={faPlus} />
+        Add Movie
+      </ButtonComponent>
+    );
+  }
+
   render() {
     return (
       <>
         <HeaderNavComponent
           headerLogo={<BrandLogoComponent />}
-          actionButton={
-            (
-              <ButtonComponent
-                classes="btn--secondary btn--with-icon"
-                onButtonClick={this.handleAddButton}
-              >
-                <FontAwesomeIcon size="xs" icon={faPlus} />
-                Add Movie
-              </ButtonComponent>
-            )
-          }
+          actionButton={this.getHeaderActionButton()}
         />
         {this.state.isModalOpened && (
           <Suspense fallback={<SpinnerComponent />}>
-            <LazyModalComponent
-              title="Add Movie"
-              onCloseTrigger={this.handleModalClose}
-              body={<div>This is the body</div>}
-              footer={<div>This is the footer</div>}
+            <LazyModalFormContainer
+              title={this.state.modalTitle}
+              actionButtons={this.state.modalActions}
+              formInputs={this.state.formInputs}
+              onCancel={this.handleModalClose}
+              onSubmit={this.handleFormSubmit}
+              onReset={() => this.handleFormReset()}
+              onChange={this.handleOnChange}
             />
           </Suspense>
         )}

@@ -1,8 +1,8 @@
 import BannerComponent from '@components/BannerComponent/BannerComponent';
-import ButtonComponent from '@components/ButtonComponent/ButtonComponent';
+import ButtonComponent from '@components/Forms/ButtonComponent/ButtonComponent';
 import ColumnComponent from '@components/Grid/ColumnComponent/ColumnComponent';
 import RowComponent from '@components/Grid/RowComponent/RowComponent';
-import InputComponent from '@components/InputComponent/InputComponent';
+import InputComponent from '@components/Forms/InputComponent/InputComponent';
 import React from 'react';
 
 export default function BannerContainer() {
@@ -19,9 +19,11 @@ export default function BannerContainer() {
           </ColumnComponent>
 
           <ColumnComponent classes="column--m-3">
-            <ButtonComponent classes="btn--primary btn--full-width">
-              Search
-            </ButtonComponent>
+            <div className="form-element-wrapper">
+              <ButtonComponent classes="btn--primary btn--full-width">
+                Search
+              </ButtonComponent>
+            </div>
           </ColumnComponent>
         </RowComponent>
       </form>

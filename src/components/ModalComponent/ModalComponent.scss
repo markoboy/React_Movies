@@ -8,13 +8,15 @@
   height: 100%;
   background-color: rgba($color-black, 0.85);
   z-index: 110;
+  overflow-y: auto;
 
   &__content {
     position: relative;
     max-width: 680px;
-    margin: 8em auto 1em;
+    margin: 8em auto 4em;
     padding: 2.5em 3.5em;
     background-color: $color-black;
+    box-shadow: $box-shadow;
   }
 
   &__close-trigger {
