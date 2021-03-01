@@ -26,6 +26,7 @@ exports.getCommonConfig = ({ buildPath }) => ({
       '@containers': resolve(__dirname, 'src', 'containers'),
       '@services': resolve(__dirname, 'src', 'services'),
       '@utils': resolve(__dirname, 'src', 'utils'),
+      '@constants': resolve(__dirname, 'src', 'constants'),
     },
   },
 
