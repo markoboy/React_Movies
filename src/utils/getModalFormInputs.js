@@ -25,7 +25,7 @@ export default function getModalFormInputs({
     {
       type: FormTypes.DATE,
       placeholder: 'Select Date',
-      name: 'date',
+      name: 'releaseDate',
       id: 'modal-form-date',
       value: releaseDate,
       label: 'Release Date',

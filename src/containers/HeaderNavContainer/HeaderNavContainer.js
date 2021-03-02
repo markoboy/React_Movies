@@ -5,7 +5,9 @@ import SpinnerComponent from '@components/SpinnerComponent/SpinnerComponent';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import getModalFormInputs from '@utils/getModalFormInputs';
+import getSerializedModalFormInputs from '@utils/getSerializedModalFormInputs';
 import React, { Component, lazy, Suspense } from 'react';
+import PropTypes from 'prop-types';
 
 const LazyModalFormContainer = lazy(() => import('@containers/ModalFormContainer/ModalFormContainer'));
 
@@ -28,7 +30,7 @@ export default class HeaderNavContainer extends Component {
           type: 'submit',
         },
       ],
-      formInputs: getModalFormInputs(),
+      formInputs: null,
     };
 
     this.handleAddButton = this.handleAddButton.bind(this);
@@ -38,21 +40,16 @@ export default class HeaderNavContainer extends Component {
   }
 
   handleModalClose() {
-    this.setState({ isModalOpened: false });
+    this.setState({ isModalOpened: false, formInputs: null });
   }
 
   handleAddButton() {
-    this.setState({ isModalOpened: true });
+    this.setState({ isModalOpened: true, formInputs: getModalFormInputs(), });
   }
 
   handleFormSubmit() {
-    const data = this.state.formInputs.reduce((computedData, input) => {
-      // eslint-disable-next-line no-param-reassign
-      computedData[input.name] = input.value;
-      return computedData;
-    }, {});
-
-    console.log(data);
+    const movie = getSerializedModalFormInputs(this.state.formInputs);
+    this.props.onAddMovie(movie);
   }
 
   handleFormReset() {
@@ -110,3 +107,7 @@ export default class HeaderNavContainer extends Component {
     );
   }
 }
+
+HeaderNavContainer.propTypes = {
+  onAddMovie: PropTypes.func.isRequired,
+};

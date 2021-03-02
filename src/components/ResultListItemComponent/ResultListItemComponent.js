@@ -3,6 +3,7 @@ import ResultItemPopOutComponent from '@components/ResultItemPopOutComponent/Res
 import PropTypes from 'prop-types';
 import React from 'react';
 import './ResultListItemComponent.scss';
+import DefaultImage from '../../../resources/pulp-fiction.JPG';
 
 export default function ResultListItemComponent({
   image, title, releaseDate, genre, actions, id
@@ -10,11 +11,11 @@ export default function ResultListItemComponent({
   return (
     <div className="result-list__item">
       <a href="#">
-        <img src={image} alt={title} />
+        <img src={image || DefaultImage} alt={title} />
 
         <div className="result-item__body flex flex--wrap">
           <h4 className="result-item__title">{title}</h4>
-          <p className="result-item__release-date">{releaseDate}</p>
+          <p className="result-item__release-date">{releaseDate.getFullYear()}</p>
           <p className="result-item__genre">{genre.join(', ')}</p>
         </div>
       </a>
@@ -32,7 +33,7 @@ ResultListItemComponent.propTypes = {
   id: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-  releaseDate: PropTypes.number.isRequired,
+  releaseDate: PropTypes.instanceOf(Date).isRequired,
   genre: PropTypes.arrayOf(PropTypes.string).isRequired,
   actions: PropTypes.arrayOf(PropTypes.string),
 };

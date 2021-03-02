@@ -6,6 +6,7 @@ import ColumnComponent from '@components/Grid/ColumnComponent/ColumnComponent';
 import RowComponent from '@components/Grid/RowComponent/RowComponent';
 import ModalComponent from '@components/ModalComponent/ModalComponent';
 import FormTypes from '@constants/FormTypes';
+import convertToMultiSelectOption from '@utils/convertToMultiSelectOption';
 import React, { Fragment } from 'react';
 
 export default function ModalFormContainer({
@@ -44,7 +45,7 @@ export default function ModalFormContainer({
       <SelectComponent
         placeholder={input.placeholder}
         options={input.options}
-        value={input.value}
+        value={input.value.map(convertToMultiSelectOption)}
         label={input.label}
         onChange={(event) => onChange(input, event)}
       />

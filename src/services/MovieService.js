@@ -5,6 +5,53 @@ import KillBill from '../../resources/kill-bill.JPG';
 import PulpFiction from '../../resources/pulp-fiction.JPG';
 import Reservoir from '../../resources/reservoir-dogs.JPG';
 
+let movies = [
+  {
+    id: 'm1',
+    image: PulpFiction,
+    title: 'Pulp Fiction',
+    releaseDate: new Date(2004, 0),
+    genre: ['Action & Adventure'],
+  },
+  {
+    id: 'm2',
+    image: Bohemian,
+    title: 'Bohemian Rhapsody',
+    releaseDate: new Date(2003, 0),
+    genre: ['Drama', 'Biography', 'Music'],
+  },
+  {
+    id: 'm3',
+    image: KillBill,
+    title: 'Kill Bill: Vol 2',
+    releaseDate: new Date(1994, 0),
+    genre: ['Oscar winning Movie'],
+  },
+  {
+    id: 'm4',
+    image: Avengers,
+    title: 'Avengers: War of Infinity',
+    releaseDate: new Date(2004, 0),
+    genre: ['Action & Adventure'],
+  },
+  {
+    id: 'm5',
+    image: Inception,
+    title: 'Inception',
+    releaseDate: new Date(2003, 0),
+    genre: ['Action & Adventure'],
+  },
+  {
+    id: 'm6',
+    image: Reservoir,
+    title: 'Reservoir dogs',
+    releaseDate: new Date(1994, 0),
+    genre: ['Oscar winning Movie'],
+  },
+];
+
+let lastMovieId = movies.length;
+
 const MovieService = {
   getAvailableFilters() {
     return [
@@ -49,50 +96,32 @@ const MovieService = {
   },
 
   getMovies() {
-    return [
-      {
-        id: 'm1',
-        image: PulpFiction,
-        title: 'Pulp Fiction',
-        releaseDate: 2004,
-        genre: ['Action & Adventure'],
-      },
-      {
-        id: 'm2',
-        image: Bohemian,
-        title: 'Bohemian Rhapsody',
-        releaseDate: 2003,
-        genre: ['Drama', 'Biography', 'Music'],
-      },
-      {
-        id: 'm3',
-        image: KillBill,
-        title: 'Kill Bill: Vol 2',
-        releaseDate: 1994,
-        genre: ['Oscar winning Movie'],
-      },
-      {
-        id: 'm4',
-        image: Avengers,
-        title: 'Avengers: War of Infinity',
-        releaseDate: 2004,
-        genre: ['Action & Adventure'],
-      },
-      {
-        id: 'm5',
-        image: Inception,
-        title: 'Inception',
-        releaseDate: 2003,
-        genre: ['Action & Adventure'],
-      },
-      {
-        id: 'm6',
-        image: Reservoir,
-        title: 'Reservoir dogs',
-        releaseDate: 1994,
-        genre: ['Oscar winning Movie'],
-      },
-    ];
+    return movies;
+  },
+
+  addMovie(movie) {
+    lastMovieId += 1;
+
+    movies = movies.concat([{
+      image: '',
+      ...movie,
+      genre: movie.genre.map((g) => g.label),
+      id: `m${lastMovieId}`
+    }]);
+
+    return movies;
+  },
+
+  editMovie(movieId, movie) {
+    movies = movies.map((m) => (m.id === movieId ? movie : m));
+
+    return movies;
+  },
+
+  deleteMovie(movieId) {
+    movies = movies.filter((m) => m.id !== movieId);
+
+    return movies;
   },
 };
 
