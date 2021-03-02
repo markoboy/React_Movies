@@ -5,6 +5,11 @@ import KillBill from '../../resources/kill-bill.JPG';
 import PulpFiction from '../../resources/pulp-fiction.JPG';
 import Reservoir from '../../resources/reservoir-dogs.JPG';
 
+export const SortOptions = {
+  RELEASE: 'Release Date',
+  TITLE: 'Title',
+};
+
 let movies = [
   {
     id: 'm1',
@@ -82,15 +87,11 @@ const MovieService = {
     return [
       {
         id: 's1',
-        sort: 'release date',
+        sort: SortOptions.RELEASE,
       },
       {
         id: 's2',
-        sort: 'name',
-      },
-      {
-        id: 's3',
-        sort: 'rating',
+        sort: SortOptions.TITLE,
       },
     ];
   },
@@ -125,6 +126,22 @@ const MovieService = {
 
     return movies;
   },
+
+  sortByTitle(mov) {
+    return mov.sort((a, b) => {
+      if (a.title < b.title) {
+        return -1;
+      }
+      if (a.title > b.title) {
+        return 1;
+      }
+      return 0;
+    });
+  },
+
+  sortByDate(mov) {
+    return mov.sort((a, b) => b.releaseDate - a.releaseDate);
+  }
 };
 
 export default MovieService;

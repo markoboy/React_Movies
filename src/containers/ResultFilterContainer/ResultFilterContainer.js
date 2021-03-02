@@ -3,13 +3,15 @@ import ResultFilterItemComponent from '@components/ResultFilterItemComponent/Res
 import ResultFilterSortComponent from '@components/ResultFilterSortComponent/ResultFilterSortComponent';
 import MovieService from '@services/MovieService';
 import React from 'react';
+import PropTypes from 'prop-types';
 
-export default function ResultFilterContainer() {
+export default function ResultFilterContainer({
+  sortOptions,
+  activeSortOption,
+  onSortOptionChange,
+}) {
   const availableFilters = MovieService.getAvailableFilters();
   const activeFilter = availableFilters[0];
-
-  const sortOptions = MovieService.getSortOptions();
-  const activeSortOption = sortOptions[0];
 
   return (
     <ResultFilterComponent>
@@ -23,8 +25,23 @@ export default function ResultFilterContainer() {
       ))}
 
       <ResultFilterItemComponent classes="result-filter__item--last">
-        <ResultFilterSortComponent options={sortOptions} selectedOption={activeSortOption} />
+        <ResultFilterSortComponent
+          options={sortOptions}
+          selectedOption={activeSortOption}
+          onChange={onSortOptionChange}
+        />
       </ResultFilterItemComponent>
     </ResultFilterComponent>
   );
 }
+
+const sortOptionShape = PropTypes.shape({
+  id: PropTypes.string,
+  sort: PropTypes.string,
+});
+
+ResultFilterContainer.propTypes = {
+  sortOptions: PropTypes.arrayOf(sortOptionShape).isRequired,
+  activeSortOption: sortOptionShape.isRequired,
+  onSortOptionChange: PropTypes.func.isRequired,
+};

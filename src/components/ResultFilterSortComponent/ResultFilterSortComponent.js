@@ -4,7 +4,17 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import './ResultFilterSortComponent.scss';
 
-export default function ResultFilterSortComponent({ options, selectedOption }) {
+export default function ResultFilterSortComponent({
+  options,
+  selectedOption,
+  onChange,
+}) {
+  function handleOnChange(event) {
+    const { value } = event.target;
+    const option = options.find((opt) => opt.sort === value);
+    onChange(option);
+  }
+
   return (
     <div className="result-filter__select-wrapper">
       <label className="result-filter__sort-label" htmlFor="sort-options">
@@ -17,6 +27,7 @@ export default function ResultFilterSortComponent({ options, selectedOption }) {
         defaultValue={selectedOption.sort}
         name="sort"
         id="sort-options"
+        onChange={handleOnChange}
       >
         {options.map((opt) => (
           <option key={opt.id} value={opt.sort}>
@@ -36,4 +47,5 @@ const optionType = PropTypes.shape({
 ResultFilterComponent.propTypes = {
   options: PropTypes.arrayOf(optionType),
   selectedOption: optionType,
+  onChange: PropTypes.func,
 };
