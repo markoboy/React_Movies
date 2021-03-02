@@ -5,7 +5,11 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import './ResultItemPopOutComponent.scss';
 
-export default function ResultItemPopOutComponent({ actions, id }) {
+export default function ResultItemPopOutComponent({
+  actions,
+  id,
+  onActionClick,
+}) {
   return (
     <div className="result-item__pop-out">
       <ButtonComponent classes="pop-out__btn">
@@ -13,7 +17,11 @@ export default function ResultItemPopOutComponent({ actions, id }) {
       </ButtonComponent>
       <div className="pop-out__content">
         {actions.map((action) => (
-          <ButtonComponent key={`${id}-${action}`} classes="btn--full-width btn--secondary pop-out-content__item">
+          <ButtonComponent
+            key={`${id}-${action}`}
+            classes="btn--full-width btn--secondary pop-out-content__item"
+            onButtonClick={() => onActionClick(action)}
+          >
             {action}
           </ButtonComponent>
         ))}
@@ -25,4 +33,5 @@ export default function ResultItemPopOutComponent({ actions, id }) {
 ResultItemPopOutComponent.propTypes = {
   actions: PropTypes.arrayOf(PropTypes.string).isRequired,
   id: PropTypes.string.isRequired,
+  onActionClick: PropTypes.func.isRequired,
 };

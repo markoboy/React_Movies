@@ -102,18 +102,20 @@ const MovieService = {
   addMovie(movie) {
     lastMovieId += 1;
 
-    movies = movies.concat([{
-      image: '',
-      ...movie,
-      genre: movie.genre.map((g) => g.label),
-      id: `m${lastMovieId}`
-    }]);
+    movies = movies.concat([
+      {
+        image: '',
+        ...movie,
+        genre: movie.genre.map((g) => g.label),
+        id: `m${lastMovieId}`,
+      },
+    ]);
 
     return movies;
   },
 
-  editMovie(movieId, movie) {
-    movies = movies.map((m) => (m.id === movieId ? movie : m));
+  editMovie(id, movie) {
+    movies = movies.map((m) => (m.id === id ? movie : m));
 
     return movies;
   },

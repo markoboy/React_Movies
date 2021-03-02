@@ -1,12 +1,15 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import ResultItemPopOutComponent from '@components/ResultItemPopOutComponent/ResultItemPopOutComponent';
 import PropTypes from 'prop-types';
 import React from 'react';
-import './ResultListItemComponent.scss';
 import DefaultImage from '../../../resources/pulp-fiction.JPG';
+import './ResultListItemComponent.scss';
 
 export default function ResultListItemComponent({
-  image, title, releaseDate, genre, actions, id
+  image,
+  title,
+  releaseDate,
+  genre,
+  children,
 }) {
   return (
     <div className="result-list__item">
@@ -15,25 +18,21 @@ export default function ResultListItemComponent({
 
         <div className="result-item__body flex flex--wrap">
           <h4 className="result-item__title">{title}</h4>
-          <p className="result-item__release-date">{releaseDate.getFullYear()}</p>
+          <p className="result-item__release-date">
+            {releaseDate.getFullYear()}
+          </p>
           <p className="result-item__genre">{genre.join(', ')}</p>
         </div>
       </a>
 
-      {actions && actions.length && <ResultItemPopOutComponent id={id} actions={actions} />}
+      {children}
     </div>
   );
 }
 
-ResultListItemComponent.defaultProps = {
-  actions: [],
-};
-
 ResultListItemComponent.propTypes = {
-  id: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   releaseDate: PropTypes.instanceOf(Date).isRequired,
   genre: PropTypes.arrayOf(PropTypes.string).isRequired,
-  actions: PropTypes.arrayOf(PropTypes.string),
 };
