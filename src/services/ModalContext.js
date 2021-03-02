@@ -26,22 +26,16 @@ export const Actions = {
 
 export const defaultModalContext = {
   isOpened: false,
-  setIsOpened() { },
 
   movie: null,
-  setMovie() { },
 
   formInputs: null,
-  setFormInputs() { },
 
   formBody: null,
-  setFormBody() { },
 
   action: null,
-  setAction() { },
 
   successMessage: null,
-  setSuccessMessage() {},
 
   [Actions.ADD]: [
     getOutlineButton('Reset', 'reset'),
