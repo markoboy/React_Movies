@@ -8,6 +8,7 @@ import ModalComponent from '@components/ModalComponent/ModalComponent';
 import FormTypes from '@constants/FormTypes';
 import convertToMultiSelectOption from '@utils/convertToMultiSelectOption';
 import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
 
 export default function ModalFormContainer({
   title,
@@ -82,8 +83,13 @@ export default function ModalFormContainer({
     onSubmit();
   };
 
+  const handleFormReset = (event) => {
+    event.preventDefault();
+    onReset();
+  };
+
   return (
-    <form onSubmit={handleFormSubmit} onReset={onReset}>
+    <form onSubmit={handleFormSubmit} onReset={handleFormReset}>
       <ModalComponent
         title={title}
         onCloseTrigger={onCancel}
@@ -93,3 +99,50 @@ export default function ModalFormContainer({
     </form>
   );
 }
+
+ModalFormContainer.defaultProps = {
+  formInputs: null,
+  formBody: null,
+};
+
+ModalFormContainer.propTypes = {
+  title: PropTypes.string.isRequired,
+
+  actionButtons: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      type: PropTypes.string.isRequired,
+      classes: PropTypes.string,
+    })
+  ).isRequired,
+
+  formInputs: PropTypes.arrayOf(
+    PropTypes.shape({
+      type: PropTypes.string,
+      placeholder: PropTypes.string,
+      name: PropTypes.string,
+      id: PropTypes.string,
+
+      // oneOfType doesnt seem to work correctly.
+      // The value can be string, date, array of {value, label}
+      // eslint-disable-next-line react/forbid-prop-types
+      value: PropTypes.any,
+
+      label: PropTypes.string,
+      required: PropTypes.bool,
+
+      options: PropTypes.arrayOf(
+        PropTypes.shape({
+          label: PropTypes.string,
+          value: PropTypes.string,
+        })
+      ),
+    })
+  ),
+
+  formBody: PropTypes.element,
+  onSubmit: PropTypes.func.isRequired,
+  onReset: PropTypes.func.isRequired,
+  onCancel: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
+};

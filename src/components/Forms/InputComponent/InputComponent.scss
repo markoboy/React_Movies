@@ -10,8 +10,8 @@
   background-color: rgba($color-secondary, 0.4);
   color: $color-white;
 
-  &:focus,
-  &:hover {
+  &:not(:disabled):focus,
+  &:not(:disabled):hover {
     border-color: $color-primary;
     box-shadow: $box-shadow-primary;
   }
@@ -19,5 +19,9 @@
   &::placeholder {
     color: $color-secondary;
     opacity: 1;
+  }
+
+  &:disabled {
+    background-color: transparent;
   }
 }

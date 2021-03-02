@@ -5,6 +5,7 @@ import FormTypes from '@constants/FormTypes';
  * add movie form
  */
 export default function getModalFormInputs({
+  id = '',
   title = '',
   url = '',
   releaseDate = '',
@@ -12,7 +13,7 @@ export default function getModalFormInputs({
   overview = '',
   runtime = '',
 } = {}) {
-  return [
+  const formInputs = [
     {
       type: FormTypes.TEXT,
       placeholder: 'Title here',
@@ -86,4 +87,19 @@ export default function getModalFormInputs({
       required: true,
     },
   ];
+
+  if (id) {
+    formInputs.unshift({
+      type: FormTypes.TEXT,
+      placeholder: 'Movie ID',
+      name: 'id',
+      id: 'modal-form-id',
+      value: id,
+      label: 'Movie id',
+      required: false,
+      disabled: true,
+    });
+  }
+
+  return formInputs;
 }
