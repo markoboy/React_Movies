@@ -13,3 +13,9 @@
     text-align: center;
   }
 }
+
+.color {
+  &--primary {
+    color: $color-primary;
+  }
+}
