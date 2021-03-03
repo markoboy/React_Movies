@@ -22,6 +22,8 @@ const modal = {
   },
 };
 
+const tileActions = [Actions.EDIT, Actions.DELETE];
+
 export default function ResultListContainer({ movies }) {
   const { setSelectedMovieId } = useContext(ApplicationContext);
   const { dispatchModalAction } = useContext(ModalContext);
@@ -42,9 +44,7 @@ export default function ResultListContainer({ movies }) {
     });
   }
 
-  const tileActions = useMemo(() => [Actions.EDIT, Actions.DELETE], []);
-
-  return (
+  return useMemo(() => (
     <>
       <ResultCountComponent count={movies.length} />
       <ResultListComponentWithSection>
@@ -65,7 +65,7 @@ export default function ResultListContainer({ movies }) {
         ))}
       </ResultListComponentWithSection>
     </>
-  );
+  ), [movies]);
 }
 
 ResultListContainer.propTypes = {

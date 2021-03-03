@@ -156,7 +156,7 @@ const MovieService = {
   },
 
   sortByTitle(mov) {
-    return mov.sort((a, b) => {
+    return [...mov].sort((a, b) => {
       if (a.title < b.title) {
         return -1;
       }
@@ -168,7 +168,7 @@ const MovieService = {
   },
 
   sortByDate(mov) {
-    return mov.sort((a, b) => b.releaseDate - a.releaseDate);
+    return [...mov].sort((a, b) => b.releaseDate - a.releaseDate);
   },
 };
 
