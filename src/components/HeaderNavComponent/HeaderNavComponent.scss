@@ -12,6 +12,10 @@
   &-container {
     width: 100%;
     z-index: 110;
+
+    &--with-bg {
+      background-color: darken($color-black, 5%);
+    }
   }
 
   &__btn-container {
