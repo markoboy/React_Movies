@@ -5,7 +5,6 @@ import HeaderNavComponent from '@components/HeaderNavComponent/HeaderNavComponen
 import { faPlus, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ModalDispatchActions } from '@hooks/UseModalState';
-import useOpenModal from '@hooks/UseOpenModal';
 import { Actions, ModalContext } from '@services/ModalContext';
 import getModalFormInputs from '@utils/getModalFormInputs';
 import PropTypes from 'prop-types';
