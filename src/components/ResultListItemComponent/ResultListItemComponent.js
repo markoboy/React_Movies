@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import PropTypes from 'prop-types';
+import { MovieListItemType } from '@constants/MovieTypes';
 import React from 'react';
 import DefaultImage from '../../../resources/pulp-fiction.JPG';
 import './ResultListItemComponent.scss';
@@ -30,9 +30,4 @@ export default function ResultListItemComponent({
   );
 }
 
-ResultListItemComponent.propTypes = {
-  image: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  releaseDate: PropTypes.instanceOf(Date).isRequired,
-  genre: PropTypes.arrayOf(PropTypes.string).isRequired,
-};
+ResultListItemComponent.propTypes = MovieListItemType;

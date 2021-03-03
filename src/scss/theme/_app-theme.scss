@@ -16,6 +16,8 @@ $color-secondary: #555555 !default;
 $color-white: #ffffff !default;
 $color-black: #232323 !default;
 $color-grey: #424242 !default;
+$color-light-grey: lighten($color-secondary, 10%) !default;
+$color-fade-white: lighten($color-secondary, 20%) !default;
 
 // Borders and shadows
 $border-radius: 4px !default;

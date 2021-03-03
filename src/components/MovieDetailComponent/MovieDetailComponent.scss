@@ -1,0 +1,53 @@
+@import 'essential';
+
+.movie-detail {
+  color: darken($color-white, 20%);
+
+  @include media(minM) {
+    margin: 1.4em 2em;
+  }
+
+  &__heading-container {
+    display: flex;
+    flex-flow: row wrap;
+    width: 100%;
+    align-items: center;
+  }
+
+  &__heading {
+    font-size: 2.3em;
+    margin: 0 0 0.2em;
+    font-weight: $font-weight-regular;
+  }
+
+  &__rating {
+    font-size: 1.3em;
+    color: #708e59;
+    margin: 0;
+    margin-left: 1em;
+    border: 1px solid $color-white;
+    border-radius: 50%;
+    padding: 0.9em 0.8em;
+  }
+
+  &__genre {
+    margin: 0;
+    font-size: 0.9em;
+  }
+
+  &__year-container {
+    margin: 0.3em 0;
+    display: flex;
+    flex-flow: row nowrap;
+    font-size: 1.5em;
+    color: $color-primary;
+  }
+
+  &__duration {
+    margin-left: 1em;
+  }
+
+  &__description {
+    margin: 0;
+  }
+}
