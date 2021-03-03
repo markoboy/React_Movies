@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React from 'react';
+import React, { useMemo } from 'react';
 import MultiSelect from 'react-multi-select-component';
 import './SelectComponent.scss';
 
@@ -14,7 +14,7 @@ export default function SelectComponent({
     selectSomeItems: placeholder,
   };
 
-  return (
+  return useMemo(() => (
     <div className="form-element-wrapper">
       {label && <label className="form__label">{label}</label>}
       <MultiSelect
@@ -24,5 +24,5 @@ export default function SelectComponent({
         onChange={onChange}
       />
     </div>
-  );
+  ), [placeholder, options, value]);
 }

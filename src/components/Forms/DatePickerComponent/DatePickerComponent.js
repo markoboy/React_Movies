@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import DatePicker from 'react-date-picker/dist/entry.nostyle';
 import './DatePickerComponent.scss';
@@ -12,7 +12,7 @@ export default function DatePickerComponent({
   required,
   label,
 }) {
-  return (
+  return useMemo(() => (
     <div className="form-element-wrapper">
       {label && <label className="form__label">{label}</label>}
       <DatePicker
@@ -27,7 +27,7 @@ export default function DatePickerComponent({
         required={required}
       />
     </div>
-  );
+  ), [value, required]);
 }
 
 DatePickerComponent.defaultProps = {

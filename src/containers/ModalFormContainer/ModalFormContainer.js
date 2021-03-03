@@ -7,7 +7,7 @@ import RowComponent from '@components/Grid/RowComponent/RowComponent';
 import ModalComponent from '@components/ModalComponent/ModalComponent';
 import FormTypes from '@constants/FormTypes';
 import convertToMultiSelectOption from '@utils/convertToMultiSelectOption';
-import React, { Fragment } from 'react';
+import React, { Fragment, useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
 
 export default function ModalFormContainer({
@@ -53,7 +53,7 @@ export default function ModalFormContainer({
     );
   };
 
-  const modalBody = formBody || (
+  const generateInputs = useCallback(() => (
     <fieldset>
       {formInputs.map((input) => (
         <Fragment key={input.id}>
@@ -61,9 +61,11 @@ export default function ModalFormContainer({
         </Fragment>
       ))}
     </fieldset>
-  );
+  ), [formInputs]);
 
-  const modalFooter = (
+  const modalBody = formBody || generateInputs();
+
+  const modalFooter = useMemo(() => (
     <RowComponent classes="justify-content--flex-end">
       {actionButtons.map((action) => (
         <ColumnComponent
@@ -76,7 +78,7 @@ export default function ModalFormContainer({
         </ColumnComponent>
       ))}
     </RowComponent>
-  );
+  ), [actionButtons]);
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
