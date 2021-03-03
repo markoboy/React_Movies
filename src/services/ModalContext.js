@@ -55,7 +55,7 @@ export const defaultModalContext = {
     getPrimaryButton('Confirm', 'submit'),
   ],
 
-  setModalState() { },
+  dispatchModalAction() { },
 };
 
 export const ModalContext = createContext(defaultModalContext);

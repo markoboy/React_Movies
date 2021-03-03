@@ -4,11 +4,12 @@ import ButtonComponent from '@components/Forms/ButtonComponent/ButtonComponent';
 import HeaderNavComponent from '@components/HeaderNavComponent/HeaderNavComponent';
 import { faPlus, faSearch } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { ModalDispatchActions } from '@hooks/UseModalState';
 import useOpenModal from '@hooks/UseOpenModal';
 import { Actions, ModalContext } from '@services/ModalContext';
 import getModalFormInputs from '@utils/getModalFormInputs';
 import PropTypes from 'prop-types';
-import React, { useMemo } from 'react';
+import React, { useCallback, useContext, useMemo } from 'react';
 
 function HeaderAddActionButton({ onButtonClick }) {
   return (
@@ -31,29 +32,33 @@ function HeaderSearchActionButton({ onClick }) {
 }
 
 export default function HeaderNavContainer({ hasBackground, onSearch, hasSearch }) {
-  const [modalContext, setOpenModal] = useOpenModal(ModalContext);
+  const { modalState, dispatchModalAction } = useContext(ModalContext);
 
-  const actionButton = hasSearch ? <HeaderSearchActionButton onClick={onSearch} /> : (
-    <HeaderAddActionButton
-      onButtonClick={() => setOpenModal({
-        formInputs: getModalFormInputs(),
-        action: Actions.ADD,
-        successMessage: <p>Movie has been added.</p>,
-      })}
-    />
-  );
+  const actionButtonCallback = useCallback(() => (
+    hasSearch ? <HeaderSearchActionButton onClick={onSearch} /> : (
+      <HeaderAddActionButton
+        onButtonClick={() => dispatchModalAction({
+          type: ModalDispatchActions.OPEN,
+          payload: {
+            formInputs: getModalFormInputs(),
+            action: Actions.ADD,
+            successMessage: <p>Movie has been added.</p>,
+          },
+        })}
+      />
+    )), [hasSearch]);
 
   return useMemo(
     () => (
       <>
         <HeaderNavComponent
           headerLogo={<BrandLogoComponent />}
-          actionButton={actionButton}
+          actionButton={actionButtonCallback()}
           hasBackground={hasBackground}
         />
       </>
     ),
-    [modalContext]
+    [modalState]
   );
 }
 

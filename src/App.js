@@ -2,164 +2,90 @@ import SpinnerComponent from '@components/SpinnerComponent/SpinnerComponent';
 import FooterContainer from '@containers/FooterContainer/FooterContainer';
 import HeaderNavContainer from '@containers/HeaderNavContainer/HeaderNavContainer';
 import SiteContainer from '@containers/SiteContainer/SiteContainer';
+import useModalState, { ModalDispatchActions } from '@hooks/UseModalState';
+import useMoviesState, { MoviesDispatchActions } from '@hooks/UseMoviesState';
+import { ApplicationContext } from '@services/ApplicationContext';
 import {
   Actions,
   defaultModalContext,
   ModalContext,
 } from '@services/ModalContext';
 import MovieService from '@services/MovieService';
-import getModalFormInputs from '@utils/getModalFormInputs';
-import getSerializedModalFormInputs from '@utils/getSerializedModalFormInputs';
-import React, { Component, lazy, Suspense } from 'react';
+import React, {
+  lazy, Suspense, useEffect, useState
+} from 'react';
 
 const LazyModalFormContainer = lazy(() => import('@containers/ModalFormContainer/ModalFormContainer'));
 
-export default class App extends Component {
-  constructor() {
-    super();
+export default function App() {
+  const [movies, dispatchMovieAction] = useMoviesState([]);
 
-    this.state = {
-      movies: [],
-      modal: {
-        ...defaultModalContext,
-        setModalState: this.modalSetModalState.bind(this),
-      },
-    };
+  const [modalState, dispatchModalAction] = useModalState(defaultModalContext, dispatchMovieAction);
 
-    this.handleAddMovie = this.handleAddMovie.bind(this);
-    this.handleEditMovie = this.handleEditMovie.bind(this);
-    this.handelDeleteMovie = this.handelDeleteMovie.bind(this);
-  }
+  const [modalTitle, setModalTitle] = useState('');
 
-  componentDidMount() {
-    const movies = MovieService.getMovies();
+  const [selectedMovieId, setSelectedMovieId] = useState();
 
-    this.setState({
-      movies,
-    });
-  }
+  const [selectedMovie, setSelectedMovie] = useState();
 
-  handleAddMovie(movie) {
-    const movies = MovieService.addMovie(movie);
+  useEffect(() => {
+    const moviesResponse = MovieService.getMovies();
+    dispatchMovieAction({ type: MoviesDispatchActions.INIT, payload: moviesResponse });
+  }, []);
 
-    this.setState({
-      movies,
-    });
-  }
+  useEffect(() => {
+    setModalTitle(
+      modalState.action !== Actions.CONFIRM ? `${modalState.action} movie` : ' '
+    );
+  }, [modalState.action]);
 
-  handleEditMovie(movieId, movie) {
-    const movies = MovieService.editMovie(movieId, movie);
+  useEffect(() => {
+    const movie = MovieService.getMovieById(selectedMovieId);
+    setSelectedMovie(movie);
+  }, [selectedMovieId]);
 
-    this.setState({
-      movies,
-    });
-  }
+  return (
+    <>
+      <ModalContext.Provider value={{ modalState, dispatchModalAction }}>
+        <ApplicationContext.Provider
+          value={{ selectedMovieId, setSelectedMovieId }}
+        >
+          <HeaderNavContainer
+            hasSearch={!!selectedMovieId}
+            hasBackground={!!selectedMovieId}
+            onSearch={() => setSelectedMovieId(null)}
+          />
+          <SiteContainer movies={movies} selectedMovie={selectedMovie} />
+        </ApplicationContext.Provider>
 
-  // eslint-disable-next-line react/sort-comp
-  handelDeleteMovie(movieId) {
-    const movies = MovieService.deleteMovie(movieId);
-
-    this.setState({
-      movies,
-    });
-  }
-
-  handleOnChange(input, value) {
-    this.setState((state) => ({
-      modal: {
-        ...state.modal,
-        formInputs: state.modal.formInputs.map((fInput) => {
-          if (fInput === input) {
-            return {
-              ...fInput,
-              value,
-            };
-          }
-
-          return fInput;
-        }),
-      },
-    }));
-  }
-
-  handleFormSubmit() {
-    const { action, formInputs, movie } = this.state.modal;
-
-    switch (action) {
-      case Actions.DELETE:
-        this.handelDeleteMovie(movie.id);
-        break;
-      case Actions.EDIT:
-        this.handleEditMovie(movie.id, {
-          ...movie,
-          ...getSerializedModalFormInputs(formInputs),
-        });
-        break;
-      case Actions.ADD:
-        this.handleAddMovie(getSerializedModalFormInputs(formInputs));
-        break;
-      default:
-        this.handleModalClose();
-    }
-
-    if (action !== Actions.CONFIRM) {
-      this.modalSetModalState({
-        action: Actions.CONFIRM,
-        formBody: this.state.modal.successMessage,
-      });
-    }
-  }
-
-  handleFormReset() {
-    this.modalSetModalState({
-      formInputs: getModalFormInputs(this.state.modal.movie || {}),
-    });
-  }
-
-  handleModalClose() {
-    this.modalSetModalState({
-      isOpened: false,
-      movie: null,
-      formInputs: null,
-      formBody: null,
-      action: null,
-    });
-  }
-
-  modalSetModalState(modalState) {
-    this.setState((state) => ({
-      modal: {
-        ...state.modal,
-        ...modalState,
-      },
-    }));
-  }
-
-  render() {
-    const { modal } = this.state;
-    const modalTitle = modal.action !== Actions.CONFIRM ? `${modal.action} movie` : ' ';
-
-    return (
-      <ModalContext.Provider value={this.state.modal}>
-        <HeaderNavContainer />
-        <SiteContainer movies={this.state.movies} />
-        <FooterContainer />
-
-        {modal.isOpened && (
+        {modalState.isOpened && (
           <Suspense fallback={<SpinnerComponent />}>
             <LazyModalFormContainer
               title={modalTitle}
-              actionButtons={modal[modal.action]}
-              formBody={modal.formBody}
-              formInputs={modal.formInputs}
-              onCancel={() => this.handleModalClose()}
-              onSubmit={() => this.handleFormSubmit()}
-              onReset={() => this.handleFormReset()}
-              onChange={(input, value) => this.handleOnChange(input, value)}
+              actionButtons={modalState[modalState.action]}
+              formBody={modalState.formBody}
+              formInputs={modalState.formInputs}
+              onCancel={() => (
+                dispatchModalAction({ type: ModalDispatchActions.CLOSE })
+              )}
+              onSubmit={() => (
+                dispatchModalAction({ type: ModalDispatchActions.SUBMIT })
+              )}
+              onReset={() => (
+                dispatchModalAction({ type: ModalDispatchActions.RESET })
+              )}
+              onChange={(input, value) => (
+                dispatchModalAction({
+                  type: ModalDispatchActions.CHANGE,
+                  payload: { input, value },
+                })
+              )}
             />
           </Suspense>
         )}
       </ModalContext.Provider>
-    );
-  }
+
+      <FooterContainer />
+    </>
+  );
 }

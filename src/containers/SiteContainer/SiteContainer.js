@@ -1,15 +1,18 @@
+import withMarginBottom from '@components/HigherOrder/WithMarginBottom';
 import BannerContainer from '@containers/BannerContainer/BannerContainer';
+import MovieDetailContainer from '@containers/MovieDetailContainer/MovieDetailContainer';
 import ResultContainer from '@containers/ResultContainer/ResultContainer';
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 
-export default function SiteContainer({ movies }) {
+const MovieDetailContainerWithMarginBottom = withMarginBottom(MovieDetailContainer);
+
+export default function SiteContainer({ movies, selectedMovie }) {
   return (
     <main className="site-container__main flex flex--column">
-      <BannerContainer />
-      <ResultContainer
-        movies={movies}
-      />
+      {!selectedMovie && <BannerContainer />}
+      {selectedMovie && <MovieDetailContainerWithMarginBottom movie={selectedMovie} />}
+      <ResultContainer movies={movies} />
     </main>
   );
 }
