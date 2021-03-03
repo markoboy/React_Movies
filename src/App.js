@@ -12,7 +12,7 @@ import {
 } from '@services/ModalContext';
 import MovieService from '@services/MovieService';
 import React, {
-  lazy, Suspense, useEffect, useState
+  lazy, Suspense, useEffect, useMemo, useState
 } from 'react';
 
 const LazyModalFormContainer = lazy(() => import('@containers/ModalFormContainer/ModalFormContainer'));
@@ -42,7 +42,13 @@ export default function App() {
   useEffect(() => {
     const movie = MovieService.getMovieById(selectedMovieId);
     setSelectedMovie(movie);
+    window.document.body.scrollTo({ top: 0, behavior: 'smooth' });
   }, [selectedMovieId]);
+
+  const memoizedSiteContainer = useMemo(() => (
+    <SiteContainer movies={movies} selectedMovie={selectedMovie} />
+  ),
+  [movies, selectedMovie]);
 
   return (
     <>
@@ -55,7 +61,7 @@ export default function App() {
             hasBackground={!!selectedMovieId}
             onSearch={() => setSelectedMovieId(null)}
           />
-          <SiteContainer movies={movies} selectedMovie={selectedMovie} />
+          {memoizedSiteContainer}
         </ApplicationContext.Provider>
 
         {modalState.isOpened && (
@@ -85,7 +91,7 @@ export default function App() {
         )}
       </ModalContext.Provider>
 
-      <FooterContainer />
+      {useMemo(() => <FooterContainer />, [])}
     </>
   );
 }

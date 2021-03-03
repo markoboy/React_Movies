@@ -17,4 +17,5 @@ export const MovieDetailType = {
 
 export const MovieListItemType = {
   ...SharedMovieType,
+  onClick: PropTypes.func.isRequired,
 };
