@@ -4,6 +4,7 @@ import HeaderNavContainer from '@containers/HeaderNavContainer/HeaderNavContaine
 import SiteContainer from '@containers/SiteContainer/SiteContainer';
 import useModalState, { ModalDispatchActions } from '@hooks/UseModalState';
 import useMoviesState, { MoviesDispatchActions } from '@hooks/UseMoviesState';
+import useSelectedMovie from '@hooks/UseSelectedMovie';
 import { ApplicationContext } from '@services/ApplicationContext';
 import {
   Actions,
@@ -24,9 +25,7 @@ export default function App() {
 
   const [modalTitle, setModalTitle] = useState('');
 
-  const [selectedMovieId, setSelectedMovieId] = useState();
-
-  const [selectedMovie, setSelectedMovie] = useState();
+  const { selectedMovie, selectedMovieId, setSelectedMovieId } = useSelectedMovie();
 
   useEffect(() => {
     const moviesResponse = MovieService.getMovies();
@@ -39,16 +38,9 @@ export default function App() {
     );
   }, [modalState.action]);
 
-  useEffect(() => {
-    const movie = MovieService.getMovieById(selectedMovieId);
-    setSelectedMovie(movie);
-    window.document.body.scrollTo({ top: 0, behavior: 'smooth' });
-  }, [selectedMovieId]);
-
   const memoizedSiteContainer = useMemo(() => (
     <SiteContainer movies={movies} selectedMovie={selectedMovie} />
-  ),
-  [movies, selectedMovie]);
+  ), [movies, selectedMovie]);
 
   return (
     <>

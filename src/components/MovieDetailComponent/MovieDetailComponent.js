@@ -4,15 +4,19 @@ import { MovieDetailType } from '@constants/MovieTypes';
 import RowComponent from '@components/Grid/RowComponent/RowComponent';
 import ColumnComponent from '@components/Grid/ColumnComponent/ColumnComponent';
 
-function MovieDetailComponent({
-  duration,
-  rating,
-  description,
-  image,
-  title,
-  releaseDate,
-  genre,
-}) {
+function MovieDetailComponent(props) {
+  const {
+    duration,
+    rating,
+    description,
+    image,
+    title,
+    releaseDate,
+    genre,
+  } = props;
+  if (!duration || !rating || !description || !image || !title || !releaseDate || !genre) {
+    throw new Error(`Please include all props for MovieDetailComponent. ${Object.keys(props)}`);
+  }
   return (
     <RowComponent>
       <ColumnComponent classes="column--m-3">

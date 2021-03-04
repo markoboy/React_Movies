@@ -131,7 +131,7 @@ const MovieService = {
   addMovie({ moviesState, movie }) {
     lastMovieId += 1;
 
-    const newMovies = moviesState.concat([
+    movies = moviesState.concat([
       {
         image: '',
         ...movie,
@@ -140,19 +140,19 @@ const MovieService = {
       },
     ]);
 
-    return newMovies;
+    return movies;
   },
 
   editMovie({ moviesState, movie }) {
-    const newMovies = moviesState.map((m) => (m.id === movie.id ? movie : m));
+    movies = moviesState.map((m) => (m.id === movie.id ? movie : m));
 
-    return newMovies;
+    return movies;
   },
 
   deleteMovie({ moviesState, movieId }) {
-    const newMovies = moviesState.filter((m) => m.id !== movieId);
+    movies = moviesState.filter((m) => m.id !== movieId);
 
-    return newMovies;
+    return movies;
   },
 
   sortByTitle(mov) {
