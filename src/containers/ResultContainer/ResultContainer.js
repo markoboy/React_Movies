@@ -4,7 +4,12 @@ import ResultFilterContainer from '@containers/ResultFilterContainer/ResultFilte
 import ResultListContainer from '@containers/ResultListContainer/ResultListContainer';
 import MovieService, { SortOptions } from '@services/MovieService';
 import PropTypes from 'prop-types';
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 
 const ResultFilterContainerWithWrapper = withWrapper(ResultFilterContainer);
 const ResultListContainerWithWrapper = withWrapper(ResultListContainer);

@@ -13,7 +13,7 @@ export default function ResultListItemComponent({
   children,
 }) {
   return (
-    <div className="result-list__item">
+    <li className="result-list__item">
       <a href="#" onClick={onClick}>
         <img src={image || DefaultImage} alt={title} />
 
@@ -27,7 +27,7 @@ export default function ResultListItemComponent({
       </a>
 
       {children}
-    </div>
+    </li>
   );
 }
 
