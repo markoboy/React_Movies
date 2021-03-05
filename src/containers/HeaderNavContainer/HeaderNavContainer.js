@@ -53,7 +53,6 @@ export default function HeaderNavContainer({
             payload: {
               formInputs: getModalFormInputs(),
               action: Actions.ADD,
-              successMessage: <p>Movie has been added.</p>,
             },
           })}
         />

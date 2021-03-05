@@ -16,10 +16,6 @@ const ResultListComponentWithSection = withSection(ResultListComponent, {
 
 const modal = {
   deleteMessage: <p>Are you sure you want to delete this movie?</p>,
-  confirmMessage: {
-    delete: <p>Movie has been deleted.</p>,
-    edit: <p>Movie has been updated.</p>,
-  },
 };
 
 const tileActions = [Actions.EDIT, Actions.DELETE];
@@ -29,7 +25,6 @@ export default function ResultListContainer({ movies }) {
   const { dispatchModalAction } = useContext(ModalContext);
 
   function handleActionClick(action, movie) {
-    console.log(movie);
     dispatchModalAction({
       type: ModalDispatchActions.OPEN,
       payload: {
@@ -37,10 +32,6 @@ export default function ResultListContainer({ movies }) {
         formBody: action === Actions.DELETE ? modal.deleteMessage : null,
         movie,
         action,
-        successMessage:
-          action === Actions.EDIT
-            ? modal.confirmMessage.edit
-            : modal.confirmMessage.delete,
       }
     });
   }
