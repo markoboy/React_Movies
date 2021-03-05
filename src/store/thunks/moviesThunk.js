@@ -16,12 +16,12 @@ import {
   selectMovieSuccessCreator,
   updateMovieCreator,
 } from '@store/action-creators/moviesActionCreators';
-import { moviesSelector } from '@store/selectors/moviesSelectors';
+import { moviesStateSelector } from '@store/selectors/moviesSelectors';
 
 export const fetchMovies = () => (dispatch, getState) => {
   dispatch(fetchMoviesCreator());
 
-  const { movies: moviesState } = getState();
+  const moviesState = moviesStateSelector(getState());
 
   return MovieServiceAPI.getAll({
     sortBy: moviesState.sortBy,
@@ -61,7 +61,7 @@ export const deleteMovie = (movieId) => (dispatch) => {
 };
 
 export const selectMovie = (selectedMovieId) => (dispatch, getState) => {
-  const moviesState = moviesSelector(getState());
+  const moviesState = moviesStateSelector(getState());
 
   const movie = moviesState.movies.find((m) => m.id === selectedMovieId);
 

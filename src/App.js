@@ -10,6 +10,7 @@ import {
   ModalContext,
 } from '@services/ModalContext';
 import { selectMovieSuccessCreator } from '@store/action-creators/moviesActionCreators';
+import { moviesStateSelector } from '@store/selectors/moviesSelectors';
 import {
   addMovie,
   deleteMovie,
@@ -119,12 +120,8 @@ function App({ movies, dispatch }) {
   );
 }
 
-const mapStateToProps = (state) => {
-  const { movies } = state;
-
-  return {
-    movies,
-  };
-};
+const mapStateToProps = (state) => ({
+  movies: moviesStateSelector(state),
+});
 
 export default connect(mapStateToProps)(App);

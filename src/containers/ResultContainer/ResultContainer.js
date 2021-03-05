@@ -3,6 +3,7 @@ import ErrorBoundary from '@containers/ErrorBoundary/ErrorBoundary';
 import ResultFilterContainer from '@containers/ResultFilterContainer/ResultFilterContainer';
 import ResultListContainer from '@containers/ResultListContainer/ResultListContainer';
 import MovieService, { SortOptions } from '@services/MovieService';
+import { moviesSelector } from '@store/selectors/moviesSelectors';
 import PropTypes from 'prop-types';
 import React, {
   useCallback,
@@ -10,11 +11,12 @@ import React, {
   useMemo,
   useState,
 } from 'react';
+import { connect } from 'react-redux';
 
 const ResultFilterContainerWithWrapper = withWrapper(ResultFilterContainer);
 const ResultListContainerWithWrapper = withWrapper(ResultListContainer);
 
-export default function ResultContainer({ movies }) {
+function ResultContainer({ movies }) {
   const [filteredMovies, setFilteredMovies] = useState(movies);
 
   const [sortOptions, setSortOptions] = useState(null);
@@ -64,3 +66,9 @@ export default function ResultContainer({ movies }) {
 ResultContainer.propTypes = {
   movies: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
+
+const mapStateToProps = (state) => ({
+  movies: moviesSelector(state),
+});
+
+export default connect(mapStateToProps)(ResultContainer);

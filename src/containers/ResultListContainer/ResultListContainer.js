@@ -4,11 +4,13 @@ import ResultItemPopOutComponent from '@components/ResultItemPopOutComponent/Res
 import ResultListComponent from '@components/ResultListComponent/ResultListComponent';
 import ResultListItemComponent from '@components/ResultListItemComponent/ResultListItemComponent';
 import { ModalDispatchActions } from '@hooks/UseModalState';
-import { ApplicationContext } from '@services/ApplicationContext';
 import { Actions, ModalContext } from '@services/ModalContext';
+import { moviesSelector, moviesTotalAmountSelector } from '@store/selectors/moviesSelectors';
+import { selectMovie } from '@store/thunks/moviesThunk';
 import getModalFormInputs from '@utils/getModalFormInputs';
 import PropTypes from 'prop-types';
 import React, { useContext, useMemo } from 'react';
+import { connect } from 'react-redux';
 
 const ResultListComponentWithSection = withSection(ResultListComponent, {
   classes: 'section--padding-bottom-only',
@@ -20,8 +22,7 @@ const modal = {
 
 const tileActions = [Actions.EDIT, Actions.DELETE];
 
-export default function ResultListContainer({ movies }) {
-  const { setSelectedMovieId } = useContext(ApplicationContext);
+function ResultListContainer({ movies, totalAmount, dispatch }) {
   const { dispatchModalAction } = useContext(ModalContext);
 
   function handleActionClick(action, movie) {
@@ -38,12 +39,12 @@ export default function ResultListContainer({ movies }) {
 
   return useMemo(() => (
     <>
-      <ResultCountComponent count={movies.length} />
+      <ResultCountComponent count={totalAmount} />
       <ResultListComponentWithSection>
         {movies.map((movie) => (
           <ResultListItemComponent
             key={movie.id}
-            onClick={() => setSelectedMovieId(movie.id)}
+            onClick={() => dispatch(selectMovie(movie.id))}
             {...movie}
           >
             {tileActions && tileActions.length && (
@@ -62,4 +63,12 @@ export default function ResultListContainer({ movies }) {
 
 ResultListContainer.propTypes = {
   movies: PropTypes.arrayOf(PropTypes.object).isRequired,
+  totalAmount: PropTypes.number.isRequired,
 };
+
+const mapStateToProps = (state) => ({
+  movies: moviesSelector(state),
+  totalAmount: moviesTotalAmountSelector(state),
+});
+
+export default connect(mapStateToProps)(ResultListContainer);
