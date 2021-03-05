@@ -26,9 +26,9 @@ const initalMoviesState = {
   offset: 0,
   totalAmount: 0,
   error: null,
-  sortBy: '',
-  sortOrder: 'asc',
-  filter: [],
+  sortBy: 'release_date',
+  sortOrder: 'desc',
+  filter: [''],
   selectedMovie: null,
 };
 
@@ -92,7 +92,7 @@ export default function moviesReducer(state = initalMoviesState, action) {
     case APPLY_SORT:
       return {
         ...state,
-        sortBy: action.payload.sortBy,
+        sortBy: action.payload.value,
         sortOrder: action.payload.sortOrder,
       };
 

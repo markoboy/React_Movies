@@ -1,47 +1,49 @@
 import ResultFilterComponent from '@components/ResultFilterComponent/ResultFilterComponent';
 import ResultFilterItemComponent from '@components/ResultFilterItemComponent/ResultFilterItemComponent';
 import ResultFilterSortComponent from '@components/ResultFilterSortComponent/ResultFilterSortComponent';
-import MovieService from '@services/MovieService';
-import React from 'react';
+import AvailableFilters from '@constants/AvailableFilters';
+import SortOptions from '@constants/SortOptions';
+import { applySortCreator } from '@store/action-creators/moviesActionCreators';
+import { moviesFilterSelector, moviesSortBySelector } from '@store/selectors/moviesSelectors';
 import PropTypes from 'prop-types';
+import React from 'react';
+import { connect } from 'react-redux';
 
-export default function ResultFilterContainer({
-  sortOptions,
-  activeSortOption,
-  onSortOptionChange,
+function ResultFilterContainer({
+  sortBy,
+  filters,
+  dispatch,
 }) {
-  const availableFilters = MovieService.getAvailableFilters();
-  const activeFilter = availableFilters[0];
-
   return (
     <ResultFilterComponent>
-      {availableFilters.map((filter) => (
+      {AvailableFilters.map((filter) => (
         <ResultFilterItemComponent
-          key={filter.id}
-          isActive={filter === activeFilter}
+          key={`result-filter-${filter.value}`}
+          isActive={filters.includes(filter.value)}
         >
-          {filter.genre}
+          {filter.label}
         </ResultFilterItemComponent>
       ))}
 
       <ResultFilterItemComponent classes="result-filter__item--last">
         <ResultFilterSortComponent
-          options={sortOptions}
-          selectedOption={activeSortOption}
-          onChange={onSortOptionChange}
+          options={SortOptions}
+          value={sortBy}
+          onChange={(option) => dispatch(applySortCreator(option))}
         />
       </ResultFilterItemComponent>
     </ResultFilterComponent>
   );
 }
 
-const sortOptionShape = PropTypes.shape({
-  id: PropTypes.string,
-  sort: PropTypes.string,
+ResultFilterContainer.propTypes = {
+  sortBy: PropTypes.string.isRequired,
+  filters: PropTypes.arrayOf(PropTypes.string).isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  sortBy: moviesSortBySelector(state),
+  filters: moviesFilterSelector(state),
 });
 
-ResultFilterContainer.propTypes = {
-  sortOptions: PropTypes.arrayOf(sortOptionShape).isRequired,
-  activeSortOption: sortOptionShape.isRequired,
-  onSortOptionChange: PropTypes.func.isRequired,
-};
+export default connect(mapStateToProps)(ResultFilterContainer);

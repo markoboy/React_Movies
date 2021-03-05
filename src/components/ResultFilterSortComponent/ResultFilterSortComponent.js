@@ -1,17 +1,22 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import ResultFilterComponent from '@components/ResultFilterComponent/ResultFilterComponent';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './ResultFilterSortComponent.scss';
 
 export default function ResultFilterSortComponent({
   options,
-  selectedOption,
+  value,
   onChange,
 }) {
+  const [selectedOption, setSelectedOption] = useState(null);
+
+  useEffect(() => {
+    setSelectedOption(options.find((o) => o.value === value));
+  }, [value]);
+
   function handleOnChange(event) {
-    const { value } = event.target;
-    const option = options.find((opt) => opt.sort === value);
+    const option = options.find((opt) => opt.value === event.target.value);
     onChange(option);
   }
 
@@ -20,18 +25,17 @@ export default function ResultFilterSortComponent({
       <label className="result-filter__sort-label" htmlFor="sort-options">
         Sort by
       </label>
-      <span className="result-filter__select-value">{selectedOption.sort}</span>
+      <span className="result-filter__select-value">{selectedOption?.label}</span>
       <select
         className="result-filter__select"
-        data-value={selectedOption.sort}
-        defaultValue={selectedOption.sort}
+        defaultValue={selectedOption?.label}
         name="sort"
         id="sort-options"
         onChange={handleOnChange}
       >
         {options.map((opt) => (
-          <option key={opt.id} value={opt.sort}>
-            {opt.sort}
+          <option key={`result-filter-sort-${opt.value}`} value={opt.value}>
+            {opt.label}
           </option>
         ))}
       </select>
@@ -40,12 +44,12 @@ export default function ResultFilterSortComponent({
 }
 
 const optionType = PropTypes.shape({
-  id: PropTypes.string.isRequired,
-  sort: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
 });
 
 ResultFilterComponent.propTypes = {
   options: PropTypes.arrayOf(optionType),
-  selectedOption: optionType,
+  value: PropTypes.string,
   onChange: PropTypes.func,
 };
