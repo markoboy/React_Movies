@@ -4,15 +4,15 @@ import PropTypes from 'prop-types';
 const SharedMovieType = {
   poster_path: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-  releaseDate: PropTypes.instanceOf(Date).isRequired,
+  releaseDate: PropTypes.instanceOf(Date),
   genres: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 export const MovieDetailType = {
   ...SharedMovieType,
-  duration: PropTypes.number.isRequired,
-  rating: PropTypes.number.isRequired,
-  description: PropTypes.string.isRequired,
+  runtime: PropTypes.number.isRequired,
+  vote_average: PropTypes.number,
+  overview: PropTypes.string.isRequired,
 };
 
 export const MovieListItemType = {

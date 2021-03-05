@@ -12,6 +12,11 @@ const getMovieDataBody = (movie) => {
     newMovie.release_date = format(newMovie.release_date, 'yyyy-MM-dd');
   }
 
+  // Genres should be converted to string if they are using the { label, value }
+  // for the multi-select
+  newMovie.genres = newMovie.genres.map((g) => (typeof g === 'string' ? g : g.label));
+  newMovie.runtime = Number(newMovie.runtime);
+
   delete newMovie.releaseDate;
   delete newMovie.image;
 

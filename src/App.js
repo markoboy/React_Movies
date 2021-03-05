@@ -66,13 +66,6 @@ function App({ movies, dispatch }) {
     dispatchModalAction({ type: ModalDispatchActions.CLOSE });
   }, [modalState.formInputs, modalState.movie]);
 
-  const memoizedSiteContainer = useMemo(
-    () => (
-      <SiteContainer movies={movies.movies} selectedMovie={movies.selectedMovie} />
-    ),
-    [movies.movies, movies.selectedMovie]
-  );
-
   return (
     <>
       <ModalContext.Provider value={{ modalState, dispatchModalAction }}>
@@ -81,7 +74,7 @@ function App({ movies, dispatch }) {
           hasBackground={!!movies.selectedMovie}
           onSearch={() => dispatch(selectMovieSuccessCreator(null))}
         />
-        {memoizedSiteContainer}
+        <SiteContainer />
 
         {movies.status === StatusTypes.LOADING && <SpinnerComponent />}
 

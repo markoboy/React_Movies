@@ -1,25 +1,24 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './MovieDetailComponent.scss';
 import { MovieDetailType } from '@constants/MovieTypes';
 import RowComponent from '@components/Grid/RowComponent/RowComponent';
 import ColumnComponent from '@components/Grid/ColumnComponent/ColumnComponent';
 
-function MovieDetailComponent(props) {
-  const {
-    duration,
-    rating,
-    description,
-    image,
-    title,
-    releaseDate,
-    genres,
-    fallbackImage,
-  } = props;
-  if (!duration || !rating || !description || !image || !title || !releaseDate || !genres) {
-    throw new Error(`Please include all props for MovieDetailComponent. ${Object.keys(props)}`);
-  }
-
+function MovieDetailComponent({
+  runtime,
+  vote_average: rating,
+  overview,
+  image,
+  title,
+  releaseDate,
+  genres,
+  fallbackImage,
+}) {
   const [imageSrc, setImageSrc] = useState(image);
+
+  useEffect(() => {
+    setImageSrc(image);
+  }, [image]);
 
   return (
     <RowComponent>
@@ -32,17 +31,17 @@ function MovieDetailComponent(props) {
 
           <div className="movie-detail__heading-container">
             <h1 className="movie-detail__heading">{title}</h1>
-            <p className="movie-detail__rating">{rating}</p>
+            {rating && <p className="movie-detail__rating">{rating}</p>}
           </div>
 
           <p className="movie-detail__genre">{genres.join(', ')}</p>
 
           <div className="movie-detail__year-container">
-            <p>{releaseDate.getFullYear()}</p>
-            <p className="movie-detail__duration">{`${duration} min`}</p>
+            {releaseDate && <p>{releaseDate.getFullYear()}</p>}
+            <p className="movie-detail__duration">{`${runtime} min`}</p>
           </div>
 
-          <p className="movie-detail__description">{description}</p>
+          <p className="movie-detail__description">{overview}</p>
         </div>
       </ColumnComponent>
     </RowComponent>
