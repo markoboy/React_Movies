@@ -10,7 +10,6 @@ function jsonFetchWrapper(uri, options) {
     .then(() => (
       fetch(uri, options).then((response) => handleResponse(response)
         .then((json) => {
-          console.log(response);
           if (!response.ok) {
             throw json;
           }
