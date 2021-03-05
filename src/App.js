@@ -7,15 +7,15 @@ import useModalState, { ModalDispatchActions } from '@hooks/UseModalState';
 import {
   Actions,
   defaultModalContext,
-  ModalContext,
+  ModalContext
 } from '@services/ModalContext';
 import { selectMovieSuccessCreator } from '@store/action-creators/moviesActionCreators';
-import { moviesStateSelector } from '@store/selectors/moviesSelectors';
+import { moviesFilterSelector, moviesSortBySelector, moviesStatusSelector, selectedMovieSelector } from '@store/selectors/moviesSelectors';
 import {
   addMovie,
   deleteMovie,
   fetchMovies,
-  updateMovie,
+  updateMovie
 } from '@store/thunks/moviesThunk';
 import getSerializedModalFormInputs from '@utils/getSerializedModalFormInputs';
 import React, {
@@ -24,13 +24,19 @@ import React, {
   useCallback,
   useEffect,
   useMemo,
-  useState,
+  useState
 } from 'react';
 import { connect } from 'react-redux';
 
 const LazyModalFormContainer = lazy(() => import('@containers/ModalFormContainer/ModalFormContainer'));
 
-function App({ movies, dispatch }) {
+function App({
+  sortBy,
+  filter,
+  selectedMovie,
+  status,
+  dispatch,
+}) {
   const [modalState, dispatchModalAction] = useModalState(
     defaultModalContext
   );
@@ -39,7 +45,7 @@ function App({ movies, dispatch }) {
 
   useEffect(() => {
     dispatch(fetchMovies());
-  }, [movies.sortBy, movies.filter]);
+  }, [sortBy, filter]);
 
   useEffect(() => {
     setModalTitle(
@@ -70,13 +76,13 @@ function App({ movies, dispatch }) {
     <>
       <ModalContext.Provider value={{ modalState, dispatchModalAction }}>
         <HeaderNavContainer
-          hasSearch={!!movies.selectedMovie}
-          hasBackground={!!movies.selectedMovie}
+          hasSearch={!!selectedMovie}
+          hasBackground={!!selectedMovie}
           onSearch={() => dispatch(selectMovieSuccessCreator(null))}
         />
         <SiteContainer />
 
-        {movies.status === StatusTypes.LOADING && <SpinnerComponent />}
+        {status === StatusTypes.LOADING && <SpinnerComponent />}
 
         {modalState.isOpened && (
           <Suspense fallback={<SpinnerComponent />}>
@@ -114,7 +120,10 @@ function App({ movies, dispatch }) {
 }
 
 const mapStateToProps = (state) => ({
-  movies: moviesStateSelector(state),
+  sortBy: moviesSortBySelector(state),
+  filter: moviesFilterSelector(state),
+  selectedMovie: selectedMovieSelector(state),
+  status: moviesStatusSelector(state),
 });
 
 export default connect(mapStateToProps)(App);

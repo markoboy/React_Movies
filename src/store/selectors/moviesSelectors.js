@@ -5,3 +5,4 @@ export const selectedMovieSelector = (store) => moviesStateSelector(store).selec
 export const moviesTotalAmountSelector = (store) => moviesStateSelector(store).totalAmount;
 export const moviesFilterSelector = (store) => moviesStateSelector(store).filter;
 export const moviesSortBySelector = (store) => moviesStateSelector(store).sortBy;
+export const moviesStatusSelector = (store) => moviesStateSelector(store).status;
