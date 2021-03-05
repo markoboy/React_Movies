@@ -1,9 +1,5 @@
-import { Actions } from '@services/ModalContext';
-import { MOVIES_ACTIONS } from '@store/actions/moviesActions';
 import getModalFormInputs from '@utils/getModalFormInputs';
-import getSerializedModalFormInputs from '@utils/getSerializedModalFormInputs';
 import { useReducer } from 'react';
-import { MoviesDispatchActions } from './UseMoviesState';
 
 export const ModalDispatchActions = {
   SUBMIT: 'submit',
@@ -40,46 +36,7 @@ function closeReducer(state) {
   };
 }
 
-function submitReducer(state, dispatchMovieAction) {
-  const { action, formInputs, movie } = state;
-
-  switch (action) {
-    case Actions.DELETE:
-      dispatchMovieAction({
-        type: MOVIES_ACTIONS.DELETE_MOVIE,
-        payload: movie.id,
-      });
-      break;
-
-    case Actions.EDIT:
-      dispatchMovieAction({
-        type: MOVIES_ACTIONS.UPDATE_MOVIE,
-        payload: {
-          ...movie,
-          ...getSerializedModalFormInputs(formInputs),
-        },
-      });
-      break;
-
-    case Actions.ADD:
-      dispatchMovieAction({
-        type: MOVIES_ACTIONS.ADD_MOVIE,
-        payload: getSerializedModalFormInputs(formInputs),
-      });
-      break;
-
-    default:
-      return closeReducer(state);
-  }
-
-  return {
-    ...state,
-    action: Actions.CONFIRM,
-    formBody: state.successMessage,
-  };
-}
-
-export default function useModalState(initialState, dispatchMovieAction) {
+export default function useModalState(initialState) {
   return useReducer((state, action) => {
     switch (action.type) {
       case ModalDispatchActions.CHANGE:
@@ -100,9 +57,6 @@ export default function useModalState(initialState, dispatchMovieAction) {
 
       case ModalDispatchActions.CLOSE:
         return closeReducer(state);
-
-      case ModalDispatchActions.SUBMIT:
-        return submitReducer(state, dispatchMovieAction);
 
       default:
         return state;

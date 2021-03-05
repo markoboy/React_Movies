@@ -1,33 +1,43 @@
 import SpinnerComponent from '@components/SpinnerComponent/SpinnerComponent';
+import StatusTypes from '@constants/StatusTypes';
 import FooterContainer from '@containers/FooterContainer/FooterContainer';
 import HeaderNavContainer from '@containers/HeaderNavContainer/HeaderNavContainer';
 import SiteContainer from '@containers/SiteContainer/SiteContainer';
 import useModalState, { ModalDispatchActions } from '@hooks/UseModalState';
-import useSelectedMovie from '@hooks/UseSelectedMovie';
-import { ApplicationContext } from '@services/ApplicationContext';
 import {
   Actions,
   defaultModalContext,
-  ModalContext
+  ModalContext,
 } from '@services/ModalContext';
-import { addMovieAsync, deleteMovieAsync, getMovies, updateMovieAsync } from '@store/actions/moviesActions';
+import { selectMovieSuccessCreator } from '@store/action-creators/moviesActionCreators';
+import {
+  addMovie,
+  deleteMovie,
+  fetchMovies,
+  updateMovie,
+} from '@store/thunks/moviesThunk';
 import getSerializedModalFormInputs from '@utils/getSerializedModalFormInputs';
 import React, {
-  lazy, Suspense, useCallback, useEffect, useMemo, useState
+  lazy,
+  Suspense,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
 } from 'react';
 import { connect } from 'react-redux';
 
 const LazyModalFormContainer = lazy(() => import('@containers/ModalFormContainer/ModalFormContainer'));
 
 function App({ movies, dispatch }) {
-  const [modalState, dispatchModalAction] = useModalState(defaultModalContext, dispatch);
+  const [modalState, dispatchModalAction] = useModalState(
+    defaultModalContext
+  );
 
   const [modalTitle, setModalTitle] = useState('');
 
-  const { selectedMovie, selectedMovieId, setSelectedMovieId } = useSelectedMovie();
-
   useEffect(() => {
-    dispatch(getMovies());
+    dispatch(fetchMovies());
   }, [movies.sortBy, movies.filter]);
 
   useEffect(() => {
@@ -39,35 +49,38 @@ function App({ movies, dispatch }) {
   const handleFormSubmit = useCallback(() => {
     const { action, formInputs, movie } = modalState;
     if (action === Actions.DELETE) {
-      dispatch(deleteMovieAsync(movie.id));
+      dispatch(deleteMovie(movie.id));
     }
 
     if (action === Actions.EDIT) {
-      dispatch(updateMovieAsync({ ...movie, ...getSerializedModalFormInputs(formInputs) }));
+      dispatch(
+        updateMovie({ ...movie, ...getSerializedModalFormInputs(formInputs) })
+      );
     }
 
     if (action === Actions.ADD) {
-      dispatch(addMovieAsync(getSerializedModalFormInputs(formInputs)));
+      dispatch(addMovie(getSerializedModalFormInputs(formInputs)));
     }
   }, [modalState.formInputs, modalState.movie]);
 
-  const memoizedSiteContainer = useMemo(() => (
-    <SiteContainer movies={movies.movies} selectedMovie={selectedMovie} />
-  ), [movies.movies, selectedMovie]);
+  const memoizedSiteContainer = useMemo(
+    () => (
+      <SiteContainer movies={movies.movies} selectedMovie={movies.selectedMovie} />
+    ),
+    [movies.movies, movies.selectedMovie]
+  );
 
   return (
     <>
       <ModalContext.Provider value={{ modalState, dispatchModalAction }}>
-        <ApplicationContext.Provider
-          value={{ selectedMovieId, setSelectedMovieId }}
-        >
-          <HeaderNavContainer
-            hasSearch={!!selectedMovieId}
-            hasBackground={!!selectedMovieId}
-            onSearch={() => setSelectedMovieId(null)}
-          />
-          {memoizedSiteContainer}
-        </ApplicationContext.Provider>
+        <HeaderNavContainer
+          hasSearch={!!movies.selectedMovie}
+          hasBackground={!!movies.selectedMovie}
+          onSearch={() => dispatch(selectMovieSuccessCreator(null))}
+        />
+        {memoizedSiteContainer}
+
+        {movies.status === StatusTypes.LOADING && <SpinnerComponent />}
 
         {modalState.isOpened && (
           <Suspense fallback={<SpinnerComponent />}>
@@ -94,7 +107,12 @@ function App({ movies, dispatch }) {
         )}
       </ModalContext.Provider>
 
-      {useMemo(() => <FooterContainer />, [])}
+      {useMemo(
+        () => (
+          <FooterContainer />
+        ),
+        []
+      )}
     </>
   );
 }

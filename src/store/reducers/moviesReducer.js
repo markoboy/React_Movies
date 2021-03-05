@@ -1,5 +1,23 @@
 import StatusTypes from '@constants/StatusTypes';
-import { MOVIES_ACTIONS } from '@store/actions/moviesActions';
+import {
+  ADD_MOVIE,
+  APPLY_FILTER,
+  APPLY_SORT,
+  DELETE_MOVIE,
+  FETCH_MOVIES,
+  FETCH_MOVIES_SUCCESS,
+  FETCH_MOVIES_FAILURE,
+  ADD_MOVIE_SUCCESS,
+  ADD_MOVIE_FAILURE,
+  DELETE_MOVIE_SUCCESS,
+  DELETE_MOVIE_FAILURE,
+  UPDATE_MOVIE_SUCCESS,
+  UPDATE_MOVIE_FAILURE,
+  SELECT_MOVIE,
+  SELECT_MOVIE_FAILURE,
+  SELECT_MOVIE_SUCCESS,
+  UPDATE_MOVIE,
+} from '@store/action-types/moviesActionTypes';
 
 const initalMoviesState = {
   status: StatusTypes.IDLE,
@@ -11,41 +29,41 @@ const initalMoviesState = {
   sortBy: '',
   sortOrder: 'asc',
   filter: [],
+  selectedMovie: null,
 };
 
-export default function moviesReducer(
-  state = initalMoviesState,
-  action,
-) {
+export default function moviesReducer(state = initalMoviesState, action) {
   switch (action.type) {
-    case MOVIES_ACTIONS.ADD_MOVIE:
-    case MOVIES_ACTIONS.DELETE_MOVIE:
-    case MOVIES_ACTIONS.UPDATE_MOVIE:
-    case MOVIES_ACTIONS.FETCH_MOVIES:
+    case ADD_MOVIE:
+    case DELETE_MOVIE:
+    case UPDATE_MOVIE:
+    case FETCH_MOVIES:
+    case SELECT_MOVIE:
       return {
         ...state,
         status: StatusTypes.LOADING,
       };
 
-    case MOVIES_ACTIONS.MOVIE_ADDED:
-    case MOVIES_ACTIONS.MOVIE_DELETED:
-    case MOVIES_ACTIONS.MOVIE_UPDATED:
+    case ADD_MOVIE_SUCCESS:
+    case DELETE_MOVIE_SUCCESS:
+    case UPDATE_MOVIE_SUCCESS:
       return {
         ...state,
         status: StatusTypes.COMPLETE,
       };
 
-    case MOVIES_ACTIONS.MOVIE_ADDED_FAILURE:
-    case MOVIES_ACTIONS.MOVIE_DELETED_FAILURE:
-    case MOVIES_ACTIONS.MOVIE_UPDATED_FAILURE:
-    case MOVIES_ACTIONS.MOVIES_FETCHED_FAILURE:
+    case ADD_MOVIE_FAILURE:
+    case DELETE_MOVIE_FAILURE:
+    case UPDATE_MOVIE_FAILURE:
+    case FETCH_MOVIES_FAILURE:
+    case SELECT_MOVIE_FAILURE:
       return {
         ...state,
         status: StatusTypes.ERROR,
         error: action.error,
       };
 
-    case MOVIES_ACTIONS.MOVIES_FETCHED:
+    case FETCH_MOVIES_SUCCESS:
       return {
         ...state,
         status: StatusTypes.COMPLETE,
@@ -57,17 +75,24 @@ export default function moviesReducer(
         totalAmount: action.payload.totalAmount,
       };
 
-    case MOVIES_ACTIONS.APPLY_SORT:
+    case APPLY_SORT:
       return {
         ...state,
         sortBy: action.payload.sortBy,
         sortOrder: action.payload.sortOrder,
       };
 
-    case MOVIES_ACTIONS.APPLY_FILTER:
+    case APPLY_FILTER:
       return {
         ...state,
         filter: action.payload,
+      };
+
+    case SELECT_MOVIE_SUCCESS:
+      return {
+        ...state,
+        selectedMovie: action.payload,
+        status: StatusTypes.COMPLETE,
       };
 
     default:

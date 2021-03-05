@@ -1,14 +1,18 @@
 function jsonFetchWrapper(uri, options) {
-  return fetch(uri, options)
-    .then((response) => response.json()
-      .then((json) => {
-        if (!response.ok) {
-          throw json;
-        }
+  const handleResponse = (response) => (
+    options.method === 'DELETE' ? response.text() : response.json()
+  );
 
-        return json;
-      })
-    );
+  return fetch(uri, options).then((response) => handleResponse(response)
+    .then((json) => {
+      console.log(response);
+      if (!response.ok) {
+        throw json;
+      }
+
+      return json;
+    })
+  );
 }
 
 /**
