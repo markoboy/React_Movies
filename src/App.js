@@ -10,7 +10,12 @@ import {
   ModalContext
 } from '@services/ModalContext';
 import { selectMovieSuccessCreator } from '@store/action-creators/moviesActionCreators';
-import { moviesFilterSelector, moviesSortBySelector, moviesStatusSelector, selectedMovieSelector } from '@store/selectors/moviesSelectors';
+import {
+  moviesFilterSelector,
+  moviesSortBySelector,
+  moviesStatusSelector,
+  selectedMovieSelector,
+} from '@store/selectors/moviesSelectors';
 import {
   addMovie,
   deleteMovie,

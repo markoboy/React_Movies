@@ -37,6 +37,11 @@ function ResultListContainer({ movies, totalAmount, dispatch }) {
     });
   }
 
+  function handleResultItemClick(movieId) {
+    dispatch(selectMovie(movieId));
+    window.document.body.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
   return useMemo(() => (
     <>
       <ResultCountComponent count={totalAmount} />
@@ -44,7 +49,7 @@ function ResultListContainer({ movies, totalAmount, dispatch }) {
         {movies.map((movie) => (
           <ResultListItemComponent
             key={movie.id}
-            onClick={() => dispatch(selectMovie(movie.id))}
+            onClick={() => handleResultItemClick(movie.id)}
             {...movie}
           >
             {tileActions && tileActions.length && (

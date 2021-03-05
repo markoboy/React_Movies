@@ -10,7 +10,7 @@ const SharedMovieType = {
 
 export const MovieDetailType = {
   ...SharedMovieType,
-  runtime: PropTypes.number.isRequired,
+  runtime: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   vote_average: PropTypes.number,
   overview: PropTypes.string.isRequired,
 };

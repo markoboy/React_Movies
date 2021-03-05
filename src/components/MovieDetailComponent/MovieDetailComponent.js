@@ -31,14 +31,14 @@ function MovieDetailComponent({
 
           <div className="movie-detail__heading-container">
             <h1 className="movie-detail__heading">{title}</h1>
-            {rating && <p className="movie-detail__rating">{rating}</p>}
+            {!!rating && <p className="movie-detail__rating">{rating}</p>}
           </div>
 
           <p className="movie-detail__genre">{genres.join(', ')}</p>
 
           <div className="movie-detail__year-container">
             {releaseDate && <p>{releaseDate.getFullYear()}</p>}
-            <p className="movie-detail__duration">{`${runtime} min`}</p>
+            {runtime && <p className="movie-detail__duration">{`${runtime} min`}</p>}
           </div>
 
           <p className="movie-detail__description">{overview}</p>
