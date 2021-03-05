@@ -3,7 +3,7 @@ import ResultFilterItemComponent from '@components/ResultFilterItemComponent/Res
 import ResultFilterSortComponent from '@components/ResultFilterSortComponent/ResultFilterSortComponent';
 import AvailableFilters from '@constants/AvailableFilters';
 import SortOptions from '@constants/SortOptions';
-import { applySortCreator } from '@store/action-creators/moviesActionCreators';
+import { applyFilterCreator, applySortCreator } from '@store/action-creators/moviesActionCreators';
 import { moviesFilterSelector, moviesSortBySelector } from '@store/selectors/moviesSelectors';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -20,6 +20,7 @@ function ResultFilterContainer({
         <ResultFilterItemComponent
           key={`result-filter-${filter.value}`}
           isActive={filters.includes(filter.value)}
+          onClick={() => dispatch(applyFilterCreator([filter.value]))}
         >
           {filter.label}
         </ResultFilterItemComponent>
