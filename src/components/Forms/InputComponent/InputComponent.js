@@ -59,7 +59,7 @@ InputComponent.propTypes = {
   name: PropTypes.string,
   id: PropTypes.string,
   classes: PropTypes.string,
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   onChange: PropTypes.func,
   onClick: PropTypes.func,
   label: PropTypes.string,

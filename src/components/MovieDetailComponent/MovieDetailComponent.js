@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './MovieDetailComponent.scss';
 import { MovieDetailType } from '@constants/MovieTypes';
 import RowComponent from '@components/Grid/RowComponent/RowComponent';
@@ -12,15 +12,19 @@ function MovieDetailComponent(props) {
     image,
     title,
     releaseDate,
-    genre,
+    genres,
+    fallbackImage,
   } = props;
-  if (!duration || !rating || !description || !image || !title || !releaseDate || !genre) {
+  if (!duration || !rating || !description || !image || !title || !releaseDate || !genres) {
     throw new Error(`Please include all props for MovieDetailComponent. ${Object.keys(props)}`);
   }
+
+  const [imageSrc, setImageSrc] = useState(image);
+
   return (
     <RowComponent>
       <ColumnComponent classes="column--m-3">
-        <img src={image} alt={title} />
+        <img src={imageSrc} alt={title} onError={() => setImageSrc(fallbackImage)} />
       </ColumnComponent>
 
       <ColumnComponent classes="column--m-9">
@@ -31,7 +35,7 @@ function MovieDetailComponent(props) {
             <p className="movie-detail__rating">{rating}</p>
           </div>
 
-          <p className="movie-detail__genre">{genre.join(', ')}</p>
+          <p className="movie-detail__genre">{genres.join(', ')}</p>
 
           <div className="movie-detail__year-container">
             <p>{releaseDate.getFullYear()}</p>
@@ -44,6 +48,10 @@ function MovieDetailComponent(props) {
     </RowComponent>
   );
 }
+
+MovieDetailComponent.defaultProps = {
+  fallbackImage: 'https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-38-picture-grey-c2ebdbb057f2a7614185931650f8cee23fa137b93812ccb132b9df511df1cfac.svg',
+};
 
 MovieDetailComponent.propTypes = MovieDetailType;
 

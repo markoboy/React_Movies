@@ -2,10 +2,10 @@
 import PropTypes from 'prop-types';
 
 const SharedMovieType = {
-  image: PropTypes.string.isRequired,
+  poster_path: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   releaseDate: PropTypes.instanceOf(Date).isRequired,
-  genre: PropTypes.arrayOf(PropTypes.string).isRequired,
+  genres: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 export const MovieDetailType = {

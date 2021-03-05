@@ -3,34 +3,32 @@ import FooterContainer from '@containers/FooterContainer/FooterContainer';
 import HeaderNavContainer from '@containers/HeaderNavContainer/HeaderNavContainer';
 import SiteContainer from '@containers/SiteContainer/SiteContainer';
 import useModalState, { ModalDispatchActions } from '@hooks/UseModalState';
-import useMoviesState, { MoviesDispatchActions } from '@hooks/UseMoviesState';
 import useSelectedMovie from '@hooks/UseSelectedMovie';
 import { ApplicationContext } from '@services/ApplicationContext';
 import {
   Actions,
   defaultModalContext,
-  ModalContext,
+  ModalContext
 } from '@services/ModalContext';
-import MovieService from '@services/MovieService';
+import { addMovieAsync, deleteMovieAsync, getMovies, updateMovieAsync } from '@store/actions/moviesActions';
+import getSerializedModalFormInputs from '@utils/getSerializedModalFormInputs';
 import React, {
-  lazy, Suspense, useEffect, useMemo, useState
+  lazy, Suspense, useCallback, useEffect, useMemo, useState
 } from 'react';
+import { connect } from 'react-redux';
 
 const LazyModalFormContainer = lazy(() => import('@containers/ModalFormContainer/ModalFormContainer'));
 
-export default function App() {
-  const [movies, dispatchMovieAction] = useMoviesState([]);
-
-  const [modalState, dispatchModalAction] = useModalState(defaultModalContext, dispatchMovieAction);
+function App({ movies, dispatch }) {
+  const [modalState, dispatchModalAction] = useModalState(defaultModalContext, dispatch);
 
   const [modalTitle, setModalTitle] = useState('');
 
   const { selectedMovie, selectedMovieId, setSelectedMovieId } = useSelectedMovie();
 
   useEffect(() => {
-    const moviesResponse = MovieService.getMovies();
-    dispatchMovieAction({ type: MoviesDispatchActions.INIT, payload: moviesResponse });
-  }, []);
+    dispatch(getMovies());
+  }, [movies.sortBy, movies.filter]);
 
   useEffect(() => {
     setModalTitle(
@@ -38,9 +36,24 @@ export default function App() {
     );
   }, [modalState.action]);
 
+  const handleFormSubmit = useCallback(() => {
+    const { action, formInputs, movie } = modalState;
+    if (action === Actions.DELETE) {
+      dispatch(deleteMovieAsync(movie.id));
+    }
+
+    if (action === Actions.EDIT) {
+      dispatch(updateMovieAsync({ ...movie, ...getSerializedModalFormInputs(formInputs) }));
+    }
+
+    if (action === Actions.ADD) {
+      dispatch(addMovieAsync(getSerializedModalFormInputs(formInputs)));
+    }
+  }, [modalState.formInputs, modalState.movie]);
+
   const memoizedSiteContainer = useMemo(() => (
-    <SiteContainer movies={movies} selectedMovie={selectedMovie} />
-  ), [movies, selectedMovie]);
+    <SiteContainer movies={movies.movies} selectedMovie={selectedMovie} />
+  ), [movies.movies, selectedMovie]);
 
   return (
     <>
@@ -66,9 +79,7 @@ export default function App() {
               onCancel={() => (
                 dispatchModalAction({ type: ModalDispatchActions.CLOSE })
               )}
-              onSubmit={() => (
-                dispatchModalAction({ type: ModalDispatchActions.SUBMIT })
-              )}
+              onSubmit={handleFormSubmit}
               onReset={() => (
                 dispatchModalAction({ type: ModalDispatchActions.RESET })
               )}
@@ -87,3 +98,13 @@ export default function App() {
     </>
   );
 }
+
+const mapStateToProps = (state) => {
+  const { movies } = state;
+
+  return {
+    movies,
+  };
+};
+
+export default connect(mapStateToProps)(App);

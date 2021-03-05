@@ -12,6 +12,13 @@
   }
 
   .result-item {
+    &-container {
+      display: flex;
+      flex-flow: column nowrap;
+      justify-content: space-between;
+      height: 100%;
+    }
+
     &__body {
       margin: 1em 0;
     }

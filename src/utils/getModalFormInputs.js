@@ -9,7 +9,7 @@ export default function getModalFormInputs({
   title = '',
   url = '',
   releaseDate = '',
-  genre = [],
+  genres = [],
   overview = '',
   runtime = '',
 } = {}) {
@@ -43,11 +43,11 @@ export default function getModalFormInputs({
     },
     {
       type: FormTypes.SELECT,
-      placeholder: 'Select Genre',
-      name: 'genre',
-      id: 'modal-form-genre',
-      value: genre,
-      label: 'Genre',
+      placeholder: 'Select Genres',
+      name: 'genres',
+      id: 'modal-form-genres',
+      value: genres,
+      label: 'Genres',
       required: true,
       options: [
         {

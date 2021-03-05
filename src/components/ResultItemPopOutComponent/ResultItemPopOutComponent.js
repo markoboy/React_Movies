@@ -32,6 +32,6 @@ export default function ResultItemPopOutComponent({
 
 ResultItemPopOutComponent.propTypes = {
   actions: PropTypes.arrayOf(PropTypes.string).isRequired,
-  id: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
   onActionClick: PropTypes.func.isRequired,
 };

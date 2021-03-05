@@ -1,4 +1,5 @@
 import { Actions } from '@services/ModalContext';
+import { MOVIES_ACTIONS } from '@store/actions/moviesActions';
 import getModalFormInputs from '@utils/getModalFormInputs';
 import getSerializedModalFormInputs from '@utils/getSerializedModalFormInputs';
 import { useReducer } from 'react';
@@ -45,14 +46,14 @@ function submitReducer(state, dispatchMovieAction) {
   switch (action) {
     case Actions.DELETE:
       dispatchMovieAction({
-        type: MoviesDispatchActions.DELETE,
+        type: MOVIES_ACTIONS.DELETE_MOVIE,
         payload: movie.id,
       });
       break;
 
     case Actions.EDIT:
       dispatchMovieAction({
-        type: MoviesDispatchActions.EDIT,
+        type: MOVIES_ACTIONS.UPDATE_MOVIE,
         payload: {
           ...movie,
           ...getSerializedModalFormInputs(formInputs),
@@ -62,7 +63,7 @@ function submitReducer(state, dispatchMovieAction) {
 
     case Actions.ADD:
       dispatchMovieAction({
-        type: MoviesDispatchActions.ADD,
+        type: MOVIES_ACTIONS.ADD_MOVIE,
         payload: getSerializedModalFormInputs(formInputs),
       });
       break;
