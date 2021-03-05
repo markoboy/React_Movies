@@ -2,7 +2,6 @@ import getModalFormInputs from '@utils/getModalFormInputs';
 import { useReducer } from 'react';
 
 export const ModalDispatchActions = {
-  SUBMIT: 'submit',
   RESET: 'reset',
   CHANGE: 'change',
   OPEN: 'open',

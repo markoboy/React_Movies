@@ -1,8 +1,22 @@
 import getHttpClient from '@utils/getHttpClient';
+import { format } from 'date-fns/esm';
 
 const MOVIE_SERVICE_URI = 'http://localhost:4000/movies';
 
 const apiClient = getHttpClient(MOVIE_SERVICE_URI);
+
+const getMovieDataBody = (movie) => {
+  const newMovie = { ...movie };
+
+  if (newMovie.release_date) {
+    newMovie.release_date = format(newMovie.release_date, 'yyyy-MM-dd');
+  }
+
+  delete newMovie.releaseDate;
+  delete newMovie.image;
+
+  return newMovie;
+};
 
 const MovieServiceAPI = {
   getAll(params) {
@@ -20,7 +34,7 @@ const MovieServiceAPI = {
     if (!movie) {
       throw new Error('[MovieServiceAPI]: add function requires movie as an argument!');
     }
-    return apiClient.post('/', movie);
+    return apiClient.post('/', getMovieDataBody(movie));
   },
 
   delete(movieId) {
@@ -34,7 +48,8 @@ const MovieServiceAPI = {
     if (!movie) {
       throw new Error('[MovieServiceAPI]: update function requires movie as an argument!');
     }
-    return apiClient.put('/', movie);
+
+    return apiClient.put('/', getMovieDataBody(movie));
   }
 };
 

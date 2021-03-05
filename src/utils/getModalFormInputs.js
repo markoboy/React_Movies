@@ -7,7 +7,7 @@ import FormTypes from '@constants/FormTypes';
 export default function getModalFormInputs({
   id = '',
   title = '',
-  url = '',
+  image = '',
   releaseDate = '',
   genres = [],
   overview = '',
@@ -26,19 +26,19 @@ export default function getModalFormInputs({
     {
       type: FormTypes.DATE,
       placeholder: 'Select Date',
-      name: 'releaseDate',
+      name: 'release_date',
       id: 'modal-form-date',
       value: releaseDate,
       label: 'Release Date',
-      required: true,
+      required: false,
     },
     {
       type: FormTypes.TEXT,
-      placeholder: 'Movie URL here',
-      name: 'url',
+      placeholder: 'Movie Poster URL here',
+      name: 'poster_path',
       id: 'modal-form-url',
-      value: url,
-      label: 'Movie URL',
+      value: image,
+      label: 'Movie Poster URL',
       required: true,
     },
     {
@@ -78,7 +78,7 @@ export default function getModalFormInputs({
       required: true,
     },
     {
-      type: FormTypes.TEXT,
+      type: FormTypes.NUMBER,
       placeholder: 'Runtime here',
       name: 'runtime',
       id: 'modal-form-runtime',
@@ -90,7 +90,7 @@ export default function getModalFormInputs({
 
   if (id) {
     formInputs.unshift({
-      type: FormTypes.TEXT,
+      type: FormTypes.NUMBER,
       placeholder: 'Movie ID',
       name: 'id',
       id: 'modal-form-id',

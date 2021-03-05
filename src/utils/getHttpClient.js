@@ -1,18 +1,23 @@
+import isProduction from './isProduction';
+import sleep from './sleep';
+
 function jsonFetchWrapper(uri, options) {
   const handleResponse = (response) => (
     options.method === 'DELETE' ? response.text() : response.json()
   );
 
-  return fetch(uri, options).then((response) => handleResponse(response)
-    .then((json) => {
-      console.log(response);
-      if (!response.ok) {
-        throw json;
-      }
+  return sleep(isProduction() ? 0 : 500)
+    .then(() => (
+      fetch(uri, options).then((response) => handleResponse(response)
+        .then((json) => {
+          console.log(response);
+          if (!response.ok) {
+            throw json;
+          }
 
-      return json;
-    })
-  );
+          return json;
+        }))
+    ));
 }
 
 /**

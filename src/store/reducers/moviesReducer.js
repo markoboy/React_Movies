@@ -32,6 +32,12 @@ const initalMoviesState = {
   selectedMovie: null,
 };
 
+const formatMovie = (movie) => ({
+  ...movie,
+  releaseDate: new Date(movie.release_date),
+  image: movie.poster_path,
+});
+
 export default function moviesReducer(state = initalMoviesState, action) {
   switch (action.type) {
     case ADD_MOVIE:
@@ -46,10 +52,22 @@ export default function moviesReducer(state = initalMoviesState, action) {
 
     case ADD_MOVIE_SUCCESS:
     case DELETE_MOVIE_SUCCESS:
+      return {
+        ...state,
+        status: StatusTypes.COMPLETE,
+      };
+
     case UPDATE_MOVIE_SUCCESS:
       return {
         ...state,
         status: StatusTypes.COMPLETE,
+        movies: state.movies.map((movie) => {
+          if (movie.id === action.payload.id) {
+            return formatMovie(action.payload);
+          }
+
+          return movie;
+        }),
       };
 
     case ADD_MOVIE_FAILURE:
@@ -67,11 +85,7 @@ export default function moviesReducer(state = initalMoviesState, action) {
       return {
         ...state,
         status: StatusTypes.COMPLETE,
-        movies: action.payload.data.map((m) => ({
-          ...m,
-          releaseDate: new Date(m.release_date),
-          image: m.poster_path,
-        })),
+        movies: action.payload.data.map(formatMovie),
         totalAmount: action.payload.totalAmount,
       };
 

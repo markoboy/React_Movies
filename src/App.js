@@ -61,6 +61,8 @@ function App({ movies, dispatch }) {
     if (action === Actions.ADD) {
       dispatch(addMovie(getSerializedModalFormInputs(formInputs)));
     }
+
+    dispatchModalAction({ type: ModalDispatchActions.CLOSE });
   }, [modalState.formInputs, modalState.movie]);
 
   const memoizedSiteContainer = useMemo(

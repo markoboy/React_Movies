@@ -29,6 +29,7 @@ export default function ResultListContainer({ movies }) {
   const { dispatchModalAction } = useContext(ModalContext);
 
   function handleActionClick(action, movie) {
+    console.log(movie);
     dispatchModalAction({
       type: ModalDispatchActions.OPEN,
       payload: {
