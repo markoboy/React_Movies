@@ -5,11 +5,6 @@ const SortOptions = [
     sortOrder: 'desc',
   },
   {
-    value: 'genres',
-    label: 'Genre',
-    sortOrder: 'asc',
-  },
-  {
     value: 'vote_average',
     label: 'Rating',
     sortOrder: 'desc',
