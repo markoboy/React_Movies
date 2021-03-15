@@ -1,7 +1,15 @@
-import React from 'react';
+import getDisplayName from '@utils/getDisplayName';
+import clsx from 'clsx';
+import React, { useMemo } from 'react';
 
 export default function withSection(Component, { classes } = {}) {
-  return function WithSectionComponent({ ...props }) {
-    return (<section className={`section ${classes}`}><Component {...props} /></section>);
-  };
+  function WithSectionComponent({ ...props }) {
+    const className = useMemo(() => clsx('section', classes), [classes]);
+
+    return (<section className={className}><Component {...props} /></section>);
+  }
+
+  WithSectionComponent.displayName = `WithSection${getDisplayName(Component)}`;
+
+  return WithSectionComponent;
 }

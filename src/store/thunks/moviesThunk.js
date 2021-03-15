@@ -16,7 +16,7 @@ import {
   selectMovieSuccessCreator,
   updateMovieCreator,
 } from '@store/action-creators/moviesActionCreators';
-import { moviesStateSelector } from '@store/selectors/moviesSelectors';
+import { moviesSelector, moviesStateSelector } from '@store/selectors/moviesSelectors';
 
 export const fetchMovies = () => (dispatch, getState) => {
   dispatch(fetchMoviesCreator());
@@ -61,9 +61,7 @@ export const deleteMovie = (movieId) => (dispatch) => {
 };
 
 export const selectMovie = (selectedMovieId) => (dispatch, getState) => {
-  const moviesState = moviesStateSelector(getState());
-
-  const movie = moviesState.movies.find((m) => m.id === selectedMovieId);
+  const movie = moviesSelector(getState()).find((m) => m.id === selectedMovieId);
 
   if (movie) {
     return dispatch(selectMovieSuccessCreator(movie));

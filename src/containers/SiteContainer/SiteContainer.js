@@ -1,21 +1,18 @@
-import withMarginBottom from '@components/HigherOrder/WithMarginBottom';
 import { MovieDetailType } from '@constants/MovieTypes';
-import BannerContainer from '@containers/BannerContainer/BannerContainer';
-import MovieDetailContainer from '@containers/MovieDetailContainer/MovieDetailContainer';
-import ResultContainer from '@containers/ResultContainer/ResultContainer';
+import Banner from '@containers/Banner';
+import MovieDetail from '@containers/MovieDetail';
+import SearchResults from '@containers/SearchResults';
 import { selectedMovieSelector } from '@store/selectors/moviesSelectors';
 import { shape } from 'prop-types';
-import React from 'react';
+import React, { memo } from 'react';
 import { connect } from 'react-redux';
-
-const MovieDetailContainerWithMarginBottom = withMarginBottom(MovieDetailContainer);
 
 function SiteContainer({ selectedMovie }) {
   return (
     <main className="site-container__main flex flex--column">
-      {!selectedMovie && <BannerContainer />}
-      {selectedMovie && <MovieDetailContainerWithMarginBottom movie={selectedMovie} />}
-      <ResultContainer />
+      {!selectedMovie && <Banner />}
+      {selectedMovie && <MovieDetail movie={selectedMovie} />}
+      <SearchResults />
     </main>
   );
 }
@@ -32,4 +29,4 @@ const mapStateToProps = (state) => ({
   selectedMovie: selectedMovieSelector(state),
 });
 
-export default connect(mapStateToProps)(SiteContainer);
+export default connect(mapStateToProps)(memo(SiteContainer));

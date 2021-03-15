@@ -1,9 +1,7 @@
 import getHttpClient from '@utils/getHttpClient';
 import { format } from 'date-fns/esm';
 
-const MOVIE_SERVICE_URI = 'http://localhost:4000/movies';
-
-const apiClient = getHttpClient(MOVIE_SERVICE_URI);
+const apiClient = getHttpClient(process.env.MOVIE_SERVICE_URI);
 
 const getMovieDataBody = (movie) => {
   const newMovie = { ...movie };

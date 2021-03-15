@@ -6,11 +6,17 @@
   &--bold {
     font-weight: $font-weight-bold;
   }
+
+
 }
 
 .text {
   &-align--center {
     text-align: center;
+  }
+
+  &-transform--uppercase {
+    text-transform: uppercase;
   }
 }
 

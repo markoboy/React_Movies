@@ -1,21 +1,28 @@
-import FormTypes from '@constants/FormTypes';
+import {
+  FORM_TYPE_DATE,
+  FORM_TYPE_NUMBER,
+  FORM_TYPE_SELECT,
+  FORM_TYPE_TEXT,
+} from '@constants/FormTypes';
 
 /**
  * Generate the form inputs that are needed for the
  * add movie form
  */
-export default function getModalFormInputs({
-  id = '',
-  title = '',
-  image = '',
-  releaseDate = '',
-  genres = [],
-  overview = '',
-  runtime = '',
-} = {}) {
+export default function getModalFormInputs(movie) {
+  const {
+    id = '',
+    title = '',
+    image = '',
+    releaseDate = '',
+    genres = [],
+    overview = '',
+    runtime = '',
+  } = movie || {};
+
   const formInputs = [
     {
-      type: FormTypes.TEXT,
+      type: FORM_TYPE_TEXT,
       placeholder: 'Title here',
       name: 'title',
       id: 'modal-form-title',
@@ -24,7 +31,7 @@ export default function getModalFormInputs({
       required: true,
     },
     {
-      type: FormTypes.DATE,
+      type: FORM_TYPE_DATE,
       placeholder: 'Select Date',
       name: 'release_date',
       id: 'modal-form-date',
@@ -33,7 +40,7 @@ export default function getModalFormInputs({
       required: false,
     },
     {
-      type: FormTypes.TEXT,
+      type: FORM_TYPE_TEXT,
       placeholder: 'Movie Poster URL here',
       name: 'poster_path',
       id: 'modal-form-url',
@@ -42,7 +49,7 @@ export default function getModalFormInputs({
       required: true,
     },
     {
-      type: FormTypes.SELECT,
+      type: FORM_TYPE_SELECT,
       placeholder: 'Select Genres',
       name: 'genres',
       id: 'modal-form-genres',
@@ -69,7 +76,7 @@ export default function getModalFormInputs({
       ],
     },
     {
-      type: FormTypes.TEXT,
+      type: FORM_TYPE_TEXT,
       placeholder: 'Overview here',
       name: 'overview',
       id: 'modal-form-overview',
@@ -78,7 +85,7 @@ export default function getModalFormInputs({
       required: true,
     },
     {
-      type: FormTypes.NUMBER,
+      type: FORM_TYPE_NUMBER,
       placeholder: 'Runtime here',
       name: 'runtime',
       id: 'modal-form-runtime',
@@ -90,7 +97,7 @@ export default function getModalFormInputs({
 
   if (id) {
     formInputs.unshift({
-      type: FormTypes.NUMBER,
+      type: FORM_TYPE_NUMBER,
       placeholder: 'Movie ID',
       name: 'id',
       id: 'modal-form-id',

@@ -3,6 +3,35 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 const { resolve } = require('path');
 const { mergeWithRules, CustomizeRule } = require('webpack-merge');
+const { existsSync } = require('fs');
+const dotenv = require('dotenv');
+
+const NODE_ENV = process.env.NODE_ENV || 'development';
+
+/**
+ * Get the environmental variables in a JSON object.
+ * @param {string} environment The environment to get
+ */
+const getEnvVariables = (environment) => {
+  // Base environmental path
+  const basePath = resolve(__dirname, '.env');
+
+  // Get the path of the environment file. ex. .env.development
+  const envPath = `${basePath}.${environment}`;
+
+  // Get the final path that will be used for loading the environmental variables
+  const finalPath = existsSync(envPath) ? envPath : basePath;
+
+  const envVariables = dotenv.config({ path: finalPath }).parsed;
+
+  const stringifiedVariables = Object.keys(envVariables)
+    .reduce((prev, key) => {
+      prev[`process.env.${key}`] = JSON.stringify(envVariables[key]);
+      return prev;
+    }, {});
+
+  return stringifiedVariables;
+};
 
 /**
  * @param {object} options Options to be used by prod and dev in order to share configs between environments
@@ -29,6 +58,7 @@ exports.getCommonConfig = ({ buildPath }) => ({
       '@constants': resolve(__dirname, 'src', 'constants'),
       '@hooks': resolve(__dirname, 'src', 'hooks'),
       '@store': resolve(__dirname, 'src', 'store'),
+      '@resources': resolve(__dirname, 'resources'),
     },
   },
 
@@ -38,6 +68,9 @@ exports.getCommonConfig = ({ buildPath }) => ({
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
+        resolve: {
+          extensions: ['.js', '.jsx']
+        },
         use: {
           loader: 'babel-loader',
         },
@@ -81,10 +114,9 @@ exports.getCommonConfig = ({ buildPath }) => ({
       inject: 'body',
     }),
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(
-        process.env.NODE_ENV || 'development'
-      ),
+      'process.env.NODE_ENV': JSON.stringify(NODE_ENV),
     }),
+    new webpack.DefinePlugin(getEnvVariables(NODE_ENV))
   ],
 });
 
@@ -104,3 +136,5 @@ exports.mergeWithPrependRules = function (...configOptions) {
     },
   })(...configOptions);
 };
+
+exports.getEnvVariables = getEnvVariables;

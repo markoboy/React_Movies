@@ -1,10 +1,4 @@
-const FormTypes = {
-  TEXT: 'text',
-  DATE: 'date',
-  SELECT: 'select',
-  NUMBER: 'number',
-};
-
-Object.freeze(FormTypes);
-
-export default FormTypes;
+export const FORM_TYPE_TEXT = 'text';
+export const FORM_TYPE_DATE = 'date';
+export const FORM_TYPE_SELECT = 'select';
+export const FORM_TYPE_NUMBER = 'number';

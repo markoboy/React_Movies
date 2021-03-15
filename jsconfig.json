@@ -26,6 +26,9 @@
         ],
         "@store/*": [
           "./src/store/*"
+        ],
+        "@resources/*": [
+          "./resources/*"
         ]
       }
     },

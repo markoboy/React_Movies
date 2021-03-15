@@ -1,4 +1,9 @@
-import StatusTypes from '@constants/StatusTypes';
+import {
+  COMPLETE_STATUS,
+  ERROR_STATUS,
+  IDLE_STATUS,
+  LOADING_STATUS
+} from '@constants/StatusTypes';
 import {
   ADD_MOVIE,
   APPLY_FILTER,
@@ -18,26 +23,21 @@ import {
   SELECT_MOVIE_SUCCESS,
   UPDATE_MOVIE,
 } from '@store/action-types/moviesActionTypes';
+import formatMovie from '@utils/formatMovie';
 
 const initalMoviesState = {
-  status: StatusTypes.IDLE,
-  movies: [],
+  status: IDLE_STATUS,
+  items: [],
   limit: 12,
   offset: 0,
   totalAmount: 0,
-  error: null,
   sortBy: 'release_date',
   sortOrder: 'desc',
   filter: [''],
   selectedMovie: null,
+  error: null,
+  success: null,
 };
-
-const formatMovie = (movie) => ({
-  ...movie,
-  releaseDate: new Date(movie.release_date),
-  image: movie.poster_path,
-  runtime: movie.runtime || '',
-});
 
 export default function moviesReducer(state = initalMoviesState, action) {
   switch (action.type) {
@@ -48,27 +48,41 @@ export default function moviesReducer(state = initalMoviesState, action) {
     case SELECT_MOVIE:
       return {
         ...state,
-        status: StatusTypes.LOADING,
+        status: LOADING_STATUS,
       };
 
     case ADD_MOVIE_SUCCESS:
+      return {
+        ...state,
+        status: COMPLETE_STATUS,
+        success: {
+          message: 'The movie has been added to database successfully',
+        },
+      };
+
     case DELETE_MOVIE_SUCCESS:
       return {
         ...state,
-        status: StatusTypes.COMPLETE,
+        status: COMPLETE_STATUS,
+        success: {
+          message: 'The movie has been deleted from database successfully',
+        },
       };
 
     case UPDATE_MOVIE_SUCCESS:
       return {
         ...state,
-        status: StatusTypes.COMPLETE,
-        movies: state.movies.map((movie) => {
+        status: COMPLETE_STATUS,
+        items: state.items.map((movie) => {
           if (movie.id === action.payload.id) {
             return formatMovie(action.payload);
           }
 
           return movie;
         }),
+        success: {
+          message: 'The movie has been updated to database successfully',
+        },
       };
 
     case ADD_MOVIE_FAILURE:
@@ -78,15 +92,15 @@ export default function moviesReducer(state = initalMoviesState, action) {
     case SELECT_MOVIE_FAILURE:
       return {
         ...state,
-        status: StatusTypes.ERROR,
+        status: ERROR_STATUS,
         error: action.error,
       };
 
     case FETCH_MOVIES_SUCCESS:
       return {
         ...state,
-        status: StatusTypes.COMPLETE,
-        movies: action.payload.data.map(formatMovie),
+        status: COMPLETE_STATUS,
+        items: action.payload.data.map(formatMovie),
         totalAmount: action.payload.totalAmount,
       };
 
@@ -107,7 +121,7 @@ export default function moviesReducer(state = initalMoviesState, action) {
       return {
         ...state,
         selectedMovie: action.payload,
-        status: StatusTypes.COMPLETE,
+        status: COMPLETE_STATUS,
       };
 
     default:

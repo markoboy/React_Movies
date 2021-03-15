@@ -1,4 +1,4 @@
-import ResultNoFoundComponent from '@components/ResultNoFoundComponent/ResultNoFoundComponent';
+import ResultNoFound from '@components/ResultNoFound';
 import LoggerService from '@services/LoggerService';
 import React from 'react';
 
@@ -19,7 +19,7 @@ export default class ErrorBoundary extends React.Component {
 
   render() {
     if (this.state.hasError) {
-      return <ResultNoFoundComponent />;
+      return <ResultNoFound />;
     }
 
     return this.props.children;
