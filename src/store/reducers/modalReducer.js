@@ -7,8 +7,6 @@ import {
 const initialModalState = {
   isOpened: false,
   title: '',
-  body: null,
-  footer: null,
 };
 
 export default function modalReducer(state = initialModalState, action) {

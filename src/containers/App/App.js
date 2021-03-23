@@ -20,7 +20,7 @@ import React, {
   useMemo,
 } from 'react';
 import { connect } from 'react-redux';
-import Notification from '@containers/Notification/Notification';
+import Notification from '@containers/Notification';
 
 const LazyModalFormContainer = lazy(() => import('@containers/ModalForm/ModalForm'));
 
