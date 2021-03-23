@@ -1,0 +1,38 @@
+  {
+    "compilerOptions": {
+      "target": "commonjs",
+      "allowSyntheticDefaultImports": false,
+      "baseUrl": "./",
+      "jsx": "react",
+      "checkJs": false,
+      "paths": {
+        "@components/*": [
+          "./src/components/*"
+        ],
+        "@containers/*": [
+          "./src/containers/*"
+        ],
+        "@services/*": [
+          "./src/services/*"
+        ],
+        "@utils/*": [
+          "./src/utils/*"
+        ],
+        "@constants/*": [
+          "./src/constants/*"
+        ],
+        "@hooks/*": [
+          "./src/hooks/*"
+        ],
+        "@store/*": [
+          "./src/store/*"
+        ],
+        "@resources/*": [
+          "./resources/*"
+        ]
+      }
+    },
+    "include": [
+      "./src/**/*"
+    ]
+  }

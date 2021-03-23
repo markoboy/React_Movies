@@ -1,0 +1,13 @@
+.background {
+  &--grey {
+    background-color: $color-grey;
+  }
+
+  &--black {
+    background-color: $color-black;
+  }
+
+  &--dark-black {
+    background-color: darken($color-black, 5%);
+  }
+}

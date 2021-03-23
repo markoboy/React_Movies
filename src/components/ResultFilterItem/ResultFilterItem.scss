@@ -1,0 +1,37 @@
+@import 'essential';
+
+.result-filter__item {
+  text-transform: uppercase;
+  position: relative;
+  margin-top: $result-filter-spacing;
+  padding-bottom: $result-filter-spacing;
+  cursor: pointer;
+
+  + .result-filter__item {
+    margin-left: $result-filter-item-spacing;
+  }
+
+  &::after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: $result-filter-border-width;
+    background-color: $color-primary;
+    transform: scaleX(0);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  &:hover,
+  &.result-filter__item--active {
+    &::after {
+      transform: scaleX(1);
+    }
+  }
+
+  &.result-filter__item--last {
+    margin-left: auto;
+  }
+}

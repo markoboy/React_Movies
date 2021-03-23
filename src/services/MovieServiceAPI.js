@@ -1,0 +1,59 @@
+import getHttpClient from '@utils/getHttpClient';
+import { format } from 'date-fns/esm';
+
+const apiClient = getHttpClient(process.env.MOVIE_SERVICE_URI);
+
+const getMovieDataBody = (movie) => {
+  const newMovie = { ...movie };
+
+  if (newMovie.release_date) {
+    newMovie.release_date = format(newMovie.release_date, 'yyyy-MM-dd');
+  }
+
+  // Genres should be converted to string if they are using the { label, value }
+  // for the multi-select
+  newMovie.genres = newMovie.genres.map((g) => (typeof g === 'string' ? g : g.label));
+  newMovie.runtime = Number(newMovie.runtime);
+
+  delete newMovie.releaseDate;
+  delete newMovie.image;
+
+  return newMovie;
+};
+
+const MovieServiceAPI = {
+  getAll(params) {
+    return apiClient.get('/', params);
+  },
+
+  getOne(movieId) {
+    if (!movieId) {
+      throw new Error('[MovieServiceAPI]: getOne function requires movieId as an argument!');
+    }
+    return apiClient.get(`/${movieId}`);
+  },
+
+  add(movie) {
+    if (!movie) {
+      throw new Error('[MovieServiceAPI]: add function requires movie as an argument!');
+    }
+    return apiClient.post('/', getMovieDataBody(movie));
+  },
+
+  delete(movieId) {
+    if (!movieId) {
+      throw new Error('[MovieServiceAPI]: delete function requires movieId as an argument!');
+    }
+    return apiClient.delete(`/${movieId}`);
+  },
+
+  update(movie) {
+    if (!movie) {
+      throw new Error('[MovieServiceAPI]: update function requires movie as an argument!');
+    }
+
+    return apiClient.put('/', getMovieDataBody(movie));
+  }
+};
+
+export default MovieServiceAPI;

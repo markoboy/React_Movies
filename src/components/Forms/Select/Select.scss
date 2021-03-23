@@ -1,0 +1,36 @@
+@import 'essential';
+
+.form-element-wrapper {
+  .multi-select {
+    --rmsc-main: #{$color-primary};
+    --rmsc-hover: #{darken($color-secondary, 15%)};
+    --rmsc-selected: #{$color-primary};
+    --rmsc-border: #{rgba($color-secondary, 0.4)};
+    --rmsc-gray: #{$color-secondary};
+    --rmsc-bg: #{rgba($color-secondary, 0.4)};
+    --rmsc-p: #{$form-input-padding}; /* Spacing */
+    --rmsc-radius: #{$border-radius}; /* Radius */
+    --rmsc-h: auto; /* Height */
+
+    &:hover {
+      --rmsc-border: #{$color-primary};
+      box-shadow: $box-shadow-primary;
+    }
+
+    .dropdown-heading {
+      padding: $form-input-padding;
+    }
+
+    .dropdown-heading-dropdown-arrow {
+      color: $color-primary;
+    }
+
+    .dropdown-content .panel-content {
+      background-color: $color-grey;
+
+      input[placeholder="Search"] {
+        padding: $form-input-padding;
+      }
+    }
+  }
+}

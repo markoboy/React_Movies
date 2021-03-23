@@ -1,0 +1,7 @@
+.result-filter {
+  border-bottom: $result-filter-border-width solid $color-grey;
+
+  @include media(maxM) {
+    flex-flow: row wrap;
+  }
+}

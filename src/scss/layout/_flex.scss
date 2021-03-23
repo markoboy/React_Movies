@@ -1,0 +1,27 @@
+.flex {
+  display: flex;
+
+  &.flex--column {
+    flex-flow: column nowrap;
+  }
+
+  &.flex--wrap {
+    flex-flow: row wrap;
+  }
+
+  &--grow {
+    flex-grow: 1;
+  }
+}
+
+.justify-content--center {
+  justify-content: center;
+}
+
+.justify-content--flex-end {
+  justify-content: flex-end;
+}
+
+.align-items--center {
+  align-items: center;
+}

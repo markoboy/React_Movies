@@ -1,0 +1,12 @@
+/**
+ * Essential styles to be included from the application
+ * and components. Files that should be included here are only
+ * themes and mixin that dont have any styles but just variable
+ * declarations and mixin/functions.
+ */
+
+// Theme imports
+@import 'theme/app-theme';
+
+// Mixin imports
+@import 'mixin/media-queries';

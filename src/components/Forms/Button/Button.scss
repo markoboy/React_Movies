@@ -1,0 +1,63 @@
+@import 'essential';
+
+.btn {
+  display: block;
+  outline: none;
+  border: none;
+  padding: $form-input-padding;
+  border-radius: $border-radius;
+  font-size: $form-input-font-size;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.3s linear, color 0.3s linear;
+
+  &:focus,
+  &:hover {
+    box-shadow: $box-shadow;
+  }
+
+  &--primary {
+    background-color: $color-primary;
+    color: $color-white;
+
+    &:focus,
+    &:hover {
+      background-color: $color-white;
+      color: $color-primary;
+    }
+  }
+
+  &--secondary {
+    background-color: rgba($color-secondary, 0.4);
+    color: $color-primary;
+
+    &:focus,
+    &:hover {
+      background-color: $color-primary;
+      color: $color-secondary;
+    }
+  }
+
+  &--outline {
+    background-color: $color-black;
+    color: $color-primary;
+    border: 1px solid $color-primary;
+
+    &:focus,
+    &:hover {
+      background-color: $color-primary;
+      color: $color-white;
+    }
+  }
+
+  &--with-icon {
+    > img,
+    > svg {
+      margin-right: 0.5em;
+    }
+  }
+
+  &--full-width {
+    width: 100%;
+  }
+}

@@ -1,0 +1,21 @@
+@import 'essential';
+
+/**
+ * Create a column style with the span prefix and breakpoint
+ */
+@mixin create-cols($span, $total, $breakpoint) {
+  $percentage: ($span / $total) * 100%;
+  &.column--#{$breakpoint}#{$span} {
+    width: calc(#{$percentage} - #{$column-margin * 2});
+  }
+}
+
+.column {
+  width: 100%;
+  margin: $column-margin;
+
+  @include media(minM) {
+    @include create-cols(9, 12, 'm-');
+    @include create-cols(3, 12, 'm-');
+  }
+}

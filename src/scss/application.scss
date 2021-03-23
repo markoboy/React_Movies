@@ -1,0 +1,31 @@
+/**
+ * Application global styles to be used through out the whole app.
+ * This file should only include the themes/mixin that should be used.
+ * No direct style should be used within this file as it is only the entry point.
+ */
+
+// 3rd party
+@import 'normalize.css';
+
+// Import essential scss modules like theme and mixin
+@import 'essential';
+
+// Base imports
+@import
+  'base/main',
+  'base/typography',
+  'base/backgrounds';
+
+// Layout imports
+@import
+  'layout/flex',
+  'layout/forms',
+  'layout/section',
+  'layout/site-container',
+  'layout/spacing',
+  'layout/wrapper';
+
+// Module imports
+@import
+  'module/result-filter',
+  'module/result-list';
