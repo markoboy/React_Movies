@@ -1,4 +1,4 @@
-import App from '@containers/App';
+import App from '@components/App';
 import store from '@store/index';
 import isProduction from '@utils/isProduction';
 import React from 'react';
