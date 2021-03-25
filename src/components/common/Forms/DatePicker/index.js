@@ -1,1 +1,1 @@
-export { default } from './DatePicker.component';
+export { default } from './component';

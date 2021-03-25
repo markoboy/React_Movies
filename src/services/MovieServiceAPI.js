@@ -28,28 +28,28 @@ const MovieServiceAPI = {
 
   getOne(movieId) {
     if (!movieId) {
-      throw new Error('[MovieServiceAPI]: getOne function requires movieId as an argument!');
+      return Promise.reject(new Error('[MovieServiceAPI]: getOne function requires movieId as an argument!'));
     }
     return apiClient.get(`/${movieId}`);
   },
 
   add(movie) {
     if (!movie) {
-      throw new Error('[MovieServiceAPI]: add function requires movie as an argument!');
+      return Promise.reject(new Error('[MovieServiceAPI]: add function requires movie as an argument!'));
     }
     return apiClient.post('/', getMovieDataBody(movie));
   },
 
   delete(movieId) {
     if (!movieId) {
-      throw new Error('[MovieServiceAPI]: delete function requires movieId as an argument!');
+      return Promise.reject(new Error('[MovieServiceAPI]: delete function requires movieId as an argument!'));
     }
     return apiClient.delete(`/${movieId}`);
   },
 
   update(movie) {
     if (!movie) {
-      throw new Error('[MovieServiceAPI]: update function requires movie as an argument!');
+      return Promise.reject(new Error('[MovieServiceAPI]: update function requires movie as an argument!'));
     }
 
     return apiClient.put('/', getMovieDataBody(movie));
