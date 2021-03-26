@@ -61,6 +61,10 @@ export const deleteMovie = (movieId) => (dispatch) => {
 };
 
 export const selectMovie = (selectedMovieId) => (dispatch, getState) => {
+  if (!selectedMovieId) {
+    return dispatch(selectMovieSuccessCreator(null));
+  }
+
   const movie = moviesSelector(getState()).find((m) => m.id === selectedMovieId);
 
   if (movie) {
