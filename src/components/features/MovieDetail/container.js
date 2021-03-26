@@ -1,4 +1,3 @@
-import ErrorBoundary from '@components/common/ErrorBoundary';
 import { MOVIE_FALLBACK_IMAGE } from '@constants/Generic';
 import { MovieDetailType } from '@constants/MovieTypes';
 import useFallbackImage from '@hooks/UseFallbackImage';
@@ -13,13 +12,11 @@ function MovieDetailContainer({ movie }) {
   );
 
   return (
-    <ErrorBoundary>
-      <MovieDetailComponent
-        {...movie}
-        onError={setFallbackImageSrc}
-        image={imageSrc}
-      />
-    </ErrorBoundary>
+    <MovieDetailComponent
+      {...movie}
+      onError={setFallbackImageSrc}
+      image={imageSrc}
+    />
   );
 }
 
