@@ -1,27 +1,16 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-/* eslint-disable react/jsx-one-expression-per-line */
-import React, { memo, useMemo } from 'react';
-import './styles.scss';
 import PropTypes from 'prop-types';
-import clsx from 'clsx';
-import { HEADER_NAV_CONTAINER_CLASS } from './constants';
+import React, { memo } from 'react';
+import './styles.scss';
 
 /**
  * @param {Object} props React props
  * @param {import('react').Component} props.brandLogo The header's logo
  * @param {import('react').Component} props.actionButton The header's action button
- * @param {Boolean} props.hasBackground If the header should have a background
+ * @param {Boolean} props.classes The classes to be applied on the header
  */
-function SiteHeaderNavComponent({ headerLogo, actionButton, hasBackground }) {
-  const className = useMemo(
-    () => clsx(HEADER_NAV_CONTAINER_CLASS, {
-      [`${HEADER_NAV_CONTAINER_CLASS}--with-bg`]: hasBackground,
-    }),
-    [hasBackground]
-  );
-
+function SiteHeaderNavComponent({ headerLogo, actionButton, classes }) {
   return (
-    <header className={className}>
+    <header className={classes}>
       <div className="header-nav">
         <div className="header-nav__logo-container">{headerLogo}</div>
         <div className="header-nav__btn-container">{actionButton}</div>
@@ -31,13 +20,13 @@ function SiteHeaderNavComponent({ headerLogo, actionButton, hasBackground }) {
 }
 
 SiteHeaderNavComponent.defaultProps = {
-  hasBackground: false,
+  classes: '',
 };
 
 SiteHeaderNavComponent.propTypes = {
   headerLogo: PropTypes.element.isRequired,
   actionButton: PropTypes.element.isRequired,
-  hasBackground: PropTypes.bool,
+  classes: PropTypes.string,
 };
 
 export default memo(SiteHeaderNavComponent);

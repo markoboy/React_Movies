@@ -1,4 +1,6 @@
 import Button from '@components/common/Forms/Button';
+import Banner from '@components/common/Banner';
+import BannerImage from '@resources/banner.jpg';
 import Input from '@components/common/Forms/Input';
 import Column from '@components/common/Grid/Column';
 import Row from '@components/common/Grid/Row';
@@ -10,7 +12,7 @@ const ButtonComponentWithWrapper = withFormElementWrapper(Button);
 
 function SearchBannerComponent({ title }) {
   return (
-    <>
+    <Banner imgSrc={BannerImage} imgAlt="Posts of movies on the wall">
       <h1 className="banner__title">{title}</h1>
       <form>
         <Row>
@@ -25,12 +27,16 @@ function SearchBannerComponent({ title }) {
           </Column>
         </Row>
       </form>
-    </>
+    </Banner>
   );
 }
 
+SearchBannerComponent.defaultProps = {
+  title: 'Find your Movie',
+};
+
 SearchBannerComponent.propTypes = {
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string,
 };
 
 export default SearchBannerComponent;

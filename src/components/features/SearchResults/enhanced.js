@@ -3,11 +3,11 @@ import {
   moviesTotalAmountSelector,
 } from '@store/selectors/moviesSelectors';
 import { connect } from 'react-redux';
-import SearchResultsContainer from './container';
+import SearchResultsComponent from './component';
 
 const mapStateToProps = (state) => ({
   status: moviesStatusSelector(state),
   totalAmount: moviesTotalAmountSelector(state),
 });
 
-export default connect(mapStateToProps)(SearchResultsContainer);
+export default connect(mapStateToProps)(SearchResultsComponent);

@@ -1,6 +1,10 @@
 /* eslint-disable react/forbid-prop-types */
 import Modal from '@components/common/Modal';
 import { COMPLETE_STATUS, ERROR_STATUS } from '@constants/StatusTypes';
+import {
+  faCheckCircle,
+  faTimesCircle,
+} from '@fortawesome/free-solid-svg-icons';
 import useNotification from '@hooks/UseNotification';
 import PropTypes from 'prop-types';
 import React, { useCallback, useEffect, useMemo } from 'react';
@@ -23,14 +27,17 @@ export default function NotificationContainer({ error, success, status }) {
     }
   }, [success, error, status]);
 
-  const isError = useMemo(() => status === ERROR_STATUS, [isOpened]);
+  const icon = useMemo(
+    () => (status === ERROR_STATUS ? faTimesCircle : faCheckCircle),
+    [isOpened]
+  );
 
   const closeTriggerHandler = useCallback(() => setIsOpened(false), []);
 
   return isOpened ? (
     <Modal
       onCloseTrigger={closeTriggerHandler}
-      body={<NotificationComponent isError={isError} {...notification} />}
+      body={<NotificationComponent icon={icon} {...notification} />}
     />
   ) : null;
 }

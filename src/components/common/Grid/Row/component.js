@@ -1,12 +1,9 @@
-import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import React, { useMemo } from 'react';
+import React from 'react';
 import './styles.scss';
 
 function RowComponent({ children, classes }) {
-  const className = useMemo(() => clsx('row', classes), [classes]);
-
-  return <div className={className}>{children}</div>;
+  return <div className={classes}>{children}</div>;
 }
 
 RowComponent.defaultProps = {

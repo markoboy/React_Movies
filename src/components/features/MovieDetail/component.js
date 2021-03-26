@@ -2,11 +2,14 @@ import Column from '@components/common/Grid/Column';
 import Row from '@components/common/Grid/Row';
 import withSection from '@components/hocs/WithSection';
 import withWrapper from '@components/hocs/WithWrapper';
-import { MOVIE_FALLBACK_IMAGE } from '@constants/Generic';
 import { MovieDetailType } from '@constants/MovieTypes';
-import useFallbackImage from '@hooks/UseFallbackImage';
+import PropTypes from 'prop-types';
 import React, { memo } from 'react';
 import './styles.scss';
+
+const RowWithSectionWrapper = withSection(withWrapper(Row), {
+  classes: 'section--large background--dark-black margin--bottom',
+});
 
 function MovieDetailComponent({
   runtime,
@@ -16,19 +19,16 @@ function MovieDetailComponent({
   title,
   releaseDate,
   genres,
-  fallbackImage,
+  onError,
 }) {
-  const { imageSrc, setFallbackImageSrc } = useFallbackImage(image, fallbackImage);
-
   return (
-    <Row>
+    <RowWithSectionWrapper>
       <Column classes="column--m-3">
-        <img src={imageSrc} alt={title} onError={setFallbackImageSrc} />
+        <img src={image} alt={title} onError={onError} />
       </Column>
 
       <Column classes="column--m-9">
         <div className="movie-detail">
-
           <div className="movie-detail__heading-container">
             <h1 className="movie-detail__heading">{title}</h1>
             {!!rating && <p className="movie-detail__rating">{rating}</p>}
@@ -38,24 +38,21 @@ function MovieDetailComponent({
 
           <div className="movie-detail__year-container">
             {releaseDate && <p>{releaseDate.getFullYear()}</p>}
-            {runtime && <p className="movie-detail__duration">{`${runtime} min`}</p>}
+            {runtime && (
+              <p className="movie-detail__duration">{`${runtime} min`}</p>
+            )}
           </div>
 
           <p className="movie-detail__description">{overview}</p>
         </div>
       </Column>
-    </Row>
+    </RowWithSectionWrapper>
   );
 }
 
-MovieDetailComponent.defaultProps = {
-  fallbackImage: MOVIE_FALLBACK_IMAGE,
+MovieDetailComponent.propTypes = {
+  ...MovieDetailType,
+  onError: PropTypes.func.isRequired,
 };
 
-MovieDetailComponent.propTypes = MovieDetailType;
-
-const MovieDetailComponentWithWrapper = withWrapper(
-  withSection(MovieDetailComponent, { classes: 'section--large' })
-);
-
-export default memo(MovieDetailComponentWithWrapper);
+export default memo(MovieDetailComponent);

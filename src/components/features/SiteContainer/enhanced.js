@@ -1,10 +1,10 @@
 import { selectedMovieSelector } from '@store/selectors/moviesSelectors';
 import { memo } from 'react';
 import { connect } from 'react-redux';
-import SiteContainer from './container';
+import SiteContainerComponent from './component';
 
 const mapStateToProps = (state) => ({
   selectedMovie: selectedMovieSelector(state),
 });
 
-export default connect(mapStateToProps)(memo(SiteContainer));
+export default connect(mapStateToProps)(memo(SiteContainerComponent));

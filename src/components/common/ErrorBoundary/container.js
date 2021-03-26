@@ -2,7 +2,7 @@ import ResultNoFound from '@components/common/ResultNoFound';
 import LoggerService from '@services/LoggerService';
 import React from 'react';
 
-export default class ErrorBoundaryComponent extends React.Component {
+export default class ErrorBoundaryContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = { hasError: false };
@@ -14,7 +14,7 @@ export default class ErrorBoundaryComponent extends React.Component {
   }
 
   componentDidCatch(error, errorInfo) {
-    ErrorBoundaryComponent.logger.warn(error, errorInfo);
+    ErrorBoundaryContainer.logger.warn(error, errorInfo);
   }
 
   render() {
@@ -26,4 +26,4 @@ export default class ErrorBoundaryComponent extends React.Component {
   }
 }
 
-ErrorBoundaryComponent.logger = new LoggerService('ErrorBoundary');
+ErrorBoundaryContainer.logger = new LoggerService('ErrorBoundary');

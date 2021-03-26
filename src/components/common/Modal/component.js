@@ -2,27 +2,11 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import useClickListener from '@hooks/UseClickListener';
 import PropTypes from 'prop-types';
-import React, { memo, useCallback } from 'react';
+import React, { memo } from 'react';
 import './styles.scss';
 
-function ModalComponent({
-  body,
-  footer,
-  title,
-  onCloseTrigger,
-}) {
-  const handleClickOutside = useCallback((event) => {
-    const el = event.target;
-
-    if (el.classList.contains('modal')) {
-      onCloseTrigger();
-    }
-  }, [onCloseTrigger]);
-
-  useClickListener(document, handleClickOutside);
-
+function ModalComponent({ body, footer, title, onCloseTrigger }) {
   return (
     <div className="modal">
       <div className="modal__content">

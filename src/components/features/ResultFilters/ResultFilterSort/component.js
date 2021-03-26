@@ -1,68 +1,39 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import PropTypes from 'prop-types';
-import React, {
-  memo,
-  useCallback,
-  useEffect,
-  useMemo,
-  useState
-} from 'react';
+import React from 'react';
 import './styles.scss';
 
-const getAvailableOption = (option) => (
-  <option key={`result-filter-sort-${option.value}`} value={option.value}>
-    {option.label}
-  </option>
-);
-
 function ResultFilterSortComponent({
-  options,
-  value,
+  label,
   onChange,
+  children,
 }) {
-  const [selectedOption, setSelectedOption] = useState(null);
-
-  useEffect(() => {
-    setSelectedOption(options.find((o) => o.value === value));
-  }, [value]);
-
-  const handleOnChange = useCallback((event) => {
-    const option = options.find((opt) => opt.value === event.target.value);
-    onChange(option);
-  }, [options, onChange]);
-
-  const availableOptions = useMemo(() => (
-    options.map(getAvailableOption)
-  ), [options]);
-
   return (
     <div className="result-filter__select-wrapper">
       <label className="result-filter__sort-label" htmlFor="sort-options">
         Sort by
       </label>
-      <span className="result-filter__select-value">{selectedOption?.label}</span>
+      <span className="result-filter__select-value">{label}</span>
       <select
         className="result-filter__select"
-        defaultValue={selectedOption?.label}
+        defaultValue={label}
         name="sort"
         id="sort-options"
-        onChange={handleOnChange}
+        onChange={onChange}
       >
-        {availableOptions}
+        {children}
       </select>
     </div>
   );
 }
 
-const optionType = PropTypes.shape({
-  label: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
-});
+ResultFilterSortComponent.defaultProps = {
+  label: '',
+};
 
 ResultFilterSortComponent.propTypes = {
-  options: PropTypes.arrayOf(optionType).isRequired,
-  value: PropTypes.string.isRequired,
+  label: PropTypes.string,
   onChange: PropTypes.func.isRequired,
 };
 
-export default memo(ResultFilterSortComponent);
+export default ResultFilterSortComponent;

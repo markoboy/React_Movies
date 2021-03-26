@@ -33,7 +33,6 @@ export default function ResultListContainer({
     (movie) => (
       <ResultListItem
         key={movie.id}
-        action={movie.id}
         onClick={handleResultItemClick}
         {...movie}
       >

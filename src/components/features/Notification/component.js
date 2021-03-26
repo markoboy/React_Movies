@@ -1,15 +1,8 @@
-import { faCheckCircle, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types';
-import React, { useMemo } from 'react';
+import React from 'react';
 
-export default function NotificationComponent({
-  title,
-  message,
-  isError,
-}) {
-  const icon = useMemo(() => (isError ? faTimesCircle : faCheckCircle), [isError]);
-
+export default function NotificationComponent({ title, message, icon }) {
   return (
     <div className="text-align--center">
       <FontAwesomeIcon className="color--primary" size="3x" icon={icon} />
@@ -21,11 +14,11 @@ export default function NotificationComponent({
 
 NotificationComponent.defaultProps = {
   message: '',
-  isError: false,
 };
 
 NotificationComponent.propTypes = {
   title: PropTypes.string.isRequired,
   message: PropTypes.string,
-  isError: PropTypes.bool,
+  // eslint-disable-next-line react/forbid-prop-types
+  icon: PropTypes.object.isRequired,
 };

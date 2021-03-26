@@ -1,8 +1,10 @@
 import BrandLogo from '@components/common/BrandLogo';
 import { MODAL_FORM_ADD_ACTION } from '@components/features/ModalForm/constants';
+import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import SiteHeaderNavComponent from './component';
+import { HEADER_NAV_CONTAINER_CLASS } from './constants';
 import HeaderAddActionButton from './HeaderAddActionButton';
 import HeaderSearchActionButton from './HeaderSearchActionButton';
 
@@ -13,6 +15,15 @@ export default function SiteHeaderNavContainer({
   setFormAction,
   setIsOpenedModal,
 }) {
+  const className = useMemo(
+    () => (
+      clsx(HEADER_NAV_CONTAINER_CLASS, {
+        [`${HEADER_NAV_CONTAINER_CLASS}--with-bg`]: hasBackground,
+      })
+    ),
+    [hasBackground]
+  );
+
   const handleHeaderAddClick = useCallback(() => {
     setFormAction(MODAL_FORM_ADD_ACTION);
     setIsOpenedModal(true);
@@ -28,7 +39,7 @@ export default function SiteHeaderNavContainer({
     <SiteHeaderNavComponent
       headerLogo={<BrandLogo />}
       actionButton={actionButton}
-      hasBackground={hasBackground}
+      classes={className}
     />
   );
 }

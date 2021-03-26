@@ -2,6 +2,7 @@
 import PropTypes from 'prop-types';
 
 const SharedMovieType = {
+  id: PropTypes.number,
   poster_path: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   releaseDate: PropTypes.instanceOf(Date),
