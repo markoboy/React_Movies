@@ -1,3 +1,4 @@
+import { formatMovieData } from '@components/features/ModalForm/utils';
 import {
   COMPLETE_STATUS,
   ERROR_STATUS,
@@ -22,8 +23,8 @@ import {
   SELECT_MOVIE_FAILURE,
   SELECT_MOVIE_SUCCESS,
   UPDATE_MOVIE,
+  REMOVE_NOTIFICATION,
 } from '@store/action-types/moviesActionTypes';
-import formatMovie from '@utils/formatMovie';
 
 const initalMoviesState = {
   status: IDLE_STATUS,
@@ -75,7 +76,7 @@ export default function moviesReducer(state = initalMoviesState, action) {
         status: COMPLETE_STATUS,
         items: state.items.map((movie) => {
           if (movie.id === action.payload.id) {
-            return formatMovie(action.payload);
+            return formatMovieData(action.payload);
           }
 
           return movie;
@@ -100,7 +101,7 @@ export default function moviesReducer(state = initalMoviesState, action) {
       return {
         ...state,
         status: COMPLETE_STATUS,
-        items: action.payload.data.map(formatMovie),
+        items: action.payload.data.map(formatMovieData),
         totalAmount: action.payload.totalAmount,
       };
 
@@ -122,6 +123,13 @@ export default function moviesReducer(state = initalMoviesState, action) {
         ...state,
         selectedMovie: action.payload,
         status: COMPLETE_STATUS,
+      };
+
+    case REMOVE_NOTIFICATION:
+      return {
+        ...state,
+        error: null,
+        success: null,
       };
 
     default:

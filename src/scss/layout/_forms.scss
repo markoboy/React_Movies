@@ -21,4 +21,10 @@ fieldset {
     font-weight: $font-weight-semi-bold;
     padding-bottom: 0.5em;
   }
+
+  &__error {
+    color: $color-primary;
+    font-size: 0.75em;
+    margin-bottom: 1.5em;
+  }
 }

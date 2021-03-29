@@ -10,14 +10,14 @@ import React from 'react';
 
 const ButtonComponentWithWrapper = withFormElementWrapper(Button);
 
-function SearchBannerComponent({ title }) {
+function SearchBannerComponent({ title, onChange }) {
   return (
     <Banner imgSrc={BannerImage} imgAlt="Posts of movies on the wall">
       <h1 className="banner__title">{title}</h1>
       <form>
         <Row>
           <Column classes="column--m-9">
-            <Input placeholder="What do you want to watch?" />
+            <Input placeholder="What do you want to watch?" value="" onChange={onChange} />
           </Column>
 
           <Column classes="column--m-3">
@@ -33,10 +33,12 @@ function SearchBannerComponent({ title }) {
 
 SearchBannerComponent.defaultProps = {
   title: 'Find your Movie',
+  onChange: () => {},
 };
 
 SearchBannerComponent.propTypes = {
   title: PropTypes.string,
+  onChange: PropTypes.func,
 };
 
 export default SearchBannerComponent;

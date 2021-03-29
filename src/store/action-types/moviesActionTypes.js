@@ -16,10 +16,12 @@ export const UPDATE_MOVIE = generateMoviesActionType('UPDATE_MOVIE');
 export const UPDATE_MOVIE_SUCCESS = generateMoviesActionType('UPDATE_MOVIE_SUCCESS');
 export const UPDATE_MOVIE_FAILURE = generateMoviesActionType('UPDATE_MOVIE_FAILURE');
 
+export const SELECT_MOVIE = generateMoviesActionType('SELECT_MOVIE');
+export const SELECT_MOVIE_SUCCESS = generateMoviesActionType('SELECT_MOVIE_SUCCESS');
+export const SELECT_MOVIE_FAILURE = generateMoviesActionType('SELECT_MOVIE_FAILURE');
+
 export const APPLY_SORT = generateMoviesActionType('APPLY_SORT');
 
 export const APPLY_FILTER = generateMoviesActionType('APPLY_FILTER');
 
-export const SELECT_MOVIE = generateMoviesActionType('SELECT_MOVIE');
-export const SELECT_MOVIE_SUCCESS = generateMoviesActionType('SELECT_MOVIE_SUCCESS');
-export const SELECT_MOVIE_FAILURE = generateMoviesActionType('SELECT_MOVIE_FAILURE');
+export const REMOVE_NOTIFICATION = generateMoviesActionType('REMOVE_NOTIFICATION');

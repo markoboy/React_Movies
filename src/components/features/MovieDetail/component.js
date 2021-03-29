@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import ErrorBoundary from '@components/common/ErrorBoundary';
 import Column from '@components/common/Grid/Column';
 import Row from '@components/common/Grid/Row';
@@ -16,9 +17,9 @@ function MovieDetailComponent({
   runtime,
   vote_average: rating,
   overview,
-  image,
+  poster_path,
   title,
-  releaseDate,
+  release_date,
   genres,
   onError,
 }) {
@@ -26,7 +27,7 @@ function MovieDetailComponent({
     <ErrorBoundary>
       <RowWithSectionWrapper>
         <Column classes="column--m-3">
-          <img src={image} alt={title} onError={onError} />
+          <img src={poster_path} alt={title} onError={onError} />
         </Column>
 
         <Column classes="column--m-9">
@@ -39,7 +40,7 @@ function MovieDetailComponent({
             <p className="movie-detail__genre">{genres.join(', ')}</p>
 
             <div className="movie-detail__year-container">
-              {releaseDate && <p>{releaseDate.getFullYear()}</p>}
+              {release_date && <p>{release_date.getFullYear()}</p>}
               {runtime && (
                 <p className="movie-detail__duration">{`${runtime} min`}</p>
               )}

@@ -25,6 +25,7 @@
     "@fortawesome/react-fontawesome": "^0.1.14",
     "clsx": "^1.1.1",
     "date-fns": "^2.19.0",
+    "formik": "^2.2.6",
     "normalize.css": "^8.0.1",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
@@ -34,7 +35,8 @@
     "react-redux": "^7.2.2",
     "react-router": "^5.2.0",
     "redux": "^4.0.5",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "yup": "^0.32.9"
   },
   "devDependencies": {
     "@babel/core": "^7.13.1",

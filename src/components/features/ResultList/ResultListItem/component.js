@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { MovieListItemType } from '@constants/MovieTypes';
 import PropTypes from 'prop-types';
@@ -5,9 +6,9 @@ import React from 'react';
 import './styles.scss';
 
 function ResultListItemComponent({
-  poster_path: image,
+  poster_path,
   title,
-  releaseDate,
+  release_date,
   genres,
   onClick,
   onError,
@@ -16,12 +17,12 @@ function ResultListItemComponent({
   return (
     <li className="result-list__item">
       <a className="result-item-container" href="#" onClick={onClick}>
-        <img src={image} alt={title} onError={onError} />
+        <img src={poster_path} alt={title} onError={onError} />
 
         <div className="result-item__body flex flex--wrap">
           <h4 className="result-item__title">{title}</h4>
           <p className="result-item__release-date">
-            {releaseDate.getFullYear()}
+            {release_date.getFullYear()}
           </p>
           <p className="result-item__genre">{genres.join(', ')}</p>
         </div>

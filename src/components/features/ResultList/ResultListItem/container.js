@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import { MOVIE_FALLBACK_IMAGE } from '@constants/Generic';
 import { MovieListItemType } from '@constants/MovieTypes';
 import useFallbackImage from '@hooks/UseFallbackImage';
@@ -6,15 +7,15 @@ import ResultListItemComponent from './component';
 
 function ResultListItemContainer({
   id,
-  poster_path: image,
+  poster_path,
   title,
-  releaseDate,
+  release_date,
   genres,
   onClick,
   children,
 }) {
   const { imageSrc, setFallbackImageSrc } = useFallbackImage(
-    image,
+    poster_path,
     MOVIE_FALLBACK_IMAGE
   );
 
@@ -23,7 +24,7 @@ function ResultListItemContainer({
   return (
     <ResultListItemComponent
       title={title}
-      releaseDate={releaseDate}
+      release_date={release_date}
       genres={genres}
       poster_path={imageSrc}
       onClick={handleClick}

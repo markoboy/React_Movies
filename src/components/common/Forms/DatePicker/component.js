@@ -11,16 +11,16 @@ import './styles.scss';
 
 function DatePickerComponent({
   value,
-  onChange,
   required,
   label,
+  helpers,
 }) {
   return (
     <>
       <FormLabelComponent label={label} />
       <ReactDatePicker
         value={value}
-        onChange={onChange}
+        onChange={helpers.setValue}
         calendarIcon={<FontAwesomeIcon icon={faCalendarAlt} />}
         clearIcon={null}
         format="dd-MM-y"
@@ -34,16 +34,18 @@ function DatePickerComponent({
 }
 
 DatePickerComponent.defaultProps = {
-  onChange: null,
   required: false,
   label: '',
+  value: '',
+  helpers: {},
 };
 
 DatePickerComponent.propTypes = {
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
-  onChange: PropTypes.func,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   required: PropTypes.bool,
   label: PropTypes.string,
+  // eslint-disable-next-line react/forbid-prop-types
+  helpers: PropTypes.object,
 };
 
 export default memo(withFormElementWrapper(DatePickerComponent));

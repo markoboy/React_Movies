@@ -4,37 +4,11 @@ import React from 'react';
 import FormLabelComponent from '../FormLabel';
 import './styles.scss';
 
-function InputComponent({
-  type,
-  placeholder,
-  name,
-  id,
-  classes,
-  value,
-  onChange,
-  onClick,
-  label,
-  required,
-  pattern,
-  disabled,
-  children,
-}) {
+function InputComponent({ classes, label, value, children, ...props }) {
   return (
     <>
-      <FormLabelComponent label={label} id={id} />
-      <input
-        className={classes}
-        type={type}
-        placeholder={placeholder}
-        name={name}
-        id={id}
-        value={value}
-        onChange={onChange}
-        onClick={onClick}
-        required={required}
-        pattern={pattern}
-        disabled={disabled}
-      />
+      <FormLabelComponent label={label} id={props.id} />
+      <input className={classes} value={value || ''} {...props} />
       {children}
     </>
   );

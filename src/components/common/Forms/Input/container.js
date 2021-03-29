@@ -1,46 +1,14 @@
 import withFormElementWrapper from '@components/hocs/WithFormElementWrapper';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import React, { useCallback, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import InputComponent from './component';
 
-function InputContainer({
-  type,
-  placeholder,
-  name,
-  id,
-  classes,
-  value,
-  onChange,
-  onClick,
-  label,
-  required,
-  pattern,
-  disabled,
-  children,
-}) {
+function InputContainer({ classes, children, ...props }) {
   const className = useMemo(() => clsx('form__input', classes), [classes]);
 
-  const handleChange = useCallback(
-    (event) => onChange && onChange(event.target.value),
-    [onChange]
-  );
-
   return (
-    <InputComponent
-      classes={className}
-      type={type}
-      placeholder={placeholder}
-      name={name}
-      id={id}
-      value={value}
-      onChange={handleChange}
-      onClick={onClick}
-      required={required}
-      pattern={pattern}
-      disabled={disabled}
-      label={label}
-    >
+    <InputComponent classes={className} {...props}>
       {children}
     </InputComponent>
   );

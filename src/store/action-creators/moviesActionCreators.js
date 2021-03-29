@@ -16,6 +16,7 @@ import {
   SELECT_MOVIE_FAILURE,
   SELECT_MOVIE_SUCCESS,
   UPDATE_MOVIE,
+  REMOVE_NOTIFICATION,
 } from '@store/action-types/moviesActionTypes';
 
 export const fetchMoviesCreator = () => ({
@@ -99,4 +100,8 @@ export const applySortCreator = (sortOption) => ({
 export const applyFilterCreator = (filterOption) => ({
   type: APPLY_FILTER,
   payload: filterOption,
+});
+
+export const removeNotificationCreator = () => ({
+  type: REMOVE_NOTIFICATION,
 });

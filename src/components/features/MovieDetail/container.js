@@ -7,7 +7,7 @@ import MovieDetailComponent from './component';
 
 function MovieDetailContainer({ movie }) {
   const { imageSrc, setFallbackImageSrc } = useFallbackImage(
-    movie.image,
+    movie.poster_path,
     MOVIE_FALLBACK_IMAGE
   );
 
@@ -15,7 +15,7 @@ function MovieDetailContainer({ movie }) {
     <MovieDetailComponent
       {...movie}
       onError={setFallbackImageSrc}
-      image={imageSrc}
+      poster_path={imageSrc}
     />
   );
 }
