@@ -80,5 +80,5 @@ export const MovieSchemaYup = Yup.object().shape({
 
   overview: Yup.string().required(isRequired('Overview')),
 
-  runtime: Yup.number().required(isRequired('Runtime')),
+  runtime: Yup.number().typeError(isRequired('Runtime')).required(isRequired('Runtime')),
 });

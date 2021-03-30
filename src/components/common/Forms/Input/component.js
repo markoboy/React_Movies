@@ -4,11 +4,39 @@ import React from 'react';
 import FormLabelComponent from '../FormLabel';
 import './styles.scss';
 
-function InputComponent({ classes, label, value, children, ...props }) {
+function InputComponent({
+  classes,
+  label,
+  value,
+  type,
+  placeholder,
+  name,
+  id,
+  required,
+  pattern,
+  disabled,
+  onChange,
+  onClick,
+  onBlur,
+  children,
+}) {
   return (
     <>
-      <FormLabelComponent label={label} id={props.id} />
-      <input className={classes} value={value || ''} {...props} />
+      <FormLabelComponent label={label} id={id} />
+      <input
+        className={classes}
+        type={type}
+        name={name}
+        id={id}
+        placeholder={placeholder}
+        value={value || ''}
+        required={required}
+        pattern={pattern}
+        disabled={disabled}
+        onChange={onChange}
+        onClick={onClick}
+        onBlur={onBlur}
+      />
       {children}
     </>
   );
@@ -21,12 +49,14 @@ InputComponent.defaultProps = {
   id: '',
   classes: '',
   value: '',
-  onChange: null,
-  onClick: null,
   label: '',
-  required: false,
-  pattern: null,
-  disabled: false,
+  required: undefined,
+  pattern: undefined,
+  disabled: undefined,
+
+  onChange: undefined,
+  onClick: undefined,
+  onBlur: undefined,
 };
 
 InputComponent.propTypes = {
@@ -36,12 +66,14 @@ InputComponent.propTypes = {
   id: PropTypes.string,
   classes: PropTypes.string,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  onChange: PropTypes.func,
-  onClick: PropTypes.func,
   label: PropTypes.string,
   required: PropTypes.bool,
   pattern: PropTypes.string,
   disabled: PropTypes.bool,
+
+  onChange: PropTypes.func,
+  onClick: PropTypes.func,
+  onBlur: PropTypes.func,
 };
 
 export default withFormElementWrapper(InputComponent);

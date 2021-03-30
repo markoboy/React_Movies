@@ -5,8 +5,8 @@ import {
 } from '@store/action-types/modalFormTypes';
 
 const initialModalFormState = {
-  selectedMovie: null,
-  action: null,
+  selectedMovie: undefined,
+  action: undefined,
 };
 
 export default function modalFormReducer(

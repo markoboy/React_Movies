@@ -6,7 +6,7 @@ import MultiSelect from 'react-multi-select-component';
 import FormLabelComponent from '../FormLabel';
 import './styles.scss';
 
-function SelectComponent({ options, value, helpers, placeholder, label }) {
+function SelectComponent({ options, value, placeholder, label, onChange, }) {
   const overrideStrings = {
     selectSomeItems: placeholder,
   };
@@ -17,8 +17,8 @@ function SelectComponent({ options, value, helpers, placeholder, label }) {
       <MultiSelect
         overrideStrings={overrideStrings}
         options={options}
-        value={value || []}
-        onChange={helpers.setValue}
+        value={value}
+        onChange={onChange}
       />
     </>
   );
@@ -31,7 +31,6 @@ const optionShape = PropTypes.shape({
 
 SelectComponent.defaultProps = {
   value: [],
-  helpers: {},
   placeholder: '',
   label: '',
 };
@@ -39,13 +38,9 @@ SelectComponent.defaultProps = {
 SelectComponent.propTypes = {
   options: PropTypes.arrayOf(optionShape).isRequired,
   value: PropTypes.arrayOf(optionShape),
-
-  // Helpers are from formik when the component is used with formik
-  // eslint-disable-next-line react/forbid-prop-types
-  helpers: PropTypes.object,
-
   placeholder: PropTypes.string,
   label: PropTypes.string,
+  onChange: PropTypes.func.isRequired,
 };
 
 export default memo(withFormElementWrapper(SelectComponent));
