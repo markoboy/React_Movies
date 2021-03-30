@@ -8,20 +8,16 @@ import {
 } from '@components/features/ModalForm/constants';
 import { MovieDetailType } from '@constants/MovieTypes';
 import PropTypes from 'prop-types';
-import React, { useEffect, useMemo } from 'react';
-import { getModalFormInputs } from '../utils';
+import React, { useCallback, useEffect, useMemo } from 'react';
+import { convertToMultiSelectOption, formatMovieData } from '../utils';
 import ModalFormBodyComponent from './component';
 
 export default function ModalFormBodyContainer({
   action,
   selectedMovie,
   setModalTitle,
-  setFormInputs,
+  onSubmit,
 }) {
-  const formInputs = useMemo(() => getModalFormInputs(selectedMovie), [
-    selectedMovie,
-  ]);
-
   const [hasDeleteBody, hasFormBody] = useMemo(() => {
     const deleteBody = action === MODAL_FORM_DELETE_ACTION;
     const formBody = [MODAL_FORM_ADD_ACTION, MODAL_FORM_EDIT_ACTION].includes(
@@ -35,12 +31,10 @@ export default function ModalFormBodyContainer({
     switch (action) {
       case MODAL_FORM_ADD_ACTION:
         setModalTitle(MODAL_ADD_TITLE);
-        setFormInputs(formInputs);
         break;
 
       case MODAL_FORM_EDIT_ACTION:
         setModalTitle(MODAL_EDIT_TITLE);
-        setFormInputs(formInputs);
         break;
 
       case MODAL_FORM_DELETE_ACTION:
@@ -52,10 +46,33 @@ export default function ModalFormBodyContainer({
     }
   }, [action]);
 
+  const formattedMovie = useMemo(() => {
+    if (selectedMovie) {
+      return {
+        ...formatMovieData(selectedMovie),
+        genres: selectedMovie.genres.map(convertToMultiSelectOption),
+      };
+    }
+
+    return undefined;
+  }, [selectedMovie]);
+
+  const handleSubmit = useCallback((event, formik) => {
+    if (formik) {
+      onSubmit(event, formik);
+    } else {
+      event.preventDefault();
+      onSubmit(event);
+    }
+  }, []);
+
   return (
     <ModalFormBodyComponent
       hasFormBody={hasFormBody}
       hasDeleteBody={hasDeleteBody}
+      formAction={action}
+      selectedMovie={formattedMovie}
+      onSubmit={handleSubmit}
     />
   );
 }
@@ -68,5 +85,4 @@ ModalFormBodyContainer.propTypes = {
   action: PropTypes.string.isRequired,
   selectedMovie: PropTypes.shape(MovieDetailType),
   setModalTitle: PropTypes.func.isRequired,
-  setFormInputs: PropTypes.func.isRequired,
 };

@@ -1,25 +1,6 @@
 import getHttpClient from '@utils/getHttpClient';
-import { format } from 'date-fns/esm';
 
 const apiClient = getHttpClient(process.env.MOVIE_SERVICE_URI);
-
-const getMovieDataBody = (movie) => {
-  const newMovie = { ...movie };
-
-  if (newMovie.release_date) {
-    newMovie.release_date = format(newMovie.release_date, 'yyyy-MM-dd');
-  }
-
-  // Genres should be converted to string if they are using the { label, value }
-  // for the multi-select
-  newMovie.genres = newMovie.genres.map((g) => (typeof g === 'string' ? g : g.label));
-  newMovie.runtime = Number(newMovie.runtime);
-
-  delete newMovie.releaseDate;
-  delete newMovie.image;
-
-  return newMovie;
-};
 
 const MovieServiceAPI = {
   getAll(params) {
@@ -37,7 +18,7 @@ const MovieServiceAPI = {
     if (!movie) {
       return Promise.reject(new Error('[MovieServiceAPI]: add function requires movie as an argument!'));
     }
-    return apiClient.post('/', getMovieDataBody(movie));
+    return apiClient.post('/', movie);
   },
 
   delete(movieId) {
@@ -52,7 +33,7 @@ const MovieServiceAPI = {
       return Promise.reject(new Error('[MovieServiceAPI]: update function requires movie as an argument!'));
     }
 
-    return apiClient.put('/', getMovieDataBody(movie));
+    return apiClient.put('/', movie);
   }
 };
 

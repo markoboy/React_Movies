@@ -1,20 +1,13 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import withFormElementWrapper from '@components/hocs/WithFormElementWrapper';
 import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types';
 import React, { memo } from 'react';
-// eslint-disable-next-line import/no-named-default
-import { default as ReactDatePicker } from 'react-date-picker/dist/entry.nostyle';
+import ReactDatePicker from 'react-date-picker/dist/entry.nostyle';
 import FormLabelComponent from '../FormLabel';
 import './styles.scss';
 
-function DatePickerComponent({
-  value,
-  onChange,
-  required,
-  label,
-}) {
+function DatePickerComponent({ value, required, label, onChange }) {
   return (
     <>
       <FormLabelComponent label={label} />
@@ -34,16 +27,16 @@ function DatePickerComponent({
 }
 
 DatePickerComponent.defaultProps = {
-  onChange: null,
   required: false,
   label: '',
+  value: '',
 };
 
 DatePickerComponent.propTypes = {
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
-  onChange: PropTypes.func,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   required: PropTypes.bool,
   label: PropTypes.string,
+  onChange: PropTypes.func.isRequired,
 };
 
 export default memo(withFormElementWrapper(DatePickerComponent));

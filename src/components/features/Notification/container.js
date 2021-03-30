@@ -11,7 +11,7 @@ import React, { useCallback, useEffect, useMemo } from 'react';
 import NotificationComponent from './component';
 import { ERROR_TITLE, SUCCESS_TITLE } from './constants';
 
-export default function NotificationContainer({ error, success, status }) {
+export default function NotificationContainer({ error, success, status, removeNotification }) {
   const {
     isOpened,
     setIsOpened,
@@ -32,7 +32,10 @@ export default function NotificationContainer({ error, success, status }) {
     [isOpened]
   );
 
-  const closeTriggerHandler = useCallback(() => setIsOpened(false), []);
+  const closeTriggerHandler = useCallback(() => {
+    setIsOpened(false);
+    removeNotification();
+  }, []);
 
   return isOpened ? (
     <Modal
@@ -51,4 +54,5 @@ NotificationContainer.propTypes = {
   error: PropTypes.object,
   success: PropTypes.object,
   status: PropTypes.string.isRequired,
+  removeNotification: PropTypes.func.isRequired,
 };

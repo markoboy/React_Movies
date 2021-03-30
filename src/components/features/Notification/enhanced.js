@@ -1,3 +1,4 @@
+import { removeNotificationCreator } from '@store/action-creators/moviesActionCreators';
 import {
   moviesErrorSelector,
   moviesStatusSelector,
@@ -12,4 +13,8 @@ const mapStateToProps = (state) => ({
   status: moviesStatusSelector(state),
 });
 
-export default connect(mapStateToProps)(NotificationContainer);
+const mapDispatchToProps = {
+  removeNotification: removeNotificationCreator,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(NotificationContainer);

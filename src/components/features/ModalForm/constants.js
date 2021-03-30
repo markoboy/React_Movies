@@ -8,7 +8,21 @@ export const MODAL_FORM_DELETE_ACTION = 'Delete';
 
 export const MODAL_FORM_EDIT_PARAGRAPH = 'Are you sure you want to delete this movie?';
 
-export const FORM_TYPE_TEXT = 'text';
-export const FORM_TYPE_DATE = 'date';
-export const FORM_TYPE_SELECT = 'select';
-export const FORM_TYPE_NUMBER = 'number';
+export const GENRE_SELECT_OPTIONS = [
+  {
+    label: 'Documentary',
+    value: 'documentary',
+  },
+  {
+    label: 'Comedy',
+    value: 'comedy',
+  },
+  {
+    label: 'Horror',
+    value: 'horror',
+  },
+  {
+    label: 'Crime',
+    value: 'crime',
+  },
+];

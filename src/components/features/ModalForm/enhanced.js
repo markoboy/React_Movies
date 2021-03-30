@@ -1,11 +1,7 @@
 import { resetModalStateCreator } from '@store/action-creators/modalActionCreators';
-import {
-  resetModalFormStateCreator,
-  setFormInputsCreator,
-} from '@store/action-creators/modalFormActionCreators';
+import { resetModalFormStateCreator } from '@store/action-creators/modalFormActionCreators';
 import {
   modalFormActionSelector,
-  modalFormInputsSelector,
   modalFormSelectedMovieSelector,
 } from '@store/selectors/modalFormSelectors';
 import { modalTitleSelector } from '@store/selectors/modalSelectors';
@@ -16,14 +12,12 @@ import ModalFormContainer from './container';
 const mapStateToProps = (state) => ({
   title: modalTitleSelector(state),
   formAction: modalFormActionSelector(state),
-  formInputs: modalFormInputsSelector(state),
   selectedMovie: modalFormSelectedMovieSelector(state),
 });
 
 const mapDispatchToProps = {
   resetModalState: resetModalStateCreator,
   resetModalFormState: resetModalFormStateCreator,
-  setFormInputs: setFormInputsCreator,
   deleteMovie,
   updateMovie,
   addMovie,
