@@ -56,6 +56,7 @@ exports.getCommonConfig = ({ buildPath }) => ({
       '@utils': resolve(__dirname, 'src', 'utils'),
       '@constants': resolve(__dirname, 'src', 'constants'),
       '@hooks': resolve(__dirname, 'src', 'hooks'),
+      '@pages': resolve(__dirname, 'src', 'pages'),
       '@store': resolve(__dirname, 'src', 'store'),
       '@resources': resolve(__dirname, 'resources'),
     },

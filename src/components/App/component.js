@@ -2,52 +2,38 @@ import SiteFooter from '@components/common/SiteFooter';
 import SiteHeaderNav from '@components/common/SiteHeaderNav';
 import Spinner from '@components/common/Spinner';
 import Notification from '@components/features/Notification';
-import SiteContainer from '@components/features/SiteContainer';
-import { MovieDetailType } from '@constants/MovieTypes';
 import PropTypes from 'prop-types';
 import React, { lazy, Suspense } from 'react';
+import { Switch } from 'react-router-dom';
+import routes, { getRouteElement } from './routes';
 
-const LazyModalFormContainer = lazy(() => import('@components/features/ModalForm'));
+const LazyModalFormContainer = lazy(() => (
+  import(/* webpackPrefetch: true */ '@components/features/ModalForm')
+));
 
-function AppComponent({
-  selectedMovie,
-  onSearch,
-  showSpinner,
-  modalIsOpened,
-}) {
+function AppComponent({ modalIsOpened, showSpinner }) {
   return (
     <>
-      <SiteHeaderNav
-        hasSearch={!!selectedMovie}
-        hasBackground={!!selectedMovie}
-        onSearch={onSearch}
-      />
-      <SiteContainer />
+      <SiteHeaderNav />
 
-      {showSpinner && <Spinner />}
+      <Suspense fallback={<Spinner />}>
+        <Switch>{routes.map(getRouteElement)}</Switch>
 
-      {modalIsOpened && (
-        <Suspense fallback={<Spinner />}>
-          <LazyModalFormContainer />
-        </Suspense>
-      )}
+        {modalIsOpened && <LazyModalFormContainer />}
+      </Suspense>
 
       <Notification />
 
       <SiteFooter />
+
+      {showSpinner && <Spinner />}
     </>
   );
 }
 
-AppComponent.defaultProps = {
-  selectedMovie: null,
-};
-
 AppComponent.propTypes = {
-  selectedMovie: PropTypes.shape(MovieDetailType),
-  onSearch: PropTypes.func.isRequired,
-  showSpinner: PropTypes.bool.isRequired,
   modalIsOpened: PropTypes.bool.isRequired,
+  showSpinner: PropTypes.bool.isRequired,
 };
 
 export default AppComponent;

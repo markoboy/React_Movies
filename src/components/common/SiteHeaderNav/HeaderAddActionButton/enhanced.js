@@ -2,11 +2,16 @@ import { setIsOpenedModalCreator } from '@store/action-creators/modalActionCreat
 import { setFormActionCreator } from '@store/action-creators/modalFormActionCreators';
 import { memo } from 'react';
 import { connect } from 'react-redux';
-import SiteHeaderNavContainer from './container';
+import HeaderAddActionButtonContainer from './container';
 
 const mapDispatchToProps = {
   setFormAction: setFormActionCreator,
   setIsOpenedModal: setIsOpenedModalCreator,
 };
 
-export default connect(null, mapDispatchToProps)(memo(SiteHeaderNavContainer));
+const HeaderAddActionButton = connect(
+  null,
+  mapDispatchToProps
+)(memo(HeaderAddActionButtonContainer));
+
+export default HeaderAddActionButton;

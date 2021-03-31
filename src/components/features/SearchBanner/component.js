@@ -1,27 +1,48 @@
-import Button from '@components/common/Forms/Button';
 import Banner from '@components/common/Banner';
-import BannerImage from '@resources/banner.jpg';
+import Button from '@components/common/Forms/Button';
 import Input from '@components/common/Forms/Input';
 import Column from '@components/common/Grid/Column';
 import Row from '@components/common/Grid/Row';
 import withFormElementWrapper from '@components/hocs/WithFormElementWrapper';
+import { withFormikField } from '@components/hocs/WithFormikField';
+import BannerImage from '@resources/banner.jpg';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { memo } from 'react';
 
 const ButtonComponentWithWrapper = withFormElementWrapper(Button);
+const WithFormikFieldInput = withFormikField(Input);
 
-function SearchBannerComponent({ title, onChange }) {
+function SearchBannerComponent({ title, formik }) {
+  const {
+    values,
+    touched,
+    errors,
+    handleSubmit,
+    handleReset,
+    handleChange,
+  } = formik;
+
   return (
     <Banner imgSrc={BannerImage} imgAlt="Posts of movies on the wall">
       <h1 className="banner__title">{title}</h1>
-      <form>
+      <form onSubmit={handleSubmit} onReset={handleReset}>
         <Row>
           <Column classes="column--m-9">
-            <Input placeholder="What do you want to watch?" value="" onChange={onChange} />
+            <WithFormikFieldInput
+              name="query"
+              placeholder="What do you want to watch?"
+              values={values}
+              touched={touched}
+              errors={errors}
+              onChange={handleChange}
+            />
           </Column>
 
           <Column classes="column--m-3">
-            <ButtonComponentWithWrapper classes="btn--primary btn--full-width">
+            <ButtonComponentWithWrapper
+              type="submit"
+              classes="btn--primary btn--full-width"
+            >
               Search
             </ButtonComponentWithWrapper>
           </Column>
@@ -33,12 +54,12 @@ function SearchBannerComponent({ title, onChange }) {
 
 SearchBannerComponent.defaultProps = {
   title: 'Find your Movie',
-  onChange: () => {},
 };
 
 SearchBannerComponent.propTypes = {
   title: PropTypes.string,
-  onChange: PropTypes.func,
+  // eslint-disable-next-line react/forbid-prop-types
+  formik: PropTypes.object.isRequired,
 };
 
-export default SearchBannerComponent;
+export default memo(SearchBannerComponent);

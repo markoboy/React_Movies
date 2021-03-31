@@ -1,0 +1,40 @@
+@import 'essential';
+
+.not-found {
+  background: rgb(0,213,217);
+  background: linear-gradient(145deg, rgba(0,213,217,1) 0%, rgba(60,60,60,1) 25%, rgba(20,20,20,1) 50%, rgba(0,213,217,1) 100%);
+  background-size: 100% 20px;
+  animation: move 3s infinite alternate ease-in-out;
+
+  &__text {
+    font-size: 5em;
+    color: $color-white;
+    text-shadow: -6px 1px 8px $color-primary;
+    margin: 10px 0 25px;
+    position: relative;
+    z-index: 10;
+
+    &::before {
+      content: '404';
+      z-index: 1;
+      position: absolute;
+      color: $color-white;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      text-shadow: 5px 1px 10px #00d5d9;
+    }
+  }
+}
+
+@keyframes move {
+  from {
+    background-position: 0;
+    background-size: 100% 20px;
+  }
+
+  to {
+    background-position: 100vw;
+    background-size: 100% 45px;
+  }
+}

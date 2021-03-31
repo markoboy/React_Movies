@@ -33,11 +33,17 @@ const initalMoviesState = {
   offset: 0,
   totalAmount: 0,
   sortBy: 'release_date',
+  // Default searchBy to title as there is no requirement as of what search should search on
+  searchBy: 'title',
   sortOrder: 'desc',
   filter: [''],
   selectedMovie: null,
   error: null,
   success: null,
+
+  // Used to invalidate the movies list in order to fetch a new list
+  // By increasing it's value the SearchResults container will make a new fetch call
+  invalidate: 0,
 };
 
 export default function moviesReducer(state = initalMoviesState, action) {
@@ -56,6 +62,7 @@ export default function moviesReducer(state = initalMoviesState, action) {
       return {
         ...state,
         status: COMPLETE_STATUS,
+        invalidate: state.invalidate + 1,
         success: {
           message: 'The movie has been added to database successfully',
         },
@@ -65,6 +72,7 @@ export default function moviesReducer(state = initalMoviesState, action) {
       return {
         ...state,
         status: COMPLETE_STATUS,
+        invalidate: state.invalidate + 1,
         success: {
           message: 'The movie has been deleted from database successfully',
         },

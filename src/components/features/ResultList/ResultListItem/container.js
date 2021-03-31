@@ -1,8 +1,8 @@
 /* eslint-disable camelcase */
 import { MOVIE_FALLBACK_IMAGE } from '@constants/Generic';
-import { MovieListItemType } from '@constants/MovieTypes';
+import { SharedMovieType } from '@constants/MovieTypes';
 import useFallbackImage from '@hooks/UseFallbackImage';
-import React, { useCallback } from 'react';
+import React from 'react';
 import ResultListItemComponent from './component';
 
 function ResultListItemContainer({
@@ -11,7 +11,6 @@ function ResultListItemContainer({
   title,
   release_date,
   genres,
-  onClick,
   children,
 }) {
   const { imageSrc, setFallbackImageSrc } = useFallbackImage(
@@ -19,15 +18,13 @@ function ResultListItemContainer({
     MOVIE_FALLBACK_IMAGE
   );
 
-  const handleClick = useCallback(() => onClick(id), [onClick]);
-
   return (
     <ResultListItemComponent
+      id={id}
       title={title}
       release_date={release_date}
       genres={genres}
       poster_path={imageSrc}
-      onClick={handleClick}
       onError={setFallbackImageSrc}
     >
       {children}
@@ -35,6 +32,6 @@ function ResultListItemContainer({
   );
 }
 
-ResultListItemContainer.propTypes = MovieListItemType;
+ResultListItemContainer.propTypes = SharedMovieType;
 
 export default ResultListItemContainer;

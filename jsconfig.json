@@ -21,6 +21,9 @@
         "@hooks/*": [
           "./src/hooks/*"
         ],
+        "@pages/*": [
+          "./src/pages/*"
+        ],
         "@store/*": [
           "./src/store/*"
         ],

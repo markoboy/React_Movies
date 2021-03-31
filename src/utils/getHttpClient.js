@@ -2,9 +2,7 @@ import isProduction from './isProduction';
 import sleep from './sleep';
 
 function jsonFetchWrapper(uri, options) {
-  const handleResponse = (response) => (
-    options.method === 'DELETE' ? response.text() : response.json()
-  );
+  const handleResponse = (response) => response.json().then((json) => json).catch(() => null);
 
   return sleep(isProduction() ? 0 : 500)
     .then(() => (

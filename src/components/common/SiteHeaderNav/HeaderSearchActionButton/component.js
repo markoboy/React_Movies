@@ -1,24 +1,17 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import PropTypes from 'prop-types';
 import React, { memo } from 'react';
+import { Link } from 'react-router-dom';
 
-function HeaderSearchActionButtonComponent({ onClick }) {
+function HeaderSearchActionButtonComponent() {
   return (
-    <a
-      className="color--primary"
-      href="#"
-      onClick={onClick}
-      title="Search movies"
-    >
+    <Link to="/" className="color--primary" title="Search movies">
       <FontAwesomeIcon size="lg" icon={faSearch} rotation={90} />
-    </a>
+    </Link>
   );
 }
 
-HeaderSearchActionButtonComponent.propTypes = {
-  onClick: PropTypes.func.isRequired,
-};
+const HeaderSearchActionButton = memo(HeaderSearchActionButtonComponent);
 
-export default memo(HeaderSearchActionButtonComponent);
+export default HeaderSearchActionButton;

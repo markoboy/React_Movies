@@ -1,6 +1,6 @@
 import { MovieDetailType } from '@constants/MovieTypes';
 import PropTypes from 'prop-types';
-import React, { useCallback } from 'react';
+import React, { memo, useCallback } from 'react';
 import ResultItemPopOutComponent from './component';
 import PopOutContentItem from './PopOutContentItem';
 
@@ -36,4 +36,6 @@ ResultItemPopOutContainer.propTypes = {
   onClick: PropTypes.func.isRequired,
 };
 
-export default ResultItemPopOutContainer;
+const ResultItemPopOut = memo(ResultItemPopOutContainer);
+
+export default ResultItemPopOut;

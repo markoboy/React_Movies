@@ -1,7 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 import PropTypes from 'prop-types';
 
-const SharedMovieType = {
+export const SharedMovieType = {
   id: PropTypes.number,
   poster_path: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
@@ -14,9 +14,4 @@ export const MovieDetailType = {
   runtime: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   vote_average: PropTypes.number,
   overview: PropTypes.string.isRequired,
-};
-
-export const MovieListItemType = {
-  ...SharedMovieType,
-  onClick: PropTypes.func.isRequired,
 };
