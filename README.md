@@ -1,4 +1,4 @@
-# ReactJS Global Mentoring Program (NetflixRoulette)
+# React Movies (NetflixRoulette)
 
 ## Local deployment
 
