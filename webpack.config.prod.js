@@ -4,6 +4,7 @@ const { resolve } = require('path');
 const {
   getCommonConfig,
   mergeWithPrependRules,
+  getParsedEnvVariables,
 } = require('./webpack.config.common');
 
 const buildPath = resolve(__dirname, 'build');
@@ -15,8 +16,9 @@ const prodConfigs = {
   mode: 'production',
 
   output: {
-    filename: './js/[name].[contenthash].js',
-    chunkFilename: './js/[id].[contenthash].js',
+    filename: 'js/[name].[contenthash].js',
+    chunkFilename: 'js/[id].[contenthash].js',
+    publicPath: getParsedEnvVariables(process.env.NODE_ENV).PUBLIC_URL,
   },
 
   module: {

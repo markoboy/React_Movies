@@ -28,7 +28,7 @@
           "./src/store/*"
         ],
         "@resources/*": [
-          "./resources/*"
+          "./public/resources/*"
         ]
       }
     },
