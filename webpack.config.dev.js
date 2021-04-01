@@ -21,6 +21,7 @@ const devConfigs = {
   output: {
     filename: './js/[name].js',
     chunkFilename: './js/[id].js',
+    publicPath: '/',
   },
 
   module: {
@@ -41,6 +42,7 @@ const devConfigs = {
     hot: true,
     inline: true,
     contentBase: resolve(__dirname, 'src'),
+    historyApiFallback: true,
   },
 };
 

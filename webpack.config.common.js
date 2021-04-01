@@ -1,4 +1,5 @@
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 const { resolve } = require('path');
@@ -9,10 +10,10 @@ const dotenv = require('dotenv');
 const NODE_ENV = process.env.NODE_ENV || 'development';
 
 /**
- * Get the environmental variables in a JSON object.
- * @param {string} environment The environment to get
+ * Get the parsed environment variables from dotenv based on the current environment
+ * @param {string} environment The NODE_ENV environment
  */
-const getEnvVariables = (environment) => {
+const getParsedEnvVariables = (environment) => {
   // Base environmental path
   const basePath = resolve(__dirname, '.env');
 
@@ -24,11 +25,20 @@ const getEnvVariables = (environment) => {
 
   const envVariables = dotenv.config({ path: finalPath }).parsed;
 
-  const stringifiedVariables = Object.keys(envVariables)
-    .reduce((prev, key) => {
-      prev[`process.env.${key}`] = JSON.stringify(envVariables[key]);
-      return prev;
-    }, {});
+  return envVariables;
+};
+
+/**
+ * Get the environmental variables in a JSON object.
+ * @param {string} environment The environment to get
+ */
+const getEnvVariables = (environment) => {
+  const envVariables = getParsedEnvVariables(environment);
+
+  const stringifiedVariables = Object.keys(envVariables).reduce((prev, key) => {
+    prev[`process.env.${key}`] = JSON.stringify(envVariables[key]);
+    return prev;
+  }, {});
 
   return stringifiedVariables;
 };
@@ -56,8 +66,9 @@ exports.getCommonConfig = ({ buildPath }) => ({
       '@utils': resolve(__dirname, 'src', 'utils'),
       '@constants': resolve(__dirname, 'src', 'constants'),
       '@hooks': resolve(__dirname, 'src', 'hooks'),
+      '@pages': resolve(__dirname, 'src', 'pages'),
       '@store': resolve(__dirname, 'src', 'store'),
-      '@resources': resolve(__dirname, 'resources'),
+      '@resources': resolve(__dirname, 'public', 'resources'),
     },
   },
 
@@ -68,7 +79,7 @@ exports.getCommonConfig = ({ buildPath }) => ({
         test: /\.jsx?$/,
         exclude: /node_modules/,
         resolve: {
-          extensions: ['.js', '.jsx']
+          extensions: ['.js', '.jsx'],
         },
         use: {
           loader: 'babel-loader',
@@ -79,14 +90,18 @@ exports.getCommonConfig = ({ buildPath }) => ({
       {
         test: /\.s[ac]ss$/i,
         exclude: /node_modules/,
-        use: ['css-loader', 'postcss-loader', {
-          loader: 'sass-loader',
-          options: {
-            sassOptions: {
-              includePaths: [resolve(__dirname, 'src', 'scss')]
-            }
-          }
-        }],
+        use: [
+          'css-loader',
+          'postcss-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              sassOptions: {
+                includePaths: [resolve(__dirname, 'src', 'scss')],
+              },
+            },
+          },
+        ],
       },
 
       // Asset loader for images
@@ -109,13 +124,21 @@ exports.getCommonConfig = ({ buildPath }) => ({
     new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
     new HtmlWebpackPlugin({
       filename: resolve(buildPath, 'index.html'),
-      template: resolve(__dirname, 'src', 'index.html'),
+      template: resolve(__dirname, 'public', 'index.html'),
       inject: 'body',
     }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(NODE_ENV),
     }),
-    new webpack.DefinePlugin(getEnvVariables(NODE_ENV))
+    new webpack.DefinePlugin(getEnvVariables(NODE_ENV)),
+    new CopyPlugin({
+      patterns: [
+        {
+          from: resolve(__dirname, 'public', '404.html'),
+          to: buildPath,
+        },
+      ],
+    }),
   ],
 });
 
@@ -137,3 +160,4 @@ exports.mergeWithPrependRules = function (...configOptions) {
 };
 
 exports.getEnvVariables = getEnvVariables;
+exports.getParsedEnvVariables = getParsedEnvVariables;

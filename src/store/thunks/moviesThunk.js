@@ -18,7 +18,7 @@ import {
 } from '@store/action-creators/moviesActionCreators';
 import { moviesSelector, moviesStateSelector } from '@store/selectors/moviesSelectors';
 
-export const fetchMovies = () => (dispatch, getState) => {
+export const fetchMovies = ({ search }) => (dispatch, getState) => {
   dispatch(fetchMoviesCreator());
 
   const moviesState = moviesStateSelector(getState());
@@ -29,6 +29,8 @@ export const fetchMovies = () => (dispatch, getState) => {
     filter: moviesState.filter,
     offset: moviesState.offset,
     limit: moviesState.limit,
+    searchBy: moviesState.searchBy,
+    search,
   })
     .then((response) => dispatch(fetchMoviesSuccessCreator(response)))
     .catch((error) => dispatch(fetchMoviesFailureCreator(error)));
@@ -39,7 +41,6 @@ export const addMovie = (movie) => (dispatch) => {
 
   return MovieServiceAPI.add(movie)
     .then((response) => dispatch(addMovieSuccessCreator(response)))
-    .then(() => dispatch(fetchMovies()))
     .catch((error) => dispatch(addMovieFailureCreator(error)));
 };
 
@@ -56,11 +57,12 @@ export const deleteMovie = (movieId) => (dispatch) => {
 
   return MovieServiceAPI.delete(movieId)
     .then((response) => dispatch(deleteMovieSuccessCreator(response)))
-    .then(() => dispatch(fetchMovies()))
     .catch((error) => dispatch(deleteMovieFailureCreator(error)));
 };
 
 export const selectMovie = (selectedMovieId) => (dispatch, getState) => {
+  dispatch(selectMovieCreator());
+
   if (!selectedMovieId) {
     return dispatch(selectMovieSuccessCreator(null));
   }
@@ -70,8 +72,6 @@ export const selectMovie = (selectedMovieId) => (dispatch, getState) => {
   if (movie) {
     return dispatch(selectMovieSuccessCreator(movie));
   }
-
-  dispatch(selectMovieCreator());
 
   return MovieServiceAPI.getOne(selectedMovieId)
     .then((response) => dispatch(selectMovieSuccessCreator(response)))

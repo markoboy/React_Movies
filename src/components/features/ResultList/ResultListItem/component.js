@@ -1,22 +1,23 @@
 /* eslint-disable camelcase */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { MovieListItemType } from '@constants/MovieTypes';
+import { SharedMovieType } from '@constants/MovieTypes';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './styles.scss';
 
 function ResultListItemComponent({
+  id,
   poster_path,
   title,
   release_date,
   genres,
-  onClick,
   onError,
   children,
 }) {
   return (
     <li className="result-list__item">
-      <a className="result-item-container" href="#" onClick={onClick}>
+      <Link className="result-item-container" to={`/film/${id}`}>
         <img src={poster_path} alt={title} onError={onError} />
 
         <div className="result-item__body flex flex--wrap">
@@ -26,7 +27,7 @@ function ResultListItemComponent({
           </p>
           <p className="result-item__genre">{genres.join(', ')}</p>
         </div>
-      </a>
+      </Link>
 
       {children}
     </li>
@@ -34,7 +35,7 @@ function ResultListItemComponent({
 }
 
 ResultListItemComponent.propTypes = {
-  ...MovieListItemType,
+  ...SharedMovieType,
   onError: PropTypes.func.isRequired,
 };
 

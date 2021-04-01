@@ -4,6 +4,7 @@ import {
   moviesStatusSelector,
   moviesSuccessSelector,
 } from '@store/selectors/moviesSelectors';
+import { memo } from 'react';
 import { connect } from 'react-redux';
 import NotificationContainer from './container';
 
@@ -17,4 +18,9 @@ const mapDispatchToProps = {
   removeNotification: removeNotificationCreator,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(NotificationContainer);
+const Notification = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(memo(NotificationContainer));
+
+export default Notification;

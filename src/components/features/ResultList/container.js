@@ -16,7 +16,6 @@ export default function ResultListContainer({
   setFormSelectedMovie,
   setFormAction,
   setIsOpenedModal,
-  selectMovie,
 }) {
   const handleActionClick = useCallback((action, movie) => {
     setFormSelectedMovie(movie);
@@ -24,18 +23,9 @@ export default function ResultListContainer({
     setIsOpenedModal(true);
   }, []);
 
-  const handleResultItemClick = useCallback((movieId) => {
-    selectMovie(movieId);
-    window.document.body.scrollTo({ top: 0, behavior: 'smooth' });
-  }, []);
-
   const getResultListItems = useCallback(
     (movie) => (
-      <ResultListItem
-        key={movie.id}
-        onClick={handleResultItemClick}
-        {...movie}
-      >
+      <ResultListItem key={movie.id} {...movie}>
         <ResultItemPopOut
           movie={movie}
           actions={tileActions}
@@ -59,5 +49,4 @@ ResultListContainer.propTypes = {
   setFormSelectedMovie: PropTypes.func.isRequired,
   setFormAction: PropTypes.func.isRequired,
   setIsOpenedModal: PropTypes.func.isRequired,
-  selectMovie: PropTypes.func.isRequired,
 };

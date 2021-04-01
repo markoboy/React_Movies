@@ -8,7 +8,6 @@ import {
   moviesSelector,
   moviesTotalAmountSelector,
 } from '@store/selectors/moviesSelectors';
-import { selectMovie } from '@store/thunks/moviesThunk';
 import { memo } from 'react';
 import { connect } from 'react-redux';
 import ResultListContainer from './container';
@@ -22,7 +21,6 @@ const mapDispatchToProps = {
   setFormSelectedMovie: setFormSelectedMovieCreator,
   setFormAction: setFormActionCreator,
   setIsOpenedModal: setIsOpenedModalCreator,
-  selectMovie,
 };
 
 export default connect(
