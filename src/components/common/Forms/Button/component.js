@@ -20,7 +20,7 @@ ButtonComponent.defaultProps = {
   type: 'button',
   classes: '',
   onClick: null,
-  tabIndex: undefined,
+  tabIndex: 0,
 };
 
 ButtonComponent.propTypes = {
