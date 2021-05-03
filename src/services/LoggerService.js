@@ -8,7 +8,7 @@ import isProduction from '@utils/isProduction';
  */
 export default class LoggerService {
   constructor(name = 'Logger') {
-    const production = isProduction();
+    const production = isProduction() || process.env.NODE_ENV === 'test';
     Object.keys(window.console).forEach((method) => {
       if (
         Object.hasOwnProperty.call(window.console, method)

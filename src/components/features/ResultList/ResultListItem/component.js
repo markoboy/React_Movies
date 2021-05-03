@@ -16,7 +16,7 @@ function ResultListItemComponent({
   children,
 }) {
   return (
-    <li className="result-list__item">
+    <li className="result-list__item" data-testid="result-list-item">
       <Link className="result-item-container" to={`/film/${id}`}>
         <img src={poster_path} alt={title} onError={onError} />
 

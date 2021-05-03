@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Banner Component renders Banner Component with provided image 1`] = `
+<div>
+  <section
+    class="banner"
+  >
+    <picture>
+      <img
+        alt="Testing banner component"
+        src="/image-path/img.jpg"
+      />
+    </picture>
+    <div
+      class="banner__content"
+    >
+      <div
+        class="wrapper"
+      />
+    </div>
+  </section>
+</div>
+`;

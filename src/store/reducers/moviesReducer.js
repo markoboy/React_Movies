@@ -26,7 +26,11 @@ import {
   REMOVE_NOTIFICATION,
 } from '@store/action-types/moviesActionTypes';
 
-const initalMoviesState = {
+export const ADD_MOVIE_SUCCESS_MESSAGE = 'The movie has been added to database successfully';
+export const DELETE_MOVIE_SUCCESS_MESSAGE = 'The movie has been deleted from database successfully';
+export const UPDATE_MOVIE_SUCCESS_MESSAGE = 'The movie has been updated to database successfully';
+
+export const initialMoviesState = {
   status: IDLE_STATUS,
   items: [],
   limit: 12,
@@ -46,7 +50,7 @@ const initalMoviesState = {
   invalidate: 0,
 };
 
-export default function moviesReducer(state = initalMoviesState, action) {
+export default function moviesReducer(state = initialMoviesState, action) {
   switch (action.type) {
     case ADD_MOVIE:
     case DELETE_MOVIE:
@@ -64,7 +68,7 @@ export default function moviesReducer(state = initalMoviesState, action) {
         status: COMPLETE_STATUS,
         invalidate: state.invalidate + 1,
         success: {
-          message: 'The movie has been added to database successfully',
+          message: ADD_MOVIE_SUCCESS_MESSAGE,
         },
       };
 
@@ -74,7 +78,7 @@ export default function moviesReducer(state = initalMoviesState, action) {
         status: COMPLETE_STATUS,
         invalidate: state.invalidate + 1,
         success: {
-          message: 'The movie has been deleted from database successfully',
+          message: DELETE_MOVIE_SUCCESS_MESSAGE,
         },
       };
 
@@ -90,7 +94,7 @@ export default function moviesReducer(state = initalMoviesState, action) {
           return movie;
         }),
         success: {
-          message: 'The movie has been updated to database successfully',
+          message: UPDATE_MOVIE_SUCCESS_MESSAGE,
         },
       };
 

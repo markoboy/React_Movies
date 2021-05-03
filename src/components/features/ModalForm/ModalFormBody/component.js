@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { MODAL_FORM_EDIT_PARAGRAPH } from '../constants';
+import { MODAL_FORM_DELETE_PARAGRAPH } from '../constants';
 import FormikForm from '../FormikForm';
 import ModalFormFooter from '../ModalFormFooter';
 
@@ -21,7 +21,7 @@ function ModalFormBodyComponent({
 
       {hasDeleteBody && (
         <form onSubmit={onSubmit}>
-          <p>{MODAL_FORM_EDIT_PARAGRAPH}</p>
+          <p>{MODAL_FORM_DELETE_PARAGRAPH}</p>
           <ModalFormFooter action={formAction} />
         </form>
       )}

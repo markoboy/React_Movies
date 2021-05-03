@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ResultNoFound Component renders with No Movie Found text 1`] = `
+<div>
+  <div
+    class="flex flex--grow justify-content--center align-items--center"
+  >
+    <h2
+      class="font--regular"
+    >
+      No Movie Found
+    </h2>
+  </div>
+</div>
+`;

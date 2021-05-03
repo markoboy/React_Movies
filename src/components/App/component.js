@@ -5,13 +5,13 @@ import Notification from '@components/features/Notification';
 import PropTypes from 'prop-types';
 import React, { lazy, Suspense } from 'react';
 import { Switch } from 'react-router-dom';
-import routes, { getRouteElement } from './routes';
+import { getRouteElement } from './routes';
 
 const LazyModalFormContainer = lazy(() => (
   import(/* webpackPrefetch: true */ '@components/features/ModalForm')
 ));
 
-function AppComponent({ modalIsOpened, showSpinner }) {
+function AppComponent({ modalIsOpened, showSpinner, routes }) {
   return (
     <>
       <SiteHeaderNav />
@@ -34,6 +34,7 @@ function AppComponent({ modalIsOpened, showSpinner }) {
 AppComponent.propTypes = {
   modalIsOpened: PropTypes.bool.isRequired,
   showSpinner: PropTypes.bool.isRequired,
+  routes: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default AppComponent;

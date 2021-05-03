@@ -6,7 +6,7 @@ export const MODAL_FORM_ADD_ACTION = 'Add';
 export const MODAL_FORM_EDIT_ACTION = 'Edit';
 export const MODAL_FORM_DELETE_ACTION = 'Delete';
 
-export const MODAL_FORM_EDIT_PARAGRAPH = 'Are you sure you want to delete this movie?';
+export const MODAL_FORM_DELETE_PARAGRAPH = 'Are you sure you want to delete this movie?';
 
 export const GENRE_SELECT_OPTIONS = [
   {

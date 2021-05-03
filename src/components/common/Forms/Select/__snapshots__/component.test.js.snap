@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SelectComponent Component renders SelectComponent Component with provided label 1`] = `
+<div>
+  <div
+    class="form-element-wrapper"
+  >
+    <label
+      class="form__label"
+      for=""
+    >
+      Select an element
+    </label>
+    Mock Component
+  </div>
+</div>
+`;

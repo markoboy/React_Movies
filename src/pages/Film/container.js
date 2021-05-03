@@ -16,12 +16,12 @@ export default function FilmContainer({ selectedMovie, status, selectMovie }) {
       return formatMovieData(selectedMovie);
     }
 
-    return undefined;
+    return null;
   }, [selectedMovie]);
 
-  return !selectedMovie && status === ERROR_STATUS ? (
+  return !formattedMovie && status === ERROR_STATUS ? (
     <Redirect to="/not-found" push />
   ) : (
-    selectedMovie && <MovieDetail movie={formattedMovie} />
+    formattedMovie && <MovieDetail movie={formattedMovie} />
   );
 }

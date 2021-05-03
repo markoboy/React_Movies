@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Input Component renders with provided text 1`] = `
+<div>
+  <div
+    class="form-element-wrapper"
+  >
+    
+    <input
+      class=""
+      id=""
+      name=""
+      placeholder=""
+      type="text"
+      value=""
+    />
+    Input component
+  </div>
+</div>
+`;

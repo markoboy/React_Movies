@@ -42,7 +42,7 @@ export function formatMovieData(movie) {
   return {
     ...movie,
     // genres: movie.genres.map(convertToMultiSelectOption),
-    release_date: new Date(movie.release_date),
+    release_date: movie.release_date ? new Date(movie.release_date) : undefined,
   };
 }
 
@@ -55,7 +55,7 @@ export function serializeMovieData(movie) {
   return {
     ...movie,
     genres: movie.genres.map(convertMultiSelectToString),
-    release_date: format(movie.release_date, 'yyyy-MM-dd'),
+    release_date: movie.release_date ? format(movie.release_date, 'yyyy-MM-dd') : undefined,
     runtime: Number(movie.runtime),
     tagline: movie.tagline || undefined,
   };

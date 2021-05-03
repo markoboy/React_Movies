@@ -8,11 +8,12 @@ import './styles.scss';
 
 function ModalComponent({ body, footer, title, onCloseTrigger }) {
   return (
-    <div className="modal">
+    <div className="modal" data-testid="modal">
       <div className="modal__content">
         <button
           type="button"
           className="modal__close-trigger"
+          data-testid="modal-close-trigger"
           onClick={onCloseTrigger}
         >
           <FontAwesomeIcon size="2x" icon={faTimes} />

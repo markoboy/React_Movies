@@ -4,7 +4,7 @@ import {
   SET_MODAL_TITLE,
 } from '@store/action-types/modalActionTypes';
 
-const initialModalState = {
+export const initialModalState = {
   isOpened: false,
   title: '',
 };
