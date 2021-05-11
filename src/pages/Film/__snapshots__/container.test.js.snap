@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Film Page doesnt render the MovieDetails if no selectedMovie is set 1`] = `<div />`;
+
+exports[`Film Page renders the selected movie when one is selected 1`] = `
+<div>
+  <section
+    class="section section--large background--dark-black margin--bottom"
+  >
+    <div
+      class="wrapper"
+    >
+      <div
+        class="row"
+      >
+        <div
+          class="column column--m-3"
+        >
+          <img
+            alt="A film title"
+            src="https://film.com/image.jpg"
+          />
+        </div>
+        <div
+          class="column column--m-9"
+        >
+          <div
+            class="movie-detail"
+          >
+            <div
+              class="movie-detail__heading-container"
+            >
+              <h1
+                class="movie-detail__heading"
+              >
+                A film title
+              </h1>
+            </div>
+            <p
+              class="movie-detail__genre"
+            >
+              Documentary
+            </p>
+            <div
+              class="movie-detail__year-container"
+            >
+              <p
+                class="movie-detail__duration"
+              >
+                145 min
+              </p>
+            </div>
+            <p
+              class="movie-detail__description"
+            >
+              A great film
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+`;

@@ -6,55 +6,38 @@ import { MODAL_FORM_ADD_ACTION, MODAL_FORM_DELETE_ACTION, MODAL_FORM_EDIT_ACTION
 
 describe('ModalFormFooter Component', () => {
   it('renders Submit action button when action is Add', () => {
-    const { getByText } = render(<ModalFormFooter action={MODAL_FORM_ADD_ACTION} />);
+    const { container } = render(<ModalFormFooter action={MODAL_FORM_ADD_ACTION} />);
 
-    const submitButton = getByText(/Submit/);
-
-    expect(submitButton).toBeDefined();
-    expect(submitButton).toHaveProperty('type', 'submit');
+    expect(container).toMatchSnapshot();
   });
 
   it('renders Save action button when action is Edit', () => {
-    const { getByText } = render(<ModalFormFooter action={MODAL_FORM_EDIT_ACTION} />);
+    const { container } = render(<ModalFormFooter action={MODAL_FORM_EDIT_ACTION} />);
 
-    const submitButton = getByText(/Save/);
-
-    expect(submitButton).toBeDefined();
-    expect(submitButton).toHaveProperty('type', 'submit');
+    expect(container).toMatchSnapshot();
   });
 
   it('renders Confirm action button when action is Delete', () => {
-    const { getByText } = render(<ModalFormFooter action={MODAL_FORM_DELETE_ACTION} />);
+    const { container } = render(<ModalFormFooter action={MODAL_FORM_DELETE_ACTION} />);
 
-    const submitButton = getByText(/Confirm/);
-
-    expect(submitButton).toBeDefined();
-    expect(submitButton).toHaveProperty('type', 'submit');
+    expect(container).toMatchSnapshot();
   });
 
   it('renders Reset action button when action is Add', () => {
-    const { getByText } = render(<ModalFormFooter action={MODAL_FORM_ADD_ACTION} />);
+    const { container } = render(<ModalFormFooter action={MODAL_FORM_ADD_ACTION} />);
 
-    const resetButton = getByText(/Reset/);
-
-    expect(resetButton).toBeDefined();
-    expect(resetButton).toHaveProperty('type', 'reset');
+    expect(container).toMatchSnapshot();
   });
 
   it('renders Reset action button when action is Edit', () => {
-    const { getByText } = render(<ModalFormFooter action={MODAL_FORM_EDIT_ACTION} />);
+    const { container } = render(<ModalFormFooter action={MODAL_FORM_EDIT_ACTION} />);
 
-    const resetButton = getByText(/Reset/);
-
-    expect(resetButton).toBeDefined();
-    expect(resetButton).toHaveProperty('type', 'reset');
+    expect(container).toMatchSnapshot();
   });
 
   it('doesnt render Reset action button when action is Delete', () => {
-    const { queryByText } = render(<ModalFormFooter action={MODAL_FORM_DELETE_ACTION} />);
+    const { container } = render(<ModalFormFooter action={MODAL_FORM_DELETE_ACTION} />);
 
-    const resetButton = queryByText(/Reset/);
-
-    expect(resetButton).toBeNull();
+    expect(container).toMatchSnapshot();
   });
 });

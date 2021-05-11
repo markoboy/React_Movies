@@ -5,22 +5,18 @@ import SiteHeaderNav from './container';
 
 describe('SiteHeaderNav Container', () => {
   it('renders add action button on home page', () => {
-    const { getByText } = renderWithStore(<SiteHeaderNav />, {
+    const { container } = renderWithStore(<SiteHeaderNav />, {
       route: HOME_PATH[0],
     });
 
-    const button = getByText(/Add Movie/);
-
-    expect(button).toBeDefined();
+    expect(container).toMatchSnapshot();
   });
 
   it('renders search action button on movie detail page', () => {
-    const { getByTitle } = renderWithStore(<SiteHeaderNav />, {
+    const { container } = renderWithStore(<SiteHeaderNav />, {
       route: FILM_PATH[0],
     });
 
-    const button = getByTitle(/Search movies/);
-
-    expect(button).toBeDefined();
+    expect(container).toMatchSnapshot();
   });
 });

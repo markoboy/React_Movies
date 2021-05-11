@@ -7,13 +7,10 @@ const mockFn = jest.fn();
 
 describe('Input Component', () => {
   it('renders with provided text', () => {
-    const { container, getByText } = render(
+    const { container } = render(
       <Input onChange={mockFn}>Input component</Input>
     );
 
-    const input = getByText(/Input component/);
-
-    expect(input).toBeDefined();
     expect(container).toMatchSnapshot();
   });
 });

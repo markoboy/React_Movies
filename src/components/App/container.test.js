@@ -1,8 +1,7 @@
-import { LOADING_STATUS } from '@constants/StatusTypes';
+import { COMPLETE_STATUS, LOADING_STATUS } from '@constants/StatusTypes';
 import { renderWithStore } from '@utils/testUtils';
 import React from 'react';
 import App from './container';
-import * as routes from './routes';
 
 describe('App Container', () => {
   let scrollToMock;
@@ -15,43 +14,27 @@ describe('App Container', () => {
     Element.prototype.scrollTo = scrollToMock;
   });
 
-  it('renders a spinner when status is loading', () => {
-    const { getAllByText } = renderWithStore(
+  it('renders a spinner when status is LOADING_STATUS', () => {
+    const { container } = renderWithStore(
       <App status={LOADING_STATUS} modalIsOpened={false} />
     );
 
-    const spinner = getAllByText(/Loading.../);
-
-    // The spinner element is rendered by Suspense as well
-    expect(spinner).toBeDefined();
-    expect(spinner.length).toBeGreaterThan(0);
+    expect(container).toMatchSnapshot();
   });
 
-  it('renders a component using getRouteElement', () => {
-    const mockRoutes = [
-      {
-        path: '/',
-        component: () => <p>Some component</p>,
-        exact: true,
-      },
-    ];
-
-    const spyGetRouteElement = jest.spyOn(routes, 'getRouteElement');
-
-    const { getByText } = renderWithStore(
-      <App status={LOADING_STATUS} modalIsOpened={false} routes={mockRoutes} />
+  it('renders components when status is COMPLETE_STATUS', () => {
+    const { container } = renderWithStore(
+      <App status={COMPLETE_STATUS} modalIsOpened={false} />
     );
 
-    const component = getByText(/Some component/);
+    expect(container).toMatchSnapshot();
+  });
 
-    expect(component).toBeDefined();
-
-    expect(spyGetRouteElement).toHaveBeenCalledWith(
-      expect.objectContaining({
-        path: expect.stringMatching(/^\/$/),
-      }),
-      expect.any(Number),
-      expect.any(Array),
+  it('renders modal when status is COMPLETE_STATUS and modalIsOpened is true', () => {
+    const { container } = renderWithStore(
+      <App status={COMPLETE_STATUS} modalIsOpened={true} />
     );
+
+    expect(container).toMatchSnapshot();
   });
 });

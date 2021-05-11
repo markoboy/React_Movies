@@ -10,7 +10,6 @@ import {
   MODAL_FORM_ADD_ACTION,
   MODAL_FORM_DELETE_ACTION,
   MODAL_FORM_EDIT_ACTION,
-  MODAL_FORM_DELETE_PARAGRAPH,
 } from '../constants';
 
 describe('ModalFormBody Component', () => {
@@ -32,12 +31,10 @@ describe('ModalFormBody Component', () => {
       />
     );
 
-    const inputs = container.querySelectorAll('input');
-
-    expect(inputs.length).toBeGreaterThanOrEqual(4);
-
     expect(setModalTitle).toHaveBeenCalledTimes(1);
     expect(setModalTitle).toHaveBeenCalledWith(MODAL_ADD_TITLE);
+
+    expect(container).toMatchSnapshot();
   });
 
   it('renders a form with inputs when action is Edit', () => {
@@ -50,16 +47,14 @@ describe('ModalFormBody Component', () => {
       />
     );
 
-    const inputs = container.querySelectorAll('input');
-
-    expect(inputs.length).toBeGreaterThanOrEqual(4);
-
     expect(setModalTitle).toHaveBeenCalledTimes(1);
     expect(setModalTitle).toHaveBeenCalledWith(MODAL_EDIT_TITLE);
+
+    expect(container).toMatchSnapshot();
   });
 
   it('renders a form with delete paragraph when action is Delete', () => {
-    const { getByText } = render(
+    const { container } = render(
       <ModalFormBody
         action={MODAL_FORM_DELETE_ACTION}
         selectedMovie={null}
@@ -68,12 +63,10 @@ describe('ModalFormBody Component', () => {
       />
     );
 
-    const paragraph = getByText(MODAL_FORM_DELETE_PARAGRAPH);
-
-    expect(paragraph).toBeDefined();
-
     expect(setModalTitle).toHaveBeenCalledTimes(1);
     expect(setModalTitle).toHaveBeenCalledWith(MODAL_DELETE_TITLE);
+
+    expect(container).toMatchSnapshot();
   });
 
   it('triggers onSubmit with values and formik instance when action is Add', async () => {
@@ -128,7 +121,7 @@ describe('ModalFormBody Component', () => {
       genres: ['Documentary'],
     };
 
-    const { getByText, getByLabelText, getByRole } = render(
+    const { container } = render(
       <ModalFormBody
         action={MODAL_FORM_EDIT_ACTION}
         selectedMovie={selectedMovie}
@@ -137,22 +130,6 @@ describe('ModalFormBody Component', () => {
       />
     );
 
-    const id = getByLabelText(/Movie ID/i);
-    const title = getByLabelText(/title/i);
-    const posterUrl = getByLabelText(/Movie Poster URL/i);
-    const overview = getByLabelText(/Overview/i);
-    const runtime = getByLabelText(/Runtime/i);
-
-    userEvent.click(getByRole('button', { name: /reset/i }));
-
-    // Documentary multi select uses span instead of DOM select element
-    const documentary = getByText(/Documentary/i);
-
-    expect(id.value).toBe('1');
-    expect(title.value).toBe('A film title');
-    expect(posterUrl.value).toBe('https://film.com/image.jpg');
-    expect(overview.value).toBe('A great film');
-    expect(runtime.value).toBe('145');
-    expect(documentary).toBeDefined();
+    expect(container).toMatchSnapshot();
   });
 });

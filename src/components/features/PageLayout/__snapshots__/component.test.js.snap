@@ -1,0 +1,85 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PageLayout Component renders PageLayout Component with provided route 1`] = `
+<div>
+  <main
+    class="site-container__main flex flex--column"
+  >
+    <p>
+      Some component
+    </p>
+    <div
+      class="background--black flex flex--column flex--grow"
+    >
+      <div
+        class="wrapper"
+      >
+        <ul
+          class="result-filter flex"
+        >
+          <li
+            class="result-filter__item result-filter__item--active"
+          >
+            All
+          </li>
+          <li
+            class="result-filter__item"
+          >
+            Documentary
+          </li>
+          <li
+            class="result-filter__item"
+          >
+            Comedy
+          </li>
+          <li
+            class="result-filter__item"
+          >
+            Horror
+          </li>
+          <li
+            class="result-filter__item"
+          >
+            Crime
+          </li>
+          <li
+            class="result-filter__item result-filter__item--last"
+          >
+            <div
+              class="result-filter__select-wrapper"
+            >
+              <label
+                class="result-filter__sort-label"
+                for="sort-options"
+              >
+                Sort by
+              </label>
+              <span
+                class="result-filter__select-value"
+              >
+                Release Date
+              </span>
+              <select
+                class="result-filter__select"
+                id="sort-options"
+                name="sort"
+              >
+                <option
+                  value="release_date"
+                >
+                  Release Date
+                </option>
+                <option
+                  value="vote_average"
+                >
+                  Rating
+                </option>
+              </select>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </main>
+</div>
+`;

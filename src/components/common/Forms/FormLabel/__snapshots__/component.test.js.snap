@@ -1,5 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`FormLabel Component doesnt render when label is not provided 1`] = `
+<div>
+  
+</div>
+`;
+
 exports[`FormLabel Component renders with provided label 1`] = `
 <div>
   <label

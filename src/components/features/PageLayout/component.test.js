@@ -27,10 +27,8 @@ describe('PageLayout Component', () => {
       ],
     };
 
-    const { getByText } = renderWithStore(<PageLayout route={route} />);
+    const { container } = renderWithStore(<PageLayout route={route} />);
 
-    const component = getByText(/Some component/i);
-
-    expect(component).toBeDefined();
+    expect(container).toMatchSnapshot();
   });
 });

@@ -43,11 +43,9 @@ describe('ResultList Component', () => {
   });
 
   it('renders the correct amount of movies', () => {
-    const { getAllByTestId } = resultListRender;
+    const { container } = resultListRender;
 
-    const items = getAllByTestId(/result-list-item/i);
-
-    expect(items.length).toBe(movies.length);
+    expect(container).toMatchSnapshot();
   });
 
   it('triggers setFormSelectedMovie, setFormAction and setIsOpenedModal when an action is clicked', () => {

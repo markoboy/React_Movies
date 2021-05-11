@@ -16,7 +16,7 @@ describe('Notification Component', () => {
     const success = {
       message: 'Successful message',
     };
-    const { getByText } = render(
+    const { container } = render(
       <Notification
         removeNotification={removeNotification}
         success={success}
@@ -24,18 +24,14 @@ describe('Notification Component', () => {
       />
     );
 
-    const message = getByText(/Successful message/i);
-    const title = getByText(SUCCESS_TITLE);
-
-    expect(message).toBeDefined();
-    expect(title).toBeDefined();
+    expect(container).toMatchSnapshot();
   });
 
   it('renders error message when status is ERROR_STATUS', () => {
     const error = {
       message: 'Error message',
     };
-    const { getByText } = render(
+    const { container } = render(
       <Notification
         removeNotification={removeNotification}
         error={error}
@@ -43,10 +39,6 @@ describe('Notification Component', () => {
       />
     );
 
-    const message = getByText(/Error message/i);
-    const title = getByText(ERROR_TITLE);
-
-    expect(message).toBeDefined();
-    expect(title).toBeDefined();
+    expect(container).toMatchSnapshot();
   });
 });

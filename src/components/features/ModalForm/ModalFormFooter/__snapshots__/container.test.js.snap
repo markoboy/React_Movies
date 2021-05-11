@@ -1,0 +1,165 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ModalFormFooter Component doesnt render Reset action button when action is Delete 1`] = `
+<div>
+  <div
+    class="row justify-content--flex-end"
+  >
+    <div
+      class="column column--m-3"
+    >
+      <button
+        class="btn btn--primary btn--full-width"
+        tabindex="0"
+        type="submit"
+      >
+        Confirm
+      </button>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`ModalFormFooter Component renders Confirm action button when action is Delete 1`] = `
+<div>
+  <div
+    class="row justify-content--flex-end"
+  >
+    <div
+      class="column column--m-3"
+    >
+      <button
+        class="btn btn--primary btn--full-width"
+        tabindex="0"
+        type="submit"
+      >
+        Confirm
+      </button>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`ModalFormFooter Component renders Reset action button when action is Add 1`] = `
+<div>
+  <div
+    class="row justify-content--flex-end"
+  >
+    <div
+      class="column column--m-3"
+    >
+      <button
+        class="btn btn--outline btn--full-width"
+        tabindex="0"
+        type="reset"
+      >
+        Reset
+      </button>
+    </div>
+    <div
+      class="column column--m-3"
+    >
+      <button
+        class="btn btn--primary btn--full-width"
+        tabindex="0"
+        type="submit"
+      >
+        Submit
+      </button>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`ModalFormFooter Component renders Reset action button when action is Edit 1`] = `
+<div>
+  <div
+    class="row justify-content--flex-end"
+  >
+    <div
+      class="column column--m-3"
+    >
+      <button
+        class="btn btn--outline btn--full-width"
+        tabindex="0"
+        type="reset"
+      >
+        Reset
+      </button>
+    </div>
+    <div
+      class="column column--m-3"
+    >
+      <button
+        class="btn btn--primary btn--full-width"
+        tabindex="0"
+        type="submit"
+      >
+        Save
+      </button>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`ModalFormFooter Component renders Save action button when action is Edit 1`] = `
+<div>
+  <div
+    class="row justify-content--flex-end"
+  >
+    <div
+      class="column column--m-3"
+    >
+      <button
+        class="btn btn--outline btn--full-width"
+        tabindex="0"
+        type="reset"
+      >
+        Reset
+      </button>
+    </div>
+    <div
+      class="column column--m-3"
+    >
+      <button
+        class="btn btn--primary btn--full-width"
+        tabindex="0"
+        type="submit"
+      >
+        Save
+      </button>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`ModalFormFooter Component renders Submit action button when action is Add 1`] = `
+<div>
+  <div
+    class="row justify-content--flex-end"
+  >
+    <div
+      class="column column--m-3"
+    >
+      <button
+        class="btn btn--outline btn--full-width"
+        tabindex="0"
+        type="reset"
+      >
+        Reset
+      </button>
+    </div>
+    <div
+      class="column column--m-3"
+    >
+      <button
+        class="btn btn--primary btn--full-width"
+        tabindex="0"
+        type="submit"
+      >
+        Submit
+      </button>
+    </div>
+  </div>
+</div>
+`;

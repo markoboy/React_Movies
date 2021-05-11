@@ -14,22 +14,18 @@ describe('Film Page', () => {
       genres: ['Documentary'],
     };
 
-    const { getByText } = renderWithRouter(
+    const { container } = renderWithRouter(
       <Film selectedMovie={selectedMovie} selectMovie={() => {}} />
     );
 
-    const title = getByText(/A film title/i);
-
-    expect(title).toBeDefined();
+    expect(container).toMatchSnapshot();
   });
 
   it('doesnt render the MovieDetails if no selectedMovie is set', () => {
-    const { queryByText } = renderWithRouter(
+    const { container } = renderWithRouter(
       <Film selectMovie={() => {}} />
     );
 
-    const title = queryByText(/A film title/i);
-
-    expect(title).toBeNull();
+    expect(container).toMatchSnapshot();
   });
 });

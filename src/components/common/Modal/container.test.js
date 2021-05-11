@@ -27,15 +27,9 @@ describe('Modal Component', () => {
   });
 
   it('renders with provided slots', () => {
-    const { getByText } = modal;
+    const { container } = modal;
 
-    const title = getByText(/Some title/);
-    const body = getByText(/Some body/);
-    const footer = getByText(/Some footer/);
-
-    expect(title).toBeDefined();
-    expect(body).toBeDefined();
-    expect(footer).toBeDefined();
+    expect(container).toMatchSnapshot();
   });
 
   it('triggers onCloseTrigger event when its clicked outside', () => {

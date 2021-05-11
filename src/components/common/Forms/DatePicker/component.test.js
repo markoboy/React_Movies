@@ -8,13 +8,10 @@ const mockFn = jest.fn();
 
 describe('DatePicker Component', () => {
   it('renders DatePicker Component with provided label', () => {
-    const { container, getByText } = render(
+    const { container } = render(
       <DatePicker onChange={mockFn} label="Date picker" />
     );
 
-    const datePicker = getByText(/Date picker/);
-
-    expect(datePicker).toBeDefined();
     expect(container).toMatchSnapshot();
   });
 

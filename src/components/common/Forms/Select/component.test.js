@@ -8,13 +8,10 @@ const mockFn = jest.fn();
 
 describe('SelectComponent Component', () => {
   it('renders SelectComponent Component with provided label', () => {
-    const { container, getByText } = render(
+    const { container } = render(
       <SelectComponent options={[]} onChange={mockFn} label="Select an element" />
     );
 
-    const selectComponent = getByText(/Select an element/);
-
-    expect(selectComponent).toBeDefined();
     expect(container).toMatchSnapshot();
   });
 
