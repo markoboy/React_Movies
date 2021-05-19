@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ResultListItem Component renders ResultListItem Component with provided props 1`] = `
+<div>
+  <li
+    class="result-list__item"
+    data-testid="result-list-item"
+  >
+    <a
+      class="result-item-container"
+      href="/film/1"
+    >
+      <img
+        alt="The best movie of all times"
+        src="https://a-path.to/an/image.jpg"
+      />
+      <div
+        class="result-item__body flex flex--wrap"
+      >
+        <h4
+          class="result-item__title"
+        >
+          The best movie of all times
+        </h4>
+        <p
+          class="result-item__release-date"
+        >
+          2021
+        </p>
+        <p
+          class="result-item__genre"
+        >
+          Documentary
+        </p>
+      </div>
+    </a>
+  </li>
+</div>
+`;

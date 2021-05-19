@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NotFound Page renders NotFound Page 1`] = `
+<div>
+  <main
+    class="site-container__main flex flex--column background--dark-black justify-content--center text-align--center"
+  >
+    <h1
+      class="font--regular"
+    >
+      Page Not Found
+    </h1>
+    <section
+      class="margin--bottom"
+    >
+      <div
+        class="not-found"
+      >
+        <p
+          class="not-found__text"
+        >
+          404
+        </p>
+      </div>
+      <a
+        href="/"
+      >
+        <button
+          class="btn btn--outline"
+          tabindex="-1"
+          type="button"
+        >
+          Go back to home
+        </button>
+      </a>
+    </section>
+  </main>
+</div>
+`;

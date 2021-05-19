@@ -1,0 +1,99 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ResultList Component renders the correct amount of movies 1`] = `
+<div>
+  <p>
+    <span
+      class="font--bold"
+    >
+      1
+    </span>
+     
+    movies found
+  </p>
+  <section
+    class="section section--padding-bottom-only"
+  >
+    <ul
+      class="result-list"
+    >
+      <li
+        class="result-list__item"
+        data-testid="result-list-item"
+      >
+        <a
+          class="result-item-container"
+          href="/film/1"
+        >
+          <img
+            alt="A film title"
+            src="https://film.com/image.jpg"
+          />
+          <div
+            class="result-item__body flex flex--wrap"
+          >
+            <h4
+              class="result-item__title"
+            >
+              A film title
+            </h4>
+            <p
+              class="result-item__release-date"
+            >
+              2021
+            </p>
+            <p
+              class="result-item__genre"
+            >
+              Documentary
+            </p>
+          </div>
+        </a>
+        <div
+          class="result-item__pop-out"
+        >
+          <button
+            class="btn pop-out__btn"
+            tabindex="0"
+            type="button"
+          >
+            <svg
+              aria-hidden="true"
+              class="svg-inline--fa fa-ellipsis-v fa-w-6 fa-lg "
+              data-icon="ellipsis-v"
+              data-prefix="fas"
+              focusable="false"
+              role="img"
+              viewBox="0 0 192 512"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M96 184c39.8 0 72 32.2 72 72s-32.2 72-72 72-72-32.2-72-72 32.2-72 72-72zM24 80c0 39.8 32.2 72 72 72s72-32.2 72-72S135.8 8 96 8 24 40.2 24 80zm0 352c0 39.8 32.2 72 72 72s72-32.2 72-72-32.2-72-72-72-72 32.2-72 72z"
+                fill="currentColor"
+              />
+            </svg>
+          </button>
+          <div
+            class="pop-out__content"
+          >
+            <button
+              class="btn btn--full-width btn--secondary pop-out-content__item"
+              tabindex="0"
+              type="button"
+            >
+              Edit
+            </button>
+            <button
+              class="btn btn--full-width btn--secondary pop-out-content__item"
+              tabindex="0"
+              type="button"
+            >
+              Delete
+            </button>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </section>
+</div>
+`;

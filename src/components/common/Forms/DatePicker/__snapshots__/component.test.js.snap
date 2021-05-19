@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DatePicker Component renders DatePicker Component with provided label 1`] = `
+<div>
+  <div
+    class="form-element-wrapper"
+  >
+    <label
+      class="form__label"
+      for=""
+    >
+      Date picker
+    </label>
+    Mock Component
+  </div>
+</div>
+`;

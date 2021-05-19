@@ -1,0 +1,70 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MovieDetail Component renders MovieDetail Component with provided props 1`] = `
+<div>
+  <section
+    class="section section--large background--dark-black margin--bottom"
+  >
+    <div
+      class="wrapper"
+    >
+      <div
+        class="row"
+      >
+        <div
+          class="column column--m-3"
+        >
+          <img
+            alt="The best movie of all times"
+            src="https://a-path.to/an/image.jpg"
+          />
+        </div>
+        <div
+          class="column column--m-9"
+        >
+          <div
+            class="movie-detail"
+          >
+            <div
+              class="movie-detail__heading-container"
+            >
+              <h1
+                class="movie-detail__heading"
+              >
+                The best movie of all times
+              </h1>
+              <p
+                class="movie-detail__rating"
+              >
+                8.7
+              </p>
+            </div>
+            <p
+              class="movie-detail__genre"
+            >
+              Documentary
+            </p>
+            <div
+              class="movie-detail__year-container"
+            >
+              <p>
+                2021
+              </p>
+              <p
+                class="movie-detail__duration"
+              >
+                140 min
+              </p>
+            </div>
+            <p
+              class="movie-detail__description"
+            >
+              A great movie
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+`;

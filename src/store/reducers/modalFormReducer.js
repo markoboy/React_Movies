@@ -4,7 +4,7 @@ import {
   SET_FORM_SELECTED_MOVIE,
 } from '@store/action-types/modalFormTypes';
 
-const initialModalFormState = {
+export const initialModalFormState = {
   selectedMovie: undefined,
   action: undefined,
 };
