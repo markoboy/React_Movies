@@ -7,7 +7,14 @@ function SearchResultsContainer({ totalAmount, status, sortBy, filter, invalidat
   const { query = '' } = useParams();
 
   useEffect(() => {
-    fetchMovies({ search: query });
+    // Dont fetch if movies have been retrieved from SSR
+    // eslint-disable-next-line no-underscore-dangle
+    if (!window.__SSR_STATE__?.movies?.items?.length) {
+      fetchMovies({ search: query });
+    } else {
+      // eslint-disable-next-line no-underscore-dangle
+      delete window.__SSR_STATE__.movies.items;
+    }
   }, [sortBy, filter, query, invalidate]);
 
   return <SearchResultsComponent totalAmount={totalAmount} status={status} />;

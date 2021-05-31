@@ -22,7 +22,7 @@ const actionButtonRoutes = [
 ];
 
 export default function SiteHeaderNavContainer() {
-  const noBackground = useRouteMatch(HOME_PATH).isExact;
+  const noBackground = useRouteMatch(HOME_PATH)?.isExact;
 
   const className = useMemo(
     () => (

@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import isFunction from '@utils/isFunction';
 import isProduction from '@utils/isProduction';
 
@@ -9,22 +10,19 @@ import isProduction from '@utils/isProduction';
 export default class LoggerService {
   constructor(name = 'Logger') {
     const production = isProduction() || process.env.NODE_ENV === 'test';
-    Object.keys(window.console).forEach((method) => {
+    Object.keys(console).forEach((method) => {
       if (
-        Object.hasOwnProperty.call(window.console, method)
-        && isFunction(window.console[method])
+        Object.hasOwnProperty.call(console, method)
+        && isFunction(console[method])
       ) {
         // Enable logs only on development environment
         if (!production) {
           try {
-            this[method] = window.console[method].bind(
-              window.console,
-              `[${name}] `
-            );
-          // eslint-disable-next-line no-empty
-          } catch (err) { }
+            this[method] = console[method].bind(console, `[${name}] `);
+            // eslint-disable-next-line no-empty
+          } catch (err) {}
         } else {
-          this[method] = () => { };
+          this[method] = () => {};
         }
       }
     });
