@@ -7,7 +7,9 @@ const {
   getParsedEnvVariables,
 } = require('./webpack.config.common');
 
-const buildPath = resolve(__dirname, 'build');
+const rootPath = resolve(__dirname, '..');
+
+const buildPath = resolve(rootPath, 'build');
 
 /**
  * @type {import('webpack').WebpackOptionsNormalized}
@@ -16,8 +18,8 @@ const prodConfigs = {
   mode: 'production',
 
   output: {
-    filename: 'js/[name].[contenthash].js',
-    chunkFilename: 'js/[id].[contenthash].js',
+    filename: 'assets/js/[name].[contenthash].js',
+    chunkFilename: 'assets/js/[id].[contenthash].js',
     publicPath: getParsedEnvVariables(process.env.NODE_ENV).PUBLIC_URL,
   },
 
@@ -31,7 +33,11 @@ const prodConfigs = {
     ],
   },
 
-  plugins: [new MiniCssExtractPlugin()],
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: 'assets/css/[name].[contenthash].css',
+    }),
+  ],
 
   optimization: {
     minimize: true,

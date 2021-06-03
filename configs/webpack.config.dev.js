@@ -4,9 +4,12 @@ const webpack = require('webpack');
 const {
   getCommonConfig,
   mergeWithPrependRules,
+  getParsedEnvVariables,
 } = require('./webpack.config.common');
 
-const buildPath = resolve(__dirname, 'dev');
+const rootPath = resolve(__dirname, '..');
+
+const buildPath = resolve(rootPath, 'build');
 
 /**
  * @type {import('webpack').WebpackOptionsNormalized}
@@ -16,12 +19,12 @@ const devConfigs = {
 
   target: 'web',
 
-  devtool: 'eval-cheap-module-source-map',
+  devtool: 'source-map',
 
   output: {
-    filename: './js/[name].js',
-    chunkFilename: './js/[id].js',
-    publicPath: '/',
+    filename: 'assets/js/[name].js',
+    chunkFilename: 'assets/js/[id].js',
+    publicPath: getParsedEnvVariables(process.env.NODE_ENV).PUBLIC_URL,
   },
 
   module: {
@@ -41,7 +44,7 @@ const devConfigs = {
     port: 3000,
     hot: true,
     inline: true,
-    contentBase: resolve(__dirname, 'src'),
+    contentBase: resolve(rootPath, 'src'),
     historyApiFallback: true,
   },
 };

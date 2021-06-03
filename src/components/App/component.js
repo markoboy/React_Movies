@@ -2,25 +2,22 @@ import SiteFooter from '@components/common/SiteFooter';
 import SiteHeaderNav from '@components/common/SiteHeaderNav';
 import Spinner from '@components/common/Spinner';
 import Notification from '@components/features/Notification';
+import loadable from '@loadable/component';
 import PropTypes from 'prop-types';
-import React, { lazy, Suspense } from 'react';
+import React from 'react';
 import { Switch } from 'react-router-dom';
 import { getRouteElement } from './routes';
 
-const LazyModalFormContainer = lazy(() => (
-  import(/* webpackPrefetch: true */ '@components/features/ModalForm')
-));
+const LazyModalFormContainer = loadable(() => import(/* webpackPrefetch: true */ '@components/features/ModalForm'));
 
 function AppComponent({ modalIsOpened, showSpinner, routes }) {
   return (
     <>
       <SiteHeaderNav />
 
-      <Suspense fallback={<Spinner />}>
-        <Switch>{routes.map(getRouteElement)}</Switch>
+      <Switch>{routes.map(getRouteElement)}</Switch>
 
-        {modalIsOpened && <LazyModalFormContainer />}
-      </Suspense>
+      {modalIsOpened && <LazyModalFormContainer fallback={<Spinner />} />}
 
       <Notification />
 

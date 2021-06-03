@@ -12,6 +12,12 @@ $ npm start
 $ npm run start:dev
 ```
 
+For SSR development:
+
+```
+$ npm run dev
+```
+
 You will also need to run the API found on https://github.com/VarvaraZadnepriak/MoviesAPI.ReactJS.
 
 ## Builds
@@ -33,4 +39,18 @@ To serve the builds:
 ```
 $ npm run serve:dev
 $ npm run serve:prod
+```
+
+### SSR builds
+
+To build production server:
+
+```
+$ npm run build:ssr
+```
+
+To start node server:
+
+```
+$ npm run start:ssr
 ```

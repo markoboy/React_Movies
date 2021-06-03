@@ -1,14 +1,21 @@
 import isProduction from '@utils/isProduction';
+import isSSR from '@utils/isSSR';
 import { applyMiddleware, compose, createStore } from 'redux';
 import thunk from 'redux-thunk';
-import rootReducer from './reducers';
+import createReducer from './createReducer';
+import rootReducerMap from './reducers';
 
-const composeEnhancers = (!isProduction() && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__)
-  || compose;
+const composeEnhancers = !isProduction() && !isSSR()
+  ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+  : compose;
 
-const store = createStore(
-  rootReducer,
-  composeEnhancers(applyMiddleware(thunk))
-);
+/**
+ *
+ * @param {Object} preloadedState The state to load
+ * @returns {import('redux').Store}
+ */
+export default function configureStore(preloadedState) {
+  const rootReducer = createReducer(rootReducerMap, preloadedState);
 
-export default store;
+  return createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
+}

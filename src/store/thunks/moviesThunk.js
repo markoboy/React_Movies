@@ -18,7 +18,7 @@ import {
 } from '@store/action-creators/moviesActionCreators';
 import { moviesSelector, moviesStateSelector } from '@store/selectors/moviesSelectors';
 
-export const fetchMovies = ({ search }) => (dispatch, getState) => {
+export const fetchMovies = ({ search = '' } = {}) => (dispatch, getState) => {
   dispatch(fetchMoviesCreator());
 
   const moviesState = moviesStateSelector(getState());
@@ -32,8 +32,14 @@ export const fetchMovies = ({ search }) => (dispatch, getState) => {
     searchBy: moviesState.searchBy,
     search,
   })
-    .then((response) => dispatch(fetchMoviesSuccessCreator(response)))
-    .catch((error) => dispatch(fetchMoviesFailureCreator(error)));
+    .then((response) => {
+      dispatch(fetchMoviesSuccessCreator(response));
+      return response;
+    })
+    .catch((error) => {
+      dispatch(fetchMoviesFailureCreator(error));
+      return error;
+    });
 };
 
 export const addMovie = (movie) => (dispatch) => {

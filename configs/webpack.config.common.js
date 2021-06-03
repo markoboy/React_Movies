@@ -6,8 +6,11 @@ const { resolve } = require('path');
 const { mergeWithRules, CustomizeRule } = require('webpack-merge');
 const { existsSync } = require('fs');
 const dotenv = require('dotenv');
+const LoadablePlugin = require('@loadable/webpack-plugin');
 
 const NODE_ENV = process.env.NODE_ENV || 'development';
+
+const rootPath = resolve(__dirname, '..');
 
 /**
  * Get the parsed environment variables from dotenv based on the current environment
@@ -15,7 +18,7 @@ const NODE_ENV = process.env.NODE_ENV || 'development';
  */
 const getParsedEnvVariables = (environment) => {
   // Base environmental path
-  const basePath = resolve(__dirname, '.env');
+  const basePath = resolve(rootPath, '.env');
 
   // Get the path of the environment file. ex. .env.development
   const envPath = `${basePath}.${environment}`;
@@ -50,7 +53,7 @@ const getEnvVariables = (environment) => {
  */
 exports.getCommonConfig = ({ buildPath }) => ({
   entry: {
-    bundle: resolve(__dirname, 'src', 'index.js'),
+    bundle: resolve(rootPath, 'src', 'index.js'),
   },
 
   output: {
@@ -61,14 +64,14 @@ exports.getCommonConfig = ({ buildPath }) => ({
     extensions: ['.js', '.jsx'],
     symlinks: false,
     alias: {
-      '@components': resolve(__dirname, 'src', 'components'),
-      '@services': resolve(__dirname, 'src', 'services'),
-      '@utils': resolve(__dirname, 'src', 'utils'),
-      '@constants': resolve(__dirname, 'src', 'constants'),
-      '@hooks': resolve(__dirname, 'src', 'hooks'),
-      '@pages': resolve(__dirname, 'src', 'pages'),
-      '@store': resolve(__dirname, 'src', 'store'),
-      '@resources': resolve(__dirname, 'public', 'resources'),
+      '@components': resolve(rootPath, 'src', 'components'),
+      '@services': resolve(rootPath, 'src', 'services'),
+      '@utils': resolve(rootPath, 'src', 'utils'),
+      '@constants': resolve(rootPath, 'src', 'constants'),
+      '@hooks': resolve(rootPath, 'src', 'hooks'),
+      '@pages': resolve(rootPath, 'src', 'pages'),
+      '@store': resolve(rootPath, 'src', 'store'),
+      '@resources': resolve(rootPath, 'public', 'resources'),
     },
   },
 
@@ -97,7 +100,7 @@ exports.getCommonConfig = ({ buildPath }) => ({
             loader: 'sass-loader',
             options: {
               sassOptions: {
-                includePaths: [resolve(__dirname, 'src', 'scss')],
+                includePaths: [resolve(rootPath, 'src', 'scss')],
               },
             },
           },
@@ -109,6 +112,9 @@ exports.getCommonConfig = ({ buildPath }) => ({
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
         type: 'asset/resource',
         exclude: /node_modules/,
+        generator: {
+          filename: 'assets/images/[hash][ext]',
+        },
       },
 
       // Asset loader for fonts
@@ -121,10 +127,11 @@ exports.getCommonConfig = ({ buildPath }) => ({
   },
 
   plugins: [
+    new LoadablePlugin(),
     new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
     new HtmlWebpackPlugin({
       filename: resolve(buildPath, 'index.html'),
-      template: resolve(__dirname, 'public', 'index.html'),
+      template: resolve(rootPath, 'public', 'index.html'),
       inject: 'body',
     }),
     new webpack.DefinePlugin({
@@ -134,7 +141,7 @@ exports.getCommonConfig = ({ buildPath }) => ({
     new CopyPlugin({
       patterns: [
         {
-          from: resolve(__dirname, 'public', '404.html'),
+          from: resolve(rootPath, 'public', '404.html'),
           to: buildPath,
         },
       ],
