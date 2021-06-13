@@ -1,5 +1,5 @@
-import { format } from 'date-fns';
-import * as Yup from 'yup';
+import format from 'date-fns/format';
+import { object, string, date, array, number } from 'yup';
 
 /**
  * Convert an option to a multi select option to be used
@@ -65,20 +65,20 @@ const isRequired = (field) => `${field} is required`;
 
 const atLeastOneRequired = (field) => `Select at least one ${field} to proceed`;
 
-export const MovieSchemaYup = Yup.object().shape({
-  title: Yup.string().required(isRequired('Title')),
+export const MovieSchemaYup = object({
+  title: string().required(isRequired('Title')),
 
-  release_date: Yup.date('Input a valid Release Date to proceed').nullable(),
+  release_date: date('Input a valid Release Date to proceed').nullable(),
 
-  poster_path: Yup.string()
+  poster_path: string()
     .url('Input a valid URL to proceed')
     .required(isRequired('Movie Poster URL')),
 
-  genres: Yup.array()
+  genres: array()
     .min(1, atLeastOneRequired('genre'))
     .required(atLeastOneRequired('genre')),
 
-  overview: Yup.string().required(isRequired('Overview')),
+  overview: string().required(isRequired('Overview')),
 
-  runtime: Yup.number().typeError(isRequired('Runtime')).required(isRequired('Runtime')),
+  runtime: number().typeError(isRequired('Runtime')).required(isRequired('Runtime')),
 });

@@ -1,8 +1,11 @@
 import express from 'express';
+import compression from 'compression';
 
 import serverRenderer from './server-renderer';
 
 const app = express();
+
+app.use(compression());
 
 app.use('/assets', express.static('./build/assets'));
 

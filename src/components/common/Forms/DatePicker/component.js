@@ -1,25 +1,24 @@
 import withFormElementWrapper from '@components/hocs/WithFormElementWrapper';
-import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons/faCalendarAlt';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types';
 import React, { memo } from 'react';
-import ReactDatePicker from 'react-date-picker/dist/entry.nostyle';
+import Flatpickr from 'react-flatpickr';
 import FormLabelComponent from '../FormLabel';
 import './styles.scss';
+
+const flatpickrOptions = {
+  dateFormat: 'd-M-Y',
+};
 
 function DatePickerComponent({ value, required, label, onChange }) {
   return (
     <>
       <FormLabelComponent label={label} />
-      <ReactDatePicker
+      <Flatpickr
         value={value}
         onChange={onChange}
-        calendarIcon={<FontAwesomeIcon icon={faCalendarAlt} />}
-        clearIcon={null}
-        format="dd-MM-y"
-        dayPlaceholder="Day"
-        monthPlaceholder="Month"
-        yearPlaceholder="Year"
+        options={flatpickrOptions}
         required={required}
       />
     </>
