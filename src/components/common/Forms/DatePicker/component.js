@@ -1,25 +1,42 @@
-import withFormElementWrapper from '@components/hocs/WithFormElementWrapper';
-// import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons/faCalendarAlt';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Input from '@components/common/Forms/Input';
+import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons/faCalendarAlt';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types';
 import React, { memo } from 'react';
 import Flatpickr from 'react-flatpickr';
-import FormLabelComponent from '../FormLabel';
 import './styles.scss';
 
 const flatpickrOptions = {
   dateFormat: 'd-M-Y',
 };
 
-function DatePickerComponent({ value, required, label, onChange }) {
+const noop = () => {};
+
+function DatePickerComponent({
+  value,
+  required,
+  label,
+  placeholder,
+  onChange,
+}) {
   return (
     <>
-      <FormLabelComponent label={label} />
       <Flatpickr
         value={value}
-        onChange={onChange}
+        onChange={(dates) => onChange?.(dates[0])}
         options={flatpickrOptions}
-        required={required}
+        render={({ defaultValue }, ref) => (
+          <Input
+            inputRef={ref}
+            defaultValue={defaultValue}
+            label={label}
+            placeholder={placeholder}
+            required={required}
+            onChange={noop}
+          >
+            <FontAwesomeIcon className="date-picker__calendar-button" icon={faCalendarAlt} />
+          </Input>
+        )}
       />
     </>
   );
@@ -38,4 +55,4 @@ DatePickerComponent.propTypes = {
   onChange: PropTypes.func.isRequired,
 };
 
-export default memo(withFormElementWrapper(DatePickerComponent));
+export default memo(DatePickerComponent);

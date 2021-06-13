@@ -8,6 +8,7 @@ function InputComponent({
   classes,
   label,
   value,
+  defaultValue,
   type,
   placeholder,
   name,
@@ -18,18 +19,21 @@ function InputComponent({
   onChange,
   onClick,
   onBlur,
+  inputRef,
   children,
 }) {
   return (
     <>
       <FormLabelComponent label={label} id={id} />
       <input
+        ref={inputRef}
         className={classes}
         type={type}
         name={name}
         id={id}
         placeholder={placeholder}
         value={value || ''}
+        defaultValue={defaultValue}
         required={required}
         pattern={pattern}
         disabled={disabled}

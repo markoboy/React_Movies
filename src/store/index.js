@@ -5,9 +5,9 @@ import thunk from 'redux-thunk';
 import createReducer from './createReducer';
 import rootReducerMap from './reducers';
 
-const isReduxDevTools = !isProduction() && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;
+const isReduxDevTools = !isSSR() && !!window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;
 
-const composeEnhancers = isReduxDevTools && !isSSR()
+const composeEnhancers = isReduxDevTools && !isProduction()
   ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
   : compose;
 

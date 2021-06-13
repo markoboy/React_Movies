@@ -86,7 +86,7 @@ exports.getCommonConfig = ({ buildPath }) => ({
           options: {
             adapter: require('responsive-loader/sharp'),
             format: 'webp',
-            quality: 75,
+            quality: 50,
             outputPath: 'assets/images',
             esModule: true,
           },
