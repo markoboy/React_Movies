@@ -77,6 +77,22 @@ exports.getCommonConfig = ({ buildPath }) => ({
 
   module: {
     rules: [
+      // Responsive loader for images
+      {
+        test: /\.(jpe?g|png|webp)$/i,
+        exclude: /node_modules/,
+        use: {
+          loader: 'responsive-loader',
+          options: {
+            adapter: require('responsive-loader/sharp'),
+            format: 'webp',
+            quality: 75,
+            outputPath: 'assets/images',
+            esModule: true,
+          },
+        },
+      },
+
       // Babel loader to transform JSX to JavaScript and transpile our code based on the .browserslistrc
       {
         test: /\.jsx?$/,
@@ -105,16 +121,6 @@ exports.getCommonConfig = ({ buildPath }) => ({
             },
           },
         ],
-      },
-
-      // Asset loader for images
-      {
-        test: /\.(png|svg|jpg|jpeg|gif)$/i,
-        type: 'asset/resource',
-        exclude: /node_modules/,
-        generator: {
-          filename: 'assets/images/[hash][ext]',
-        },
       },
 
       // Asset loader for fonts

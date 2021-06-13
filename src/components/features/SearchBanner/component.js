@@ -5,7 +5,7 @@ import Column from '@components/common/Grid/Column';
 import Row from '@components/common/Grid/Row';
 import withFormElementWrapper from '@components/hocs/WithFormElementWrapper';
 import { withFormikField } from '@components/hocs/WithFormikField';
-import BannerImage from '@resources/banner.jpg';
+import BannerImage from '@resources/banner.jpg?sizes[]=300,sizes[]=600,sizes[]=1024';
 import PropTypes from 'prop-types';
 import React, { memo } from 'react';
 
@@ -23,7 +23,14 @@ function SearchBannerComponent({ title, formik }) {
   } = formik;
 
   return (
-    <Banner imgSrc={BannerImage} imgAlt="Posts of movies on the wall">
+    <Banner
+      src={BannerImage.src}
+      srcSet={BannerImage.srcSet}
+      width={BannerImage.width}
+      height={BannerImage.height}
+      sizes="(min-width: 600px) 600px, 100vw"
+      alt="Posts of movies on the wall"
+    >
       <h1 className="banner__title">{title}</h1>
       <form onSubmit={handleSubmit} onReset={handleReset}>
         <Row>

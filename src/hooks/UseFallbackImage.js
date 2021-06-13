@@ -8,7 +8,9 @@ export default function useFallbackImage(image, fallback) {
   }, [image]);
 
   const setFallbackImageSrc = useCallback(() => {
-    setImageSrc(fallback);
+    if (fallback) {
+      setImageSrc(fallback);
+    }
   }, [fallback]);
 
   return { imageSrc, setImageSrc, setFallbackImageSrc };
