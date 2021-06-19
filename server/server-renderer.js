@@ -44,6 +44,7 @@ export default async function serverRenderer({ rootId = 'root', url } = {}) {
 
   const preloadedState = store.getState();
 
+  const inlineStyleTags = await extractor.getInlineStyleTags();
   const scriptTags = extractor.getScriptTags();
   const linkTags = extractor.getLinkTags();
   const styleTags = extractor.getStyleTags();
@@ -59,7 +60,10 @@ export default async function serverRenderer({ rootId = 'root', url } = {}) {
   indexHtml = indexHtml.replace(divContainerRegex, `$1${appHtml}`);
 
   // Append style tags and link tags to prefetch/preload assets before closing head tag
-  indexHtml = indexHtml.replace(/(<\/head>)/, `${styleTags}${linkTags}$1`);
+  indexHtml = indexHtml.replace(
+    /(<\/head>)/,
+    `${inlineStyleTags}${styleTags}${linkTags}$1`
+  );
 
   // Append the __SSR_STATE__ to the window object with a script before the body closing tag
   indexHtml = indexHtml.replace(

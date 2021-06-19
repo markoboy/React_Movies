@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { MODAL_FORM_DELETE_PARAGRAPH } from '../constants';
-import FormikForm from '../FormikForm';
+import ModalMovieForm from '../ModalMovieForm';
 import ModalFormFooter from '../ModalFormFooter';
 
 function ModalFormBodyComponent({
@@ -14,9 +14,9 @@ function ModalFormBodyComponent({
   return (
     <>
       {hasFormBody && (
-        <FormikForm selectedMovie={selectedMovie} onSubmit={onSubmit}>
+        <ModalMovieForm selectedMovie={selectedMovie} onSubmit={onSubmit}>
           <ModalFormFooter action={formAction} />
-        </FormikForm>
+        </ModalMovieForm>
       )}
 
       {hasDeleteBody && (

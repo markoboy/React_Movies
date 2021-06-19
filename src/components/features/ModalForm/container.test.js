@@ -1,5 +1,5 @@
 import React from 'react';
-import { waitFor } from '@testing-library/react';
+import { waitFor, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import thunk from 'redux-thunk';
 import configureMockStore from 'redux-mock-store';
@@ -73,7 +73,7 @@ describe('ModalForm Component', () => {
     const documentary = getByText(/Documentary/i);
     userEvent.click(documentary);
 
-    userEvent.click(getByRole('button', { name: /submit/i }));
+    fireEvent.submit(getByRole('button', { name: /submit/i }));
 
     await waitFor(() => {
       expect(addMovie).toHaveBeenCalledTimes(1);
@@ -138,7 +138,7 @@ describe('ModalForm Component', () => {
     const comedy = getByText(/Comedy/i);
     userEvent.click(comedy);
 
-    userEvent.click(getByRole('button', { name: /save/i }));
+    fireEvent.submit(getByRole('button', { name: /save/i }));
 
     await waitFor(() => {
       expect(updateMovie).toHaveBeenCalledTimes(1);
@@ -192,7 +192,7 @@ describe('ModalForm Component', () => {
       }
     );
 
-    userEvent.click(getByRole('button', { name: /confirm/i }));
+    fireEvent.submit(getByRole('button', { name: /confirm/i }));
 
     await waitFor(() => {
       expect(deleteMovie).toHaveBeenCalledTimes(1);

@@ -3,7 +3,7 @@ import { render } from '@testing-library/react';
 
 import DatePicker from './component';
 
-jest.mock('react-date-picker/dist/entry.nostyle', () => () => 'Mock Component');
+jest.mock('react-flatpickr');
 const mockFn = jest.fn();
 
 describe('DatePicker Component', () => {

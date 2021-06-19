@@ -32,7 +32,7 @@ function InputComponent({
         name={name}
         id={id}
         placeholder={placeholder}
-        value={value || ''}
+        value={value}
         defaultValue={defaultValue}
         required={required}
         pattern={pattern}
@@ -48,12 +48,12 @@ function InputComponent({
 
 InputComponent.defaultProps = {
   type: 'text',
-  placeholder: '',
-  name: '',
-  id: '',
-  classes: '',
-  value: '',
-  label: '',
+  placeholder: undefined,
+  name: undefined,
+  id: undefined,
+  classes: undefined,
+  value: undefined,
+  label: undefined,
   required: undefined,
   pattern: undefined,
   disabled: undefined,

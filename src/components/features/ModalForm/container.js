@@ -29,22 +29,18 @@ export default function ModalFormContainer({
   }, []);
 
   const handleOnSubmit = useCallback(
-    /**
-     * @param {import('formik').FormikValues} movieFormValues
-     * @param {import('formik').FormikHelpers} formikHelpers
-     */
-    (movieFormValues, formikHelpers) => {
+    (formData) => {
       switch (formAction) {
         case MODAL_FORM_DELETE_ACTION:
           deleteMovie(selectedMovie.id);
           break;
 
         case MODAL_FORM_EDIT_ACTION:
-          updateMovie(serializeMovieData(movieFormValues));
+          updateMovie(serializeMovieData(formData));
           break;
 
         case MODAL_FORM_ADD_ACTION:
-          addMovie(serializeMovieData(movieFormValues));
+          addMovie(serializeMovieData(formData));
           break;
 
         default:
@@ -52,10 +48,6 @@ export default function ModalFormContainer({
             `FormAction: ${formAction} doesnt exist on modal form submit!`
           );
           break;
-      }
-
-      if (formikHelpers) {
-        formikHelpers.setSubmitting(false);
       }
 
       handleCloseTrigger();

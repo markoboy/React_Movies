@@ -1,5 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import defaultStore from '@store/index';
+import configureStore from '@store/index';
 import { render } from '@testing-library/react';
 import React from 'react';
 import { Provider } from 'react-redux';
@@ -7,7 +7,11 @@ import { BrowserRouter } from 'react-router-dom';
 
 export function renderWithStore(
   ui,
-  { store = defaultStore, route = '/', ...renderOptions } = {}
+  { store = configureStore({
+    modalForm: {
+      action: '',
+    },
+  }), route = '/', ...renderOptions } = {}
 ) {
   window.history.pushState({}, 'Test page', route);
 

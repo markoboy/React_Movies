@@ -12,7 +12,9 @@ exports[`ResultListItem Component renders ResultListItem Component with provided
     >
       <img
         alt="The best movie of all times"
+        height="500"
         src="https://a-path.to/an/image.jpg"
+        width="333"
       />
       <div
         class="result-item__body flex flex--wrap"

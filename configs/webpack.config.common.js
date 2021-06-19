@@ -73,6 +73,10 @@ exports.getCommonConfig = ({ buildPath }) => ({
       '@store': resolve(rootPath, 'src', 'store'),
       '@resources': resolve(rootPath, 'public', 'resources'),
     },
+    importsFields: ['jsnext:main', 'module', 'main'],
+    fallback: {
+      'react-hook-form': resolve(rootPath, 'node_modules', 'react-hook-form', 'dist', 'index.esm.js'),
+    }
   },
 
   module: {
