@@ -5,7 +5,9 @@
  */
 
 // 3rd party
-@import 'normalize.css';
+@import
+  '@fortawesome/fontawesome-svg-core/styles.css',
+  'normalize.css';
 
 // Import essential scss modules like theme and mixin
 @import 'essential';

@@ -7,6 +7,7 @@ const { mergeWithRules, CustomizeRule } = require('webpack-merge');
 const { existsSync } = require('fs');
 const dotenv = require('dotenv');
 const LoadablePlugin = require('@loadable/webpack-plugin');
+const GoogleFontsPlugin = require('@beyonk/google-fonts-webpack-plugin');
 
 const NODE_ENV = process.env.NODE_ENV || 'development';
 
@@ -75,8 +76,14 @@ exports.getCommonConfig = ({ buildPath }) => ({
     },
     importsFields: ['jsnext:main', 'module', 'main'],
     fallback: {
-      'react-hook-form': resolve(rootPath, 'node_modules', 'react-hook-form', 'dist', 'index.esm.js'),
-    }
+      'react-hook-form': resolve(
+        rootPath,
+        'node_modules',
+        'react-hook-form',
+        'dist',
+        'index.esm.js'
+      ),
+    },
   },
 
   module: {
@@ -139,10 +146,21 @@ exports.getCommonConfig = ({ buildPath }) => ({
   plugins: [
     new LoadablePlugin(),
     new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
+    new GoogleFontsPlugin({
+      fonts: [
+        {
+          family: 'Montserrat',
+          variants: ['400', '600', '800'],
+          display: 'swap',
+        },
+      ],
+      filename: 'assets/css/fonts.css',
+      path: '../font/',
+    }),
     new HtmlWebpackPlugin({
       filename: resolve(buildPath, 'index.html'),
-      template: resolve(rootPath, 'public', 'index.html'),
-      inject: 'body',
+      template: resolve(rootPath, 'public', 'index.ejs'),
+      inject: NODE_ENV === 'development',
     }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(NODE_ENV),

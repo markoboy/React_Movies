@@ -38,7 +38,7 @@ if (typeof IntersectionObserver !== 'undefined' && !isSSR()) {
    */
   const options = {
     root: document.body,
-    rootMargin: '15%',
+    rootMargin: '530px',
     threshold: 1.0,
   };
 

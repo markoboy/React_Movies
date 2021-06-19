@@ -5,27 +5,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin  />
+    <link rel="preload" href="/assets/font/Montserrat-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/font/Montserrat-ExtraBold.woff2" as="font" type="font/woff2" crossorigin>
+    <style> <%= compilation.assets['assets/css/fonts.css']._value.replace(/\.\.\/font/g, '/assets/font') %> </style>
 
+    <% var imageAssets = compilation.getAssets().filter((asset) => asset.name.includes('assets/images')) %>
     <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap"
       rel="preload"
-      as="style"
-    />
-
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap"
-      rel="stylesheet"
-      media="print"
-      onload="this.media='all'"
-    />
-
-    <no-script>
-      <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap"
-        rel="stylesheet"
-      />
-    </no-script>
+      as="image"
+      href="/<%= imageAssets[0].name %>"
+      imagesrcset="/<%= imageAssets[0].name %> 300w, /<%= imageAssets[1].name %> 600w, /<%= imageAssets[2].name %> 1024w"
+      imagesizes="(min-width: 600px) 600px, 100vw">
 
     <title>Find your movie | Netflix Roulette</title>
 
@@ -68,9 +58,7 @@
     <!-- End Single Page Apps for GitHub Pages -->
   </head>
   <body>
-    <noscript>
-      You need to enable JavaScript to run this app.
-    </noscript>
+    <noscript> You need to enable JavaScript to run this app. </noscript>
 
     <div id="root" class="site-container"></div>
   </body>
