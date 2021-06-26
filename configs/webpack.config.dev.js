@@ -49,6 +49,9 @@ const devConfigs = {
   },
 };
 
+/**
+ * @type {import('webpack').WebpackOptionsNormalized}
+ */
 module.exports = mergeWithPrependRules(
   getCommonConfig({ buildPath }),
   devConfigs

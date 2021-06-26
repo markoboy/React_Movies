@@ -7,7 +7,7 @@ const { mergeWithRules, CustomizeRule } = require('webpack-merge');
 const { existsSync } = require('fs');
 const dotenv = require('dotenv');
 const LoadablePlugin = require('@loadable/webpack-plugin');
-const GoogleFontsPlugin = require('@beyonk/google-fonts-webpack-plugin');
+const GoogleFontsPlugin = require('../lib/google-fonts-webpack-plugin/src/index');
 
 const NODE_ENV = process.env.NODE_ENV || 'development';
 
@@ -155,12 +155,12 @@ exports.getCommonConfig = ({ buildPath }) => ({
         },
       ],
       filename: 'assets/css/fonts.css',
-      path: '../font/',
+      path: 'assets/fonts',
     }),
     new HtmlWebpackPlugin({
       filename: resolve(buildPath, 'index.html'),
       template: resolve(rootPath, 'public', 'index.ejs'),
-      inject: NODE_ENV === 'development',
+      inject: NODE_ENV !== 'production',
     }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(NODE_ENV),
