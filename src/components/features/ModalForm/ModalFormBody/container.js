@@ -8,7 +8,7 @@ import {
 } from '@components/features/ModalForm/constants';
 import { MovieDetailType } from '@constants/MovieTypes';
 import PropTypes from 'prop-types';
-import React, { useCallback, useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { convertToMultiSelectOption, formatMovieData } from '../utils';
 import ModalFormBodyComponent from './component';
 
@@ -57,22 +57,13 @@ export default function ModalFormBodyContainer({
     return undefined;
   }, [selectedMovie]);
 
-  const handleSubmit = useCallback((event, formik) => {
-    if (formik) {
-      onSubmit(event, formik);
-    } else {
-      event.preventDefault();
-      onSubmit(event);
-    }
-  }, []);
-
   return (
     <ModalFormBodyComponent
       hasFormBody={hasFormBody}
       hasDeleteBody={hasDeleteBody}
       formAction={action}
       selectedMovie={formattedMovie}
-      onSubmit={handleSubmit}
+      onSubmit={onSubmit}
     />
   );
 }

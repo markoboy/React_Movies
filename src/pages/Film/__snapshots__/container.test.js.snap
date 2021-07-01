@@ -18,7 +18,9 @@ exports[`Film Page renders the selected movie when one is selected 1`] = `
         >
           <img
             alt="A film title"
+            height="500"
             src="https://film.com/image.jpg"
+            width="333"
           />
         </div>
         <div

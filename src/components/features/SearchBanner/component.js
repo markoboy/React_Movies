@@ -4,37 +4,39 @@ import Input from '@components/common/Forms/Input';
 import Column from '@components/common/Grid/Column';
 import Row from '@components/common/Grid/Row';
 import withFormElementWrapper from '@components/hocs/WithFormElementWrapper';
-import { withFormikField } from '@components/hocs/WithFormikField';
-import BannerImage from '@resources/banner.jpg';
+import { withFormError } from '@components/hocs/WithFormError';
+import BannerImage from '@resources/banner.jpg?sizes[]=300,sizes[]=600,sizes[]=1024';
 import PropTypes from 'prop-types';
 import React, { memo } from 'react';
 
 const ButtonComponentWithWrapper = withFormElementWrapper(Button);
-const WithFormikFieldInput = withFormikField(Input);
+const WithFormErrorInput = withFormError(Input);
 
-function SearchBannerComponent({ title, formik }) {
-  const {
-    values,
-    touched,
-    errors,
-    handleSubmit,
-    handleReset,
-    handleChange,
-  } = formik;
-
+function SearchBannerComponent({
+  title,
+  input,
+  errors,
+  touched,
+  handleSubmit,
+}) {
   return (
-    <Banner imgSrc={BannerImage} imgAlt="Posts of movies on the wall">
+    <Banner
+      src={BannerImage.src}
+      srcSet={BannerImage.srcSet}
+      width={BannerImage.width}
+      height={BannerImage.height}
+      sizes="(min-width: 600px) 600px, 100vw"
+      alt="Posts of movies on the wall"
+    >
       <h1 className="banner__title">{title}</h1>
-      <form onSubmit={handleSubmit} onReset={handleReset}>
+      <form onSubmit={handleSubmit}>
         <Row>
           <Column classes="column--m-9">
-            <WithFormikFieldInput
-              name="query"
+            <WithFormErrorInput
+              input={input}
               placeholder="What do you want to watch?"
-              values={values}
               touched={touched}
               errors={errors}
-              onChange={handleChange}
             />
           </Column>
 
@@ -58,8 +60,6 @@ SearchBannerComponent.defaultProps = {
 
 SearchBannerComponent.propTypes = {
   title: PropTypes.string,
-  // eslint-disable-next-line react/forbid-prop-types
-  formik: PropTypes.object.isRequired,
 };
 
 export default memo(SearchBannerComponent);

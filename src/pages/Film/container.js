@@ -22,6 +22,6 @@ export default function FilmContainer({ selectedMovie, status, selectMovie }) {
   return !formattedMovie && status === ERROR_STATUS ? (
     <Redirect to="/not-found" push />
   ) : (
-    formattedMovie && <MovieDetail movie={formattedMovie} />
+    formattedMovie && <MovieDetail {...formattedMovie} />
   );
 }

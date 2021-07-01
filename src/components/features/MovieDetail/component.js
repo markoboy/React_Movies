@@ -2,10 +2,11 @@
 import ErrorBoundary from '@components/common/ErrorBoundary';
 import Column from '@components/common/Grid/Column';
 import Row from '@components/common/Grid/Row';
+import Image from '@components/common/Image';
 import withSection from '@components/hocs/WithSection';
 import withWrapper from '@components/hocs/WithWrapper';
+import { MOVIE_FALLBACK_IMAGE, MOVIE_POSTER_HEIGHT, MOVIE_POSTER_WIDTH } from '@constants/Generic';
 import { MovieDetailType } from '@constants/MovieTypes';
-import PropTypes from 'prop-types';
 import React, { memo } from 'react';
 import './styles.scss';
 
@@ -15,26 +16,33 @@ const RowWithSectionWrapper = withSection(withWrapper(Row), {
 
 function MovieDetailComponent({
   runtime,
-  vote_average: rating,
+  vote_average,
   overview,
   poster_path,
   title,
   release_date,
   genres,
-  onError,
 }) {
   return (
     <ErrorBoundary>
       <RowWithSectionWrapper>
         <Column classes="column--m-3">
-          <img src={poster_path} alt={title} onError={onError} />
+          <Image
+            src={poster_path}
+            width={MOVIE_POSTER_WIDTH}
+            height={MOVIE_POSTER_HEIGHT}
+            alt={title}
+            fallbackSrc={MOVIE_FALLBACK_IMAGE}
+          />
         </Column>
 
         <Column classes="column--m-9">
           <div className="movie-detail">
             <div className="movie-detail__heading-container">
               <h1 className="movie-detail__heading">{title}</h1>
-              {!!rating && <p className="movie-detail__rating">{rating}</p>}
+              {!!vote_average && (
+                <p className="movie-detail__rating">{vote_average}</p>
+              )}
             </div>
 
             <p className="movie-detail__genre">{genres.join(', ')}</p>
@@ -56,7 +64,6 @@ function MovieDetailComponent({
 
 MovieDetailComponent.propTypes = {
   ...MovieDetailType,
-  onError: PropTypes.func.isRequired,
 };
 
 export default memo(MovieDetailComponent);

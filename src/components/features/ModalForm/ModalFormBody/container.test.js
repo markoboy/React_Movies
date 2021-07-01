@@ -106,7 +106,7 @@ describe('ModalFormBody Component', () => {
           runtime: 145,
           genres: [{ label: 'Documentary', value: 'documentary' }],
         }),
-        expect.any(Object)
+        expect.anything(),
       );
     });
   });

@@ -1,10 +1,8 @@
 /* eslint-disable react/forbid-prop-types */
 import Modal from '@components/common/Modal';
 import { COMPLETE_STATUS, ERROR_STATUS } from '@constants/StatusTypes';
-import {
-  faCheckCircle,
-  faTimesCircle,
-} from '@fortawesome/free-solid-svg-icons';
+import { faCheckCircle } from '@fortawesome/free-solid-svg-icons/faCheckCircle';
+import { faTimesCircle } from '@fortawesome/free-solid-svg-icons/faTimesCircle';
 import useNotification from '@hooks/UseNotification';
 import PropTypes from 'prop-types';
 import React, { useCallback, useEffect, useMemo } from 'react';

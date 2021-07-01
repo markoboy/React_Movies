@@ -25,9 +25,10 @@ function getJestAliases(jsConfigPath) {
 module.exports = {
   moduleNameMapper: {
     '\\.s[ac]ss$': '<rootDir>/__mocks__/styleMock.js',
-    '\\.jpg$': '<rootDir>/__mocks__/imagesMock.js',
+    '\\.jpg\\?(.+)': '<rootDir>/__mocks__/imagesMock.js',
     ...getJestAliases('./jsconfig.json'),
   },
-  setupFiles: ['<rootDir>/src/setupTests.js'],
+  setupFiles: ['<rootDir>/src/__setup__/setupTests.js'],
+  setupFilesAfterEnv: ['<rootDir>/src/__setup__/setupTestsAfterEnv.js'],
   collectCoverageFrom: ['src/**/*.js(x)?'],
 };

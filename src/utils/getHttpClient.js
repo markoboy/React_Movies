@@ -1,6 +1,8 @@
 import isProduction from './isProduction';
 import sleep from './sleep';
 
+const cache = new Map();
+
 function jsonFetchWrapper(uri, options) {
   const handleResponse = (response) => response.json().then((json) => json).catch(() => null);
 
@@ -30,10 +32,20 @@ export default function getHttpClient(uri) {
     get(path, params = {}, options = {}) {
       const serializedParams = new URLSearchParams(params).toString();
 
+      const key = `${path}=${serializedParams}`;
+
+      // Naive cache storage to get some performance gains :)
+      if (cache.has(key)) {
+        return Promise.resolve(cache.get(key));
+      }
+
       return jsonFetchWrapper(`${uri}${path}?${serializedParams}`, {
         method: 'GET',
         headers,
         ...options,
+      }).then((response) => {
+        cache.set(key, response);
+        return response;
       });
     },
 

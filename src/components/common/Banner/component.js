@@ -1,43 +1,41 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import Image from '../Image';
 import './styles.scss';
 
-const getPictureSources = (src) => (
-  <source key={src.id} media={src.media} srcSet={src.srcSet} />
-);
-
-function BannerComponent({
-  children, imgSrc, imgAlt, sources
-}) {
+function BannerComponent({ children, src, srcSet, sizes, alt, width, height }) {
   return (
     <section className="banner">
-      <picture>
-        {sources.map(getPictureSources)}
-        <img src={imgSrc} alt={imgAlt} />
-      </picture>
+      <Image
+        src={src}
+        srcSet={srcSet}
+        sizes={sizes}
+        alt={alt}
+        width={width}
+        height={height}
+        lazy={false}
+      />
       <div className="banner__content">
-        <div className="wrapper">
-          {children}
-        </div>
+        <div className="wrapper">{children}</div>
       </div>
     </section>
   );
 }
 
 BannerComponent.defaultProps = {
-  sources: [],
+  srcSet: undefined,
+  sizes: undefined,
+  width: undefined,
+  height: undefined,
 };
 
 BannerComponent.propTypes = {
-  imgSrc: PropTypes.string.isRequired,
-  imgAlt: PropTypes.string.isRequired,
-  sources: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      media: PropTypes.string.isRequired,
-      srcSet: PropTypes.string.isRequired,
-    })
-  ),
+  src: PropTypes.string.isRequired,
+  srcSet: PropTypes.string,
+  sizes: PropTypes.string,
+  alt: PropTypes.string.isRequired,
+  width: PropTypes.number,
+  height: PropTypes.number,
 };
 
 export default BannerComponent;

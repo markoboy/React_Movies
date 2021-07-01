@@ -1,5 +1,4 @@
-import { format } from 'date-fns';
-import * as Yup from 'yup';
+import format from 'date-fns/format';
 
 /**
  * Convert an option to a multi select option to be used
@@ -60,25 +59,3 @@ export function serializeMovieData(movie) {
     tagline: movie.tagline || undefined,
   };
 }
-
-const isRequired = (field) => `${field} is required`;
-
-const atLeastOneRequired = (field) => `Select at least one ${field} to proceed`;
-
-export const MovieSchemaYup = Yup.object().shape({
-  title: Yup.string().required(isRequired('Title')),
-
-  release_date: Yup.date('Input a valid Release Date to proceed').nullable(),
-
-  poster_path: Yup.string()
-    .url('Input a valid URL to proceed')
-    .required(isRequired('Movie Poster URL')),
-
-  genres: Yup.array()
-    .min(1, atLeastOneRequired('genre'))
-    .required(atLeastOneRequired('genre')),
-
-  overview: Yup.string().required(isRequired('Overview')),
-
-  runtime: Yup.number().typeError(isRequired('Runtime')).required(isRequired('Runtime')),
-});

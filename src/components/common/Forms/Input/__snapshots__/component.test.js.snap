@@ -7,10 +7,6 @@ exports[`Input Component renders with provided text 1`] = `
   >
     
     <input
-      class=""
-      id=""
-      name=""
-      placeholder=""
       type="text"
       value=""
     />

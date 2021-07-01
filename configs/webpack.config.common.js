@@ -7,6 +7,7 @@ const { mergeWithRules, CustomizeRule } = require('webpack-merge');
 const { existsSync } = require('fs');
 const dotenv = require('dotenv');
 const LoadablePlugin = require('@loadable/webpack-plugin');
+const GoogleFontsPlugin = require('../lib/google-fonts-webpack-plugin/src/index');
 
 const NODE_ENV = process.env.NODE_ENV || 'development';
 
@@ -73,10 +74,36 @@ exports.getCommonConfig = ({ buildPath }) => ({
       '@store': resolve(rootPath, 'src', 'store'),
       '@resources': resolve(rootPath, 'public', 'resources'),
     },
+    importsFields: ['jsnext:main', 'module', 'main'],
+    fallback: {
+      'react-hook-form': resolve(
+        rootPath,
+        'node_modules',
+        'react-hook-form',
+        'dist',
+        'index.esm.js'
+      ),
+    },
   },
 
   module: {
     rules: [
+      // Responsive loader for images
+      {
+        test: /\.(jpe?g|png|webp)$/i,
+        exclude: /node_modules/,
+        use: {
+          loader: 'responsive-loader',
+          options: {
+            adapter: require('responsive-loader/sharp'),
+            format: 'webp',
+            quality: 50,
+            outputPath: 'assets/images',
+            esModule: true,
+          },
+        },
+      },
+
       // Babel loader to transform JSX to JavaScript and transpile our code based on the .browserslistrc
       {
         test: /\.jsx?$/,
@@ -107,16 +134,6 @@ exports.getCommonConfig = ({ buildPath }) => ({
         ],
       },
 
-      // Asset loader for images
-      {
-        test: /\.(png|svg|jpg|jpeg|gif)$/i,
-        type: 'asset/resource',
-        exclude: /node_modules/,
-        generator: {
-          filename: 'assets/images/[hash][ext]',
-        },
-      },
-
       // Asset loader for fonts
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,
@@ -129,10 +146,21 @@ exports.getCommonConfig = ({ buildPath }) => ({
   plugins: [
     new LoadablePlugin(),
     new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
+    new GoogleFontsPlugin({
+      fonts: [
+        {
+          family: 'Montserrat',
+          variants: ['400', '600', '800'],
+          display: 'swap',
+        },
+      ],
+      filename: 'assets/css/fonts.css',
+      path: 'assets/fonts',
+    }),
     new HtmlWebpackPlugin({
       filename: resolve(buildPath, 'index.html'),
-      template: resolve(rootPath, 'public', 'index.html'),
-      inject: 'body',
+      template: resolve(rootPath, 'public', 'index.ejs'),
+      inject: NODE_ENV !== 'production',
     }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(NODE_ENV),

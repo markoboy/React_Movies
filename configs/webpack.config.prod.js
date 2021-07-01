@@ -1,5 +1,9 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { resolve } = require('path');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
+  .BundleAnalyzerPlugin;
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 const {
   getCommonConfig,
@@ -37,21 +41,40 @@ const prodConfigs = {
     new MiniCssExtractPlugin({
       filename: 'assets/css/[name].[contenthash].css',
     }),
+    new BundleAnalyzerPlugin({
+      analyzerMode: 'disabled',
+      generateStatsFile: true,
+    }),
   ],
 
   optimization: {
     minimize: true,
     moduleIds: 'deterministic',
     runtimeChunk: 'single',
+    minimizer: [
+      new CssMinimizerPlugin({
+        minimizerOptions: {
+          preset: [
+            'default',
+            {
+              discardComments: { removeAll: true },
+            },
+          ],
+        },
+      }),
+      new TerserPlugin({
+        extractComments: 'all',
+        terserOptions: {
+          compress: {
+            collapse_vars: false,
+          },
+        },
+      }),
+    ],
     splitChunks: {
       chunks: 'all',
-      cacheGroups: {
-        vendor: {
-          test: /node_modules/,
-          name: 'vendors',
-          chunks: 'all',
-        },
-      },
+      maxInitialRequests: Infinity,
+      minSize: 0,
     },
   },
 };

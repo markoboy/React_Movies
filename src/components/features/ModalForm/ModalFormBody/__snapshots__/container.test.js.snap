@@ -51,102 +51,34 @@ exports[`ModalFormBody Component renders a form with inputs when action is Add 1
     >
       <label
         class="form__label"
-        for=""
+        for="release_date"
       >
         Release Date
       </label>
-      <div
-        class="react-date-picker react-date-picker--closed react-date-picker--enabled"
+      <input
+        class="form__input flatpickr-input"
+        id="release_date"
+        name="release_date"
+        placeholder="Select Date"
+        readonly="readonly"
+        type="text"
+        value=""
+      />
+      <svg
+        aria-hidden="true"
+        class="svg-inline--fa fa-calendar-alt fa-w-14 date-picker__calendar-button"
+        data-icon="calendar-alt"
+        data-prefix="fas"
+        focusable="false"
+        role="img"
+        viewBox="0 0 448 512"
+        xmlns="http://www.w3.org/2000/svg"
       >
-        <div
-          class="react-date-picker__wrapper"
-        >
-          <div
-            class="react-date-picker__inputGroup"
-          >
-            <input
-              max="275760-09-13"
-              min="0001-01-01"
-              name="date"
-              style="visibility: hidden; position: absolute; z-index: -999;"
-              type="date"
-              value=""
-            />
-            
-            <input
-              autocomplete="off"
-              class="react-date-picker__inputGroup__input react-date-picker__inputGroup__day"
-              data-input="true"
-              inputmode="numeric"
-              max="31"
-              min="1"
-              name="day"
-              placeholder="Day"
-              style="width: 17px;"
-              type="number"
-              value=""
-            />
-            <span
-              class="react-date-picker__inputGroup__divider"
-            >
-              -
-            </span>
-            <input
-              autocomplete="off"
-              class="react-date-picker__inputGroup__input react-date-picker__inputGroup__month"
-              data-input="true"
-              inputmode="numeric"
-              max="12"
-              min="1"
-              name="month"
-              placeholder="Month"
-              style="width: 28px;"
-              type="number"
-              value=""
-            />
-            <span
-              class="react-date-picker__inputGroup__divider"
-            >
-              -
-            </span>
-            <input
-              autocomplete="off"
-              class="react-date-picker__inputGroup__input react-date-picker__inputGroup__year"
-              data-input="true"
-              inputmode="numeric"
-              max="275760"
-              min="1"
-              name="year"
-              placeholder="Year"
-              step="1"
-              style="width: 20px;"
-              type="number"
-              value=""
-            />
-            
-          </div>
-          <button
-            class="react-date-picker__calendar-button react-date-picker__button"
-            type="button"
-          >
-            <svg
-              aria-hidden="true"
-              class="svg-inline--fa fa-calendar-alt fa-w-14 "
-              data-icon="calendar-alt"
-              data-prefix="fas"
-              focusable="false"
-              role="img"
-              viewBox="0 0 448 512"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M0 464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V192H0v272zm320-196c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40zm0 128c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40zM192 268c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40zm0 128c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40zM64 268c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12H76c-6.6 0-12-5.4-12-12v-40zm0 128c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12H76c-6.6 0-12-5.4-12-12v-40zM400 64h-48V16c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v48H160V16c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v48H48C21.5 64 0 85.5 0 112v48h448v-48c0-26.5-21.5-48-48-48z"
-                fill="currentColor"
-              />
-            </svg>
-          </button>
-        </div>
-      </div>
+        <path
+          d="M0 464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V192H0v272zm320-196c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40zm0 128c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40zM192 268c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40zm0 128c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40zM64 268c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12H76c-6.6 0-12-5.4-12-12v-40zm0 128c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12H76c-6.6 0-12-5.4-12-12v-40zM400 64h-48V16c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v48H160V16c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v48H48C21.5 64 0 85.5 0 112v48h448v-48c0-26.5-21.5-48-48-48z"
+          fill="currentColor"
+        />
+      </svg>
     </div>
     <div
       class="form-element-wrapper"
@@ -303,102 +235,34 @@ exports[`ModalFormBody Component renders a form with inputs when action is Edit 
     >
       <label
         class="form__label"
-        for=""
+        for="release_date"
       >
         Release Date
       </label>
-      <div
-        class="react-date-picker react-date-picker--closed react-date-picker--enabled"
+      <input
+        class="form__input flatpickr-input"
+        id="release_date"
+        name="release_date"
+        placeholder="Select Date"
+        readonly="readonly"
+        type="text"
+        value=""
+      />
+      <svg
+        aria-hidden="true"
+        class="svg-inline--fa fa-calendar-alt fa-w-14 date-picker__calendar-button"
+        data-icon="calendar-alt"
+        data-prefix="fas"
+        focusable="false"
+        role="img"
+        viewBox="0 0 448 512"
+        xmlns="http://www.w3.org/2000/svg"
       >
-        <div
-          class="react-date-picker__wrapper"
-        >
-          <div
-            class="react-date-picker__inputGroup"
-          >
-            <input
-              max="275760-09-13"
-              min="0001-01-01"
-              name="date"
-              style="visibility: hidden; position: absolute; z-index: -999;"
-              type="date"
-              value=""
-            />
-            
-            <input
-              autocomplete="off"
-              class="react-date-picker__inputGroup__input react-date-picker__inputGroup__day"
-              data-input="true"
-              inputmode="numeric"
-              max="31"
-              min="1"
-              name="day"
-              placeholder="Day"
-              style="width: 17px;"
-              type="number"
-              value=""
-            />
-            <span
-              class="react-date-picker__inputGroup__divider"
-            >
-              -
-            </span>
-            <input
-              autocomplete="off"
-              class="react-date-picker__inputGroup__input react-date-picker__inputGroup__month"
-              data-input="true"
-              inputmode="numeric"
-              max="12"
-              min="1"
-              name="month"
-              placeholder="Month"
-              style="width: 28px;"
-              type="number"
-              value=""
-            />
-            <span
-              class="react-date-picker__inputGroup__divider"
-            >
-              -
-            </span>
-            <input
-              autocomplete="off"
-              class="react-date-picker__inputGroup__input react-date-picker__inputGroup__year"
-              data-input="true"
-              inputmode="numeric"
-              max="275760"
-              min="1"
-              name="year"
-              placeholder="Year"
-              step="1"
-              style="width: 20px;"
-              type="number"
-              value=""
-            />
-            
-          </div>
-          <button
-            class="react-date-picker__calendar-button react-date-picker__button"
-            type="button"
-          >
-            <svg
-              aria-hidden="true"
-              class="svg-inline--fa fa-calendar-alt fa-w-14 "
-              data-icon="calendar-alt"
-              data-prefix="fas"
-              focusable="false"
-              role="img"
-              viewBox="0 0 448 512"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M0 464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V192H0v272zm320-196c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40zm0 128c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40zM192 268c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40zm0 128c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40zM64 268c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12H76c-6.6 0-12-5.4-12-12v-40zm0 128c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12H76c-6.6 0-12-5.4-12-12v-40zM400 64h-48V16c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v48H160V16c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v48H48C21.5 64 0 85.5 0 112v48h448v-48c0-26.5-21.5-48-48-48z"
-                fill="currentColor"
-              />
-            </svg>
-          </button>
-        </div>
-      </div>
+        <path
+          d="M0 464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V192H0v272zm320-196c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40zm0 128c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40zM192 268c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40zm0 128c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40zM64 268c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12H76c-6.6 0-12-5.4-12-12v-40zm0 128c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12H76c-6.6 0-12-5.4-12-12v-40zM400 64h-48V16c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v48H160V16c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v48H48C21.5 64 0 85.5 0 112v48h448v-48c0-26.5-21.5-48-48-48z"
+          fill="currentColor"
+        />
+      </svg>
     </div>
     <div
       class="form-element-wrapper"
@@ -546,7 +410,6 @@ exports[`ModalFormBody Component renders form with selectedMovie values when act
         disabled=""
         id="id"
         name="id"
-        placeholder=""
         type="number"
         value="1"
       />
@@ -574,102 +437,34 @@ exports[`ModalFormBody Component renders form with selectedMovie values when act
     >
       <label
         class="form__label"
-        for=""
+        for="release_date"
       >
         Release Date
       </label>
-      <div
-        class="react-date-picker react-date-picker--closed react-date-picker--enabled"
+      <input
+        class="form__input flatpickr-input"
+        id="release_date"
+        name="release_date"
+        placeholder="Select Date"
+        readonly="readonly"
+        type="text"
+        value=""
+      />
+      <svg
+        aria-hidden="true"
+        class="svg-inline--fa fa-calendar-alt fa-w-14 date-picker__calendar-button"
+        data-icon="calendar-alt"
+        data-prefix="fas"
+        focusable="false"
+        role="img"
+        viewBox="0 0 448 512"
+        xmlns="http://www.w3.org/2000/svg"
       >
-        <div
-          class="react-date-picker__wrapper"
-        >
-          <div
-            class="react-date-picker__inputGroup"
-          >
-            <input
-              max="275760-09-13"
-              min="0001-01-01"
-              name="date"
-              style="visibility: hidden; position: absolute; z-index: -999;"
-              type="date"
-              value=""
-            />
-            
-            <input
-              autocomplete="off"
-              class="react-date-picker__inputGroup__input react-date-picker__inputGroup__day"
-              data-input="true"
-              inputmode="numeric"
-              max="31"
-              min="1"
-              name="day"
-              placeholder="Day"
-              style="width: 17px;"
-              type="number"
-              value=""
-            />
-            <span
-              class="react-date-picker__inputGroup__divider"
-            >
-              -
-            </span>
-            <input
-              autocomplete="off"
-              class="react-date-picker__inputGroup__input react-date-picker__inputGroup__month"
-              data-input="true"
-              inputmode="numeric"
-              max="12"
-              min="1"
-              name="month"
-              placeholder="Month"
-              style="width: 28px;"
-              type="number"
-              value=""
-            />
-            <span
-              class="react-date-picker__inputGroup__divider"
-            >
-              -
-            </span>
-            <input
-              autocomplete="off"
-              class="react-date-picker__inputGroup__input react-date-picker__inputGroup__year"
-              data-input="true"
-              inputmode="numeric"
-              max="275760"
-              min="1"
-              name="year"
-              placeholder="Year"
-              step="1"
-              style="width: 20px;"
-              type="number"
-              value=""
-            />
-            
-          </div>
-          <button
-            class="react-date-picker__calendar-button react-date-picker__button"
-            type="button"
-          >
-            <svg
-              aria-hidden="true"
-              class="svg-inline--fa fa-calendar-alt fa-w-14 "
-              data-icon="calendar-alt"
-              data-prefix="fas"
-              focusable="false"
-              role="img"
-              viewBox="0 0 448 512"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M0 464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V192H0v272zm320-196c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40zm0 128c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40zM192 268c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40zm0 128c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40zM64 268c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12H76c-6.6 0-12-5.4-12-12v-40zm0 128c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12H76c-6.6 0-12-5.4-12-12v-40zM400 64h-48V16c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v48H160V16c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v48H48C21.5 64 0 85.5 0 112v48h448v-48c0-26.5-21.5-48-48-48z"
-                fill="currentColor"
-              />
-            </svg>
-          </button>
-        </div>
-      </div>
+        <path
+          d="M0 464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V192H0v272zm320-196c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40zm0 128c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40zM192 268c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40zm0 128c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12h-40c-6.6 0-12-5.4-12-12v-40zM64 268c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12H76c-6.6 0-12-5.4-12-12v-40zm0 128c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12H76c-6.6 0-12-5.4-12-12v-40zM400 64h-48V16c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v48H160V16c0-8.8-7.2-16-16-16h-32c-8.8 0-16 7.2-16 16v48H48C21.5 64 0 85.5 0 112v48h448v-48c0-26.5-21.5-48-48-48z"
+          fill="currentColor"
+        />
+      </svg>
     </div>
     <div
       class="form-element-wrapper"
